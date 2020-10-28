@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import "./assets/sass/color.scss"
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         >
           Learn React
         </a>
+        <button className="v-bg-donker v-text-light">TESTs</button>
       </header>
     </div>
   );
