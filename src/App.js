@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import "./assets/sass/color.scss"
+import './redux/reducers/auth'
 
 function App() {
   return (
