@@ -1,8 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import "./assets/sass/color.scss"
-import './redux/reducers/auth'
-
+import {setLogin} from './redux/actions/auth'
+import { connect } from "react-redux";
 function App() {
   return (
     <div className="App">
@@ -25,4 +25,9 @@ function App() {
   );
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setLogin: () => dispatch(setLogin()),
+  };
+};
+export default connect(null,mapDispatchToProps)(App);
