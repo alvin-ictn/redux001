@@ -2,12 +2,12 @@ import {useEffect} from 'react';
 import {VetPaw} from '../../../assets/icons'
 
 const Success = (props) => {
-  useEffect(()=>{
-    props.SetBarState({
-      footer: false,
-      navbar: false
-    })
-  },[])
+  // useEffect(()=>{
+  //   props.SetBarState({
+  //     footer: false,
+  //     navbar: false
+  //   })
+  // },[])
   return(
     <div className="vet-paws">
       {[0,1,2,3,4,5,6].map((item)=> 

@@ -1,4 +1,4 @@
-import { auth } from "../actions/types/";
+import { auth, utility } from "../actions/types";
 
 const initialState = {
   access_token: "",
@@ -6,6 +6,7 @@ const initialState = {
   isLogin: false,
   errorMsg: [],
   isError: false,
+  isLoading: false,
 };
 
 console.log({ ...auth });
@@ -24,6 +25,8 @@ const authReducers = (state = initialState, action) => {
     case auth.CLEAR_ERROR:
       return { ...state, isError: false, errorMsg: "" };
 
+    case utility.SET_UTILITY_PAGE_LOAD:
+      return { ...state, isLoading: action.isLoading };
     default:
       return state;
   }

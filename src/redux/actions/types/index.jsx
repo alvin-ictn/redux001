@@ -1,19 +1,5 @@
-import {
-  SET_AUTH_LOGIN,
-  SET_AUTH_USER_DATA,
-  SET_AUTH_REGISTER,
-  SET_AUTH_TOKEN,
-  SET_ERROR,
-  CLEAR_ERROR
-} from "./auth";
+import * as auth from "./auth";
+import * as utility from './utilities'
 
-const auth = {
-  SET_AUTH_LOGIN,
-  SET_AUTH_USER_DATA,
-  SET_AUTH_REGISTER,
-  SET_AUTH_TOKEN,
-  SET_ERROR,
-  CLEAR_ERROR
-};
 
-export { auth };
+export { auth, utility };

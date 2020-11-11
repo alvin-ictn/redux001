@@ -13,16 +13,25 @@ import { setLogin } from "../../redux/actions/auth";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+
+import LoadingPage from "../reusable/utilities/pageLoad";
 const Login = (props) => {
   useEffect(() => {
-    console.log(props)
+    console.log(props);
     //props.setLogin()
-  },[])
+  }, []);
+
+  useEffect(() => {
+    console.log(props.AuthPayloads);
+  }, [props]);
+
   const handleSubmit = () => {
-    console.log("THIS IS POST DATA",props.postData)
-    props.setLogin(props.postData)
-  }
-  return (
+    console.log("THIS IS POST DATA", props.postData);
+    props.setLogin(props.postData);
+  };
+  return props.AuthPayloads.isLoading ? (
+    <LoadingPage />
+  ) : (
     <Container>
       <Form>
         <FormGroup>
@@ -44,6 +53,7 @@ const Login = (props) => {
             placeholder="password placeholder"
           />
         </FormGroup>
+        <div>{JSON.stringify(props.AuthPayloads.user) || "DATA"}</div>
         <Button onClick={handleSubmit}>Submit</Button>
       </Form>
     </Container>
@@ -51,15 +61,12 @@ const Login = (props) => {
 };
 const mapStateToProps = (state) => {
   return {
-    AuthPayloads: state.Auth ,
+    AuthPayloads: state.Auth,
   };
 };
-console.log(mapStateToProps)
+console.log(mapStateToProps);
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(
-    {setLogin},
-    dispatch
-  );
+  return bindActionCreators({ setLogin }, dispatch);
 };
-export default connect(mapStateToProps,mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -1,4 +1,4 @@
-import { auth } from "./types/index";
+import { auth, utility } from "./types/index";
 import { user } from "../../database/index";
 
 export const setLogin = (data) => {
@@ -20,6 +20,11 @@ export const setLogin = (data) => {
           access_token: res.data.access_token,
         });
         localStorage.setItem("token", res.data.access_token);
+        dispatch({
+          type: utility.SET_UTILITY_PAGE_LOAD,
+          isLoading:true,
+        })
+
         user({
           method: 'self',
           access_token : res.data.access_token
@@ -35,6 +40,10 @@ export const setLogin = (data) => {
               type: auth.SET_AUTH_USER_DATA,
               user: res.data.data.user,
             });
+            dispatch({
+              type: utility.SET_UTILITY_PAGE_LOAD,
+              isLoading:false,
+            })
           }
         })
       }
