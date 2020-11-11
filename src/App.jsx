@@ -1,26 +1,30 @@
 import logo from './logo.svg';
+import {useState} from 'react'
 import './App.css';
 import "./assets/sass/color.scss"
 import {setLogin} from './redux/actions/auth'
 import { connect } from "react-redux";
+import {BrowserRouter as Router, Switch, Link, Route} from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Login from './components/login'
 function App() {
+  const [postData, setData] = useState({});
+  const HandleInput = (input) => {
+    input.preventDefault();
+    let data = { ...postData, [input.target.name]: input.target.value };
+    setData(data);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <button className="v-bg-donker v-text-light">TESTs</button>
-      </header>
+      <Router>
+        <Switch>
+          <Route path="/login" render={() => <Login handleInput={HandleInput} postData={postData}/>}/>
+          <Route path="/">
+            "GG"
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
