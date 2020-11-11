@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import {useState} from 'react'
 import './App.css';
-import "./assets/sass/color.scss"
+import "./assets/sass/main.scss"
 import {setLogin} from './redux/actions/auth'
 import { connect } from "react-redux";
 import {BrowserRouter as Router, Switch, Link, Route} from 'react-router-dom'

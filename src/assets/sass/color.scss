@@ -14,10 +14,14 @@ $colorList:(
 
 @each $name, $color in $colorList {
   .v-text-#{$name} {
-    color: $color;
+    color: $color !important;
   }
 
   .v-bg-#{$name} {
-    background-color: $color;
+    background-color: $color !important;
+  }
+
+  .v-fill-#{$name} {
+    fill: $color !important;
   }
 }
