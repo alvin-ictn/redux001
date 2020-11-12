@@ -4,44 +4,49 @@ import "../register.css";
 import { VetEyeShow, VetEyeHidden } from "../../../assets/icons";
 import { user } from "../../../database";
 import { useHistory } from "react-router-dom";
+import { setLogin } from "../../../redux/actions/auth";
 
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 function simulateNetworkRequest() {
   return new Promise((resolve) => setTimeout(resolve, 2000));
 }
 
-const Login = ({
-  data: { token, isLoading, postData, passVisibility, errorMsg, userData },
-  function: { setLoading, SetVisibility, SubmitData, HandleInput, SetUserData },
-}) => {
+const Login = (props) => {
   const [readyState, setReady] = useState(true);
   const history = useHistory();
   
-  useEffect(() => {
-    token.length && console.log("gg");
-    token.length && localStorage.setItem("VetToken", token);
-    token.length &&
-      user({
-        method: "self",
-        access_token: token,
-      }).then((res) =>
-        localStorage.setItem("userData", JSON.stringify({ ...res.data.data.user }))
-      );
+  // useEffect(() => {
+  //   token.length && console.log("gg");
+  //   token.length && localStorage.setItem("VetToken", token);
+  //   token.length &&
+  //     user({
+  //       method: "self",
+  //       access_token: token,
+  //     }).then((res) =>
+  //       localStorage.setItem("userData", JSON.stringify({ ...res.data.data.user }))
+  //     );
     
-  }, [token]);
+  // }, [token]);
 
   useEffect(() => {
-    postData?.email?.length && postData?.password?.length && setReady(false);
-  }, [postData]);
+    props.data.postData?.email?.length && props.data.postData?.password?.length && setReady(false);
+  }, [props.data.postData]);
   
+  // useEffect(() => {
+  //   if (isLoading) {
+  //     simulateNetworkRequest().then(() => {
+  //       setLoading(false);
+  //     });
+  //   }
+  // }, [isLoading]);
   useEffect(() => {
-    if (isLoading) {
-      simulateNetworkRequest().then(() => {
-        setLoading(false);
-      });
-    }
-  }, [isLoading]);
-
+    console.log(props)
+  },[])
+  const handleSubmit = () => {
+    props.setLogin(props.postData);
+  };
   return (
     <>
       <Row className="mx-4 justify-content-center flex-column">
@@ -54,7 +59,7 @@ const Login = ({
         <Form className="register-form w-100 mx-5 registerForm px-5">
           <Form.Group className="form-register">
             <Form.Control
-              onChange={(e) => HandleInput(e)}
+              onChange={(e) => props.function.HandleInput(e)}
               name="email"
               type="email"
               placeholder="Alamat Email Kamu"
@@ -62,33 +67,33 @@ const Login = ({
           </Form.Group>
           <Form.Group className="form-register">
             <Form.Control
-              onChange={(value) => HandleInput(value)}
+              onChange={(value) => props.function.HandleInput(value)}
               name="password"
-              value={postData?.password}
-              type={passVisibility ? "text" : "password"}
+              value={props.postData?.password}
+              type={props.passVisibility ? "text" : "password"}
               placeholder="Password Kamu"
             />
-            {passVisibility ? (
-              <div onClick={() => SetVisibility(0)}>
+            {props.passVisibility ? (
+              <div onClick={() => props.function.SetVisibility(0)}>
                 <VetEyeHidden className="register-eye login" size={30} />
               </div>
             ) : (
-              <div onClick={() => SetVisibility(1)}>
+              <div onClick={() => props.function.SetVisibility(1)}>
                 <VetEyeShow className="register-eye login" size={30} />
               </div>
             )}
             <Form.Text className="text-danger">
-              {errorMsg && errorMsg}
+              {props.AuthPayloads.errorMsg && props.AuthPayloads.errorMsg}
             </Form.Text>
           </Form.Group>
 
           <Row className="p-0 m-0 d-flex justify-content-center">
             <Button
               className="v-bg-mustard v-text-donker border-0 font-weight-bold w-100 py-3"
-              disabled={isLoading || readyState}
-              onClick={!isLoading ? () => SubmitData("login") : null}
+              disabled={props.isLoading || readyState}
+              onClick={!props.isLoading ? () => handleSubmit() : null}
             >
-              {isLoading ? "Loading…" : "Login"}
+              {props.isLoading ? "Loading…" : "Login"}
             </Button>
           </Row>
         </Form>
@@ -97,4 +102,13 @@ const Login = ({
   );
 };
 
-export default Login;
+const mapStateToProps = (state) => {
+  return {
+    AuthPayloads: state.Auth,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ setLogin }, dispatch);
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

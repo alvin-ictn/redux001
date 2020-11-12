@@ -1,7 +1,7 @@
-export const SET_AUTH_LOGIN = "AUTH_LOGIN";
+export const SET_AUTH_LOGIN = "SET_AUTH_LOGIN";
 export const SET_AUTH_USER_DATA = "SET_AUTH_USER_DATA";
-export const SET_AUTH_REGISTER = "AUTH_REGISTER";
-export const SET_AUTH_TOKEN = "AUTH_TOKEN";
-export const SET_ERROR = "AUTH_LOGIN";
+export const SET_AUTH_REGISTER = "SET_AUTH_REGISTER";
+export const SET_AUTH_TOKEN = "SET_AUTH_TOKEN";
+export const SET_ERROR = "SET_ERROR";
 
 export const CLEAR_ERROR = "CLEAR_ERROR";

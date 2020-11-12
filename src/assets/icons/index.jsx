@@ -614,6 +614,7 @@ export function VetPlusCircle(props) {
 export function VetPlusBox(props) {
   return (
     <svg
+      style={{cursor:"pointer"}}
       {...props}
       width={props.size || "185"}
       height={(props.size * 185) / 185 || "185"}
@@ -624,8 +625,8 @@ export function VetPlusBox(props) {
       <rect
         x={props.StrokeWidth / 2 || "1"}
         y={props.StrokeWidth / 2 || "1"}
-        width={props.size - props.strokeWidth / 2 || "185"}
-        height={props.size - props.strokeWidth / 2 || "185"}
+        width={props.size - props.strokeWidth || "183"}
+        height={props.size - props.strokeWidth || "183"}
         rx={props.radius || "4"}
         fill={props.bgcolor || "#FEFEFE"}
         stroke={props.strokeColor || "#DADADA"}

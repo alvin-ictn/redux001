@@ -14,12 +14,14 @@ console.log({ ...auth });
 const authReducers = (state = initialState, action) => {
   switch (action.type) {
     case auth.SET_AUTH_LOGIN:
+      console.log("WHY LOGIN")
       return { ...state, access_token: action.access_token, isLogin: true };
 
     case auth.SET_AUTH_USER_DATA:
       return { ...state, user: action.user, isLogin: true };
 
     case auth.SET_ERROR:
+      console.log("SET ERROR SUCCESS?")
       return { ...state, isError: true, errorMsg: action.errorMsg };
 
     case auth.CLEAR_ERROR:

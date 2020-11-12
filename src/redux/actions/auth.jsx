@@ -9,12 +9,15 @@ export const setLogin = (data) => {
       data
     }).then(res => {
       console.log(res)
-      if (res.status === 400) {
+      console.log("here before swork?")
+      if (!res.data.success) {
+        console.log(res.data.message)
         dispatch({
           type: auth.SET_ERROR,
           errorMsg: res.data.message,
         });
-      } else {
+      } else if(res.data.success) {
+        console.log("WHAT ????")
         dispatch({
           type: auth.SET_AUTH_LOGIN,
           access_token: res.data.access_token,

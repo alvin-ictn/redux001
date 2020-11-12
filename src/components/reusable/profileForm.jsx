@@ -1,15 +1,24 @@
 import React, { useState } from "react";
 import { ButtonGroup, Card, Form, ToggleButton, Button } from "react-bootstrap";
-import { VetPlusBox, VetFemale, VetMale, VetUnavailable, VetSun, VetPDog, VetPRabbit, VetPHamster, VetPCat } from "../../assets/icons";
+import {
+  VetPlusBox,
+  VetFemale,
+  VetMale,
+  VetUnavailable,
+  VetSun,
+  VetPDog,
+  VetPRabbit,
+  VetPHamster,
+  VetPCat,
+} from "../../assets/icons";
 
 import styles from "../../assets/sass/reusable/profileForm.module.scss";
 import Swal from "sweetalert2";
-import Skeleton from "react-loading-skeleton";
 
-export default function ProfileForm({ config: { mode },data }) {
+export default function ProfileForm({ config: { mode }, data }) {
   const [status, setStatus] = useState("0");
   const [gender, setGender] = useState("1");
-  
+
   const handleClick = () => {
     Swal.fire({
       title: "Update Sukses!",
@@ -23,7 +32,25 @@ export default function ProfileForm({ config: { mode },data }) {
       },
     });
   };
-  
+
+  const addAnimal = async () => {
+    const { value: formValues } = await Swal.fire({
+      title: "Multiple inputs",
+      html: JSON.stringify(<VetPDog className="m-3" size={"80"} />)
+       ,
+      focusConfirm: false,
+      preConfirm: () => {
+        return [
+          document.getElementById("swal-input1").value,
+          document.getElementById("swal-input2").value,
+        ];
+      },
+    });
+
+    if (formValues) {
+      Swal.fire(JSON.stringify(formValues));
+    }
+  };
   return (
     <>
       <Card>
@@ -32,20 +59,7 @@ export default function ProfileForm({ config: { mode },data }) {
             Upload Photo
           </Card.Header>
           <Card.Body>
-            <div
-              className="profile--upload p-3 d-flex justify-content-center align-items-center flex-column"
-              style={{
-                width: "180px",
-                height: "180px",
-                border: "1px solid black",
-              }}
-            >
-              <VetPlusBox size={40} className="font-weight-bold" />
-              <p className="justify-self-end">Upload Image</p>
-              <Form.Group className="mb-4" id="status">
-                <Form.Text>Upload</Form.Text>
-              </Form.Group>
-            </div>
+          <VetPlusBox size={187}/>
           </Card.Body>
           {(mode === "veterinary" || mode === "clinic") && (
             <>
@@ -156,15 +170,17 @@ export default function ProfileForm({ config: { mode },data }) {
                 </ToggleButton>
               </ButtonGroup>
             </Form.Group>
-            {mode === "veterinary" && <Form.Group controlId="formBasicEmail">
-              <Form.Label>Experience</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="It's my name"
-                value="1 Days"
-              />
-              <Form.Text className="text-muted">Doctor Experience.</Form.Text>
-            </Form.Group>}
+            {mode === "veterinary" && (
+              <Form.Group controlId="formBasicEmail">
+                <Form.Label>Experience</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="It's my name"
+                  value="1 Days"
+                />
+                <Form.Text className="text-muted">Doctor Experience.</Form.Text>
+              </Form.Group>
+            )}
           </Card.Body>
           <Card.Header className={`font-weight-bold ${styles["bg-unset"]}`}>
             Contact Details
@@ -187,28 +203,13 @@ export default function ProfileForm({ config: { mode },data }) {
               />
             </Form.Group>
           </Card.Body>
-          {mode === "patient" && (
-            <>
-              <Card.Header className={`font-weight-bold ${styles["bg-unset"]}`}>
-                Pets Details
-              </Card.Header>
-              <Card.Body className="d-flex">
-                <Card className="m-3">
-                  <VetPDog className="m-3" size={"80"} />
-                </Card>
-                <Card className="m-3">
-                  <VetPCat className="m-3" size={"80"} />
-                </Card>
-                <Card className="m-3">
-                  <VetPRabbit className="m-3" size={"80"} />
-                </Card>
-                <Card className="m-3">
-                  <VetPHamster className="m-3" size={"80"} />
-                </Card>
-              </Card.Body>
-            </>
-          )}
         </Form>
+
+        {mode === "patient" && (
+          <>
+            <button onClick={addAnimal}>CLICK</button>
+          </>
+        )}
       </Card>
       <Button
         className="font-weight-bold px-5 float-right my-3"
