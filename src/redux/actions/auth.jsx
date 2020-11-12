@@ -2,22 +2,29 @@ import { auth, utility } from "./types/index";
 import { user } from "../../database/index";
 
 export const setLogin = (data) => {
-  console.log(auth)
   return (dispatch) => {
+    dispatch({
+      type: utility.SET_UTILITY_ACTION_LOAD,
+      isLoading:true,
+    })
     user({
       method: 'login',
       data
     }).then(res => {
-      console.log(res)
-      console.log("here before swork?")
       if (!res.data.success) {
-        console.log(res.data.message)
+        dispatch({
+          type: utility.SET_UTILITY_ACTION_LOAD,
+          isLoading:false,
+        })
         dispatch({
           type: auth.SET_ERROR,
           errorMsg: res.data.message,
         });
       } else if(res.data.success) {
-        console.log("WHAT ????")
+        dispatch({
+          type: utility.SET_UTILITY_ACTION_LOAD,
+          isLoading:false,
+        })
         dispatch({
           type: auth.SET_AUTH_LOGIN,
           access_token: res.data.access_token,

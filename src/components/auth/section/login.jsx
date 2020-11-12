@@ -41,11 +41,8 @@ const Login = (props) => {
   //     });
   //   }
   // }, [isLoading]);
-  useEffect(() => {
-    console.log(props)
-  },[])
   const handleSubmit = () => {
-    props.setLogin(props.postData);
+    props.setLogin(props.data.postData);
   };
   return (
     <>
@@ -90,10 +87,10 @@ const Login = (props) => {
           <Row className="p-0 m-0 d-flex justify-content-center">
             <Button
               className="v-bg-mustard v-text-donker border-0 font-weight-bold w-100 py-3"
-              disabled={props.isLoading || readyState}
-              onClick={!props.isLoading ? () => handleSubmit() : null}
+              disabled={props.AuthPayloads.isLoading || readyState}
+              onClick={!props.AuthPayloads.isLoading ? () => handleSubmit() : null}
             >
-              {props.isLoading ? "Loading…" : "Login"}
+              {props.AuthPayloads.isLoading ? "Loading…" : "Login"}
             </Button>
           </Row>
         </Form>
