@@ -4,7 +4,7 @@ import { Container, Row, Col, Card, Modal, Form, Image } from "react-bootstrap";
 import rs from "../../assets/img/rs.png";
 import dc from "../../assets/img/doctor.png";
 import dog from "../../assets/img/dog.png";
-import { FaCheckCircle, FaPlusCircle } from "react-icons/fa";
+import { VetCheckCircle, VetPlusCircle } from "../../assets/icons";
 import { reservation } from '../../database';
 import styles from "./BookingContent.module.css";
 
@@ -190,7 +190,7 @@ export default function BookingContent() {
                                 <Card.Text className="ml-2 mr-4">
                                     Drh. Alizah
                                 </Card.Text>
-                                <FaCheckCircle />
+                                <VetCheckCircle />
                             </Card.Body>
                         </Card>
                     </Col>
@@ -201,7 +201,7 @@ export default function BookingContent() {
                                 <Card.Text className="ml-2 mr-4">
                                     Drh. Alizah
                                 </Card.Text>
-                                <FaCheckCircle />
+                                <VetCheckCircle />
                             </Card.Body>
                         </Card>
                     </Col>
@@ -212,7 +212,7 @@ export default function BookingContent() {
                                 <Card.Text className="ml-2 mr-4">
                                     Drh. Alizah
                                 </Card.Text>
-                                <FaCheckCircle />
+                                <VetCheckCircle />
                             </Card.Body>
                         </Card>
                     </Col>
@@ -223,7 +223,7 @@ export default function BookingContent() {
                                 <Card.Text className="ml-2 mr-4">
                                     Drh. Alizah
                                 </Card.Text>
-                                <FaCheckCircle />
+                                <VetCheckCircle />
                             </Card.Body>
                         </Card>
                     </Col>
@@ -234,7 +234,7 @@ export default function BookingContent() {
                                 <Card.Text className="ml-2 mr-4">
                                     Drh. Alizah
                                 </Card.Text>
-                                <FaCheckCircle />
+                                <VetCheckCircle />
                             </Card.Body>
                         </Card>
                     </Col>
@@ -245,7 +245,7 @@ export default function BookingContent() {
                                 <Card.Text className="ml-2 mr-4">
                                     Drh. Alizah
                                 </Card.Text>
-                                <FaCheckCircle />
+                                <VetCheckCircle />
                             </Card.Body>
                         </Card>
                     </Col>
@@ -257,7 +257,7 @@ export default function BookingContent() {
                     <Col md="3">
                         <Card className={styles.cardPet}>
                             <Card.Body className="d-flex flex-column align-items-center" >
-                                <FaPlusCircle onClick={handleShow} className={styles.icon} />
+                                <VetPlusCircle onClick={handleShow} className={styles.icon} />
                                 <Card.Title className="mt-3">
                                     Add Pet
                                 </Card.Title>

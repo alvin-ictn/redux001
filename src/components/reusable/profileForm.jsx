@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { ButtonGroup, Card, Form, ToggleButton, Button } from "react-bootstrap";
-import { HiPlus } from "react-icons/hi";
-import { VetFemale, VetMale, VetUnavailable, VetSun, VetPDog, VetPRabbit, VetPHamster, VetPCat } from "../../assets/icons";
+import { VetPlusBox, VetFemale, VetMale, VetUnavailable, VetSun, VetPDog, VetPRabbit, VetPHamster, VetPCat } from "../../assets/icons";
 
 import styles from "../../assets/sass/reusable/profileForm.module.scss";
 import Swal from "sweetalert2";
@@ -41,7 +40,7 @@ export default function ProfileForm({ config: { mode },data }) {
                 border: "1px solid black",
               }}
             >
-              <HiPlus size={40} className="font-weight-bold" />
+              <VetPlusBox size={40} className="font-weight-bold" />
               <p className="justify-self-end">Upload Image</p>
               <Form.Group className="mb-4" id="status">
                 <Form.Text>Upload</Form.Text>
