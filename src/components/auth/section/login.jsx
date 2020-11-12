@@ -79,8 +79,12 @@ const Login = (props) => {
                 <VetEyeShow className="register-eye login" size={30} />
               </div>
             )}
+            {console.log(props.AuthPayloads)}
             <Form.Text className="text-danger">
               {props.AuthPayloads.errorMsg && props.AuthPayloads.errorMsg}
+            </Form.Text>
+            <Form.Text className="text-success">
+              {props.AuthPayloads.successMsg && props.AuthPayloads.successMsg}
             </Form.Text>
           </Form.Group>
 
