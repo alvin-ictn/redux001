@@ -9,38 +9,14 @@ import { setLogin } from "../../../redux/actions/auth";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-function simulateNetworkRequest() {
-  return new Promise((resolve) => setTimeout(resolve, 2000));
-}
-
 const Login = (props) => {
   const [readyState, setReady] = useState(true);
   const history = useHistory();
-  
-  // useEffect(() => {
-  //   token.length && console.log("gg");
-  //   token.length && localStorage.setItem("VetToken", token);
-  //   token.length &&
-  //     user({
-  //       method: "self",
-  //       access_token: token,
-  //     }).then((res) =>
-  //       localStorage.setItem("userData", JSON.stringify({ ...res.data.data.user }))
-  //     );
-    
-  // }, [token]);
 
   useEffect(() => {
     props.data.postData?.email?.length && props.data.postData?.password?.length && setReady(false);
   }, [props.data.postData]);
-  
-  // useEffect(() => {
-  //   if (isLoading) {
-  //     simulateNetworkRequest().then(() => {
-  //       setLoading(false);
-  //     });
-  //   }
-  // }, [isLoading]);
+
   const handleSubmit = () => {
     props.setLogin(props.data.postData);
   };

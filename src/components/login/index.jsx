@@ -16,17 +16,8 @@ import { bindActionCreators } from "redux";
 
 import LoadingPage from "../reusable/utilities/pageLoad";
 const Login = (props) => {
-  useEffect(() => {
-    console.log(props);
-    //props.setLogin()
-  }, []);
-
-  useEffect(() => {
-    console.log(props.AuthPayloads);
-  }, [props]);
 
   const handleSubmit = () => {
-    console.log("THIS IS POST DATA", props.postData);
     props.setLogin(props.postData);
   };
   return props.AuthPayloads.isLoading ? (
@@ -64,7 +55,6 @@ const mapStateToProps = (state) => {
     AuthPayloads: state.Auth,
   };
 };
-console.log(mapStateToProps);
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ setLogin }, dispatch);
