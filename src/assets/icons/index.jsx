@@ -132,6 +132,19 @@ export function VetPaw(props) {
         d="M17.3401 14.86C16.4701 13.84 15.7401 12.97 14.8601 11.95C14.4001 11.41 13.8101 10.87 13.1101 10.63C13.0001 10.59 12.8901 10.56 12.7801 10.54C12.5301 10.5 12.2601 10.5 12.0001 10.5C11.7401 10.5 11.4701 10.5 11.2101 10.55C11.1001 10.57 10.9901 10.6 10.8801 10.64C10.1801 10.88 9.60014 11.42 9.13014 11.96C8.26014 12.98 7.53014 13.85 6.65014 14.87C5.34014 16.18 3.73014 17.63 4.03014 19.66C4.32014 20.68 5.05014 21.69 6.36014 21.98C7.09014 22.13 9.42014 21.54 11.9001 21.54H12.0801C14.5601 21.54 16.8901 22.12 17.6201 21.98C18.9301 21.69 19.6601 20.67 19.9501 19.66C20.2601 17.62 18.6501 16.17 17.3401 14.86Z"
         fill={props.color || "#1A3150"}
       />
+      <text
+        x="50%"
+        y="76%"
+        style={{
+          fill: "white",
+          opacity: 1,
+          font: `bold ${props.size/6 || 10}px sans-serif`,
+          textAnchor: "middle",
+          dominantBaseline: "middle",
+        }}
+      >
+        {props.children}
+      </text>
     </svg>
   );
 }
@@ -614,7 +627,7 @@ export function VetPlusCircle(props) {
 export function VetPlusBox(props) {
   return (
     <svg
-      style={{cursor:"pointer"}}
+      style={{ cursor: "pointer" }}
       {...props}
       width={props.size || "185"}
       height={(props.size * 185) / 185 || "185"}
@@ -851,7 +864,7 @@ export function VetCheckCircle(props) {
     <svg
       {...props}
       width={props.size || "16 "}
-      height={(props.size * 16 ) / 16  || "16 "}
+      height={(props.size * 16) / 16 || "16 "}
       viewBox="0 0 16  16 "
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
