@@ -38,7 +38,6 @@ const Success = (props) => {
 }
 
 function App() {
-  
   // state declaration
   const [token, setToken] = useState(localStorage.getItem("VetToken") || "");
   const [isLoading, setLoading] = useState(false);

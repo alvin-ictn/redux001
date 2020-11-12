@@ -1,7 +1,7 @@
 import {useEffect} from 'react';
 import {VetPaw} from '../../../assets/icons'
 
-const Success = (props) => {
+const PageLoad = (props) => {
   useEffect(()=>{
     props.SetBarState && props.SetBarState({
       footer: false,
@@ -20,4 +20,4 @@ const Success = (props) => {
   )
 }
 
-export default Success
+export default PageLoad
