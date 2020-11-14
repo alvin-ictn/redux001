@@ -1,9 +1,10 @@
 import React from "react";
 
 import { Switch, Route, Link } from "react-router-dom";
+import UserProfile from "../../reusable/profile";
 import { PatientHistory, PatientAppointment } from './appointment'
 
-import { Card, Nav } from "react-bootstrap";
+import { Container, Row, Col, Card, Nav } from "react-bootstrap";
 import "./doctor.css";
 
 export default function Appointment(props) {

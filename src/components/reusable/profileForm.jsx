@@ -1,7 +1,16 @@
-import React, { useState } from "react";
-import { ButtonGroup, Card, Form, ToggleButton, Button } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import {
+  ButtonGroup,
+  Card,
+  Form,
+  ToggleButton,
+  Button,
+  Modal,
+} from "react-bootstrap";
+
 import {
   VetPlusBox,
+  VetPlus,
   VetFemale,
   VetMale,
   VetUnavailable,
@@ -10,15 +19,22 @@ import {
   VetPRabbit,
   VetPHamster,
   VetPCat,
+  VetAddPets,
 } from "../../assets/icons";
 
 import styles from "../../assets/sass/reusable/profileForm.module.scss";
+import "./profileForm.css";
 import Swal from "sweetalert2";
 
 export default function ProfileForm({ config: { mode }, data }) {
+  console.log(data)
   const [status, setStatus] = useState("0");
   const [gender, setGender] = useState("1");
-
+  const [modalShow, setModalShow] = useState(false);
+  const [highlight, setHighlight] = useState(0);
+  useEffect(() => {
+    console.log(highlight);
+  }, [highlight]);
   const handleClick = () => {
     Swal.fire({
       title: "Update Sukses!",
@@ -33,24 +49,96 @@ export default function ProfileForm({ config: { mode }, data }) {
     });
   };
 
-  const addAnimal = async () => {
-    const { value: formValues } = await Swal.fire({
-      title: "Multiple inputs",
-      html: JSON.stringify(<VetPDog className="m-3" size={"80"} />)
-       ,
-      focusConfirm: false,
-      preConfirm: () => {
-        return [
-          document.getElementById("swal-input1").value,
-          document.getElementById("swal-input2").value,
-        ];
-      },
-    });
-
-    if (formValues) {
-      Swal.fire(JSON.stringify(formValues));
-    }
+  const PetModal = (props) => {
+    return (
+      <Modal
+        {...props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">Add Pet</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="d-flex f-col">
+          <Card
+            onClick={() => setHighlight(1)}
+            className={`m-3 ${highlight === 1 ? "selected-option" : ""}`}
+          >
+            <Card.Title className="text-center">Dog</Card.Title>
+            <VetPDog className="m-3" size={"80"} />
+          </Card>
+          <Card
+            onClick={() => setHighlight(2)}
+            className={`m-3 ${highlight === 2 ? "selected-option" : ""}`}
+          >
+            <Card.Title className="text-center">Cat</Card.Title>
+            <VetPCat className="m-3" size={"80"} />
+          </Card>
+          {/* <Card
+            onClick={() => setHighlight(3)}
+            className={`m-3 ${highlight === 3 ? "selected-option" : ""}`}
+          >
+            <Card.Title className="text-center">Rabbit</Card.Title>
+            <VetPRabbit className="m-3" size={"80"} />
+          </Card>
+          <Card
+            onClick={() => setHighlight(4)}
+            className={`m-3 ${highlight === 4 ? "selected-option" : ""}`}
+          >
+            <Card.Title className="text-center">Hamster</Card.Title>
+            <VetPHamster className="m-3" size={"80"} />
+          </Card> */}
+        </Modal.Body>
+        <Modal.Body>
+          <Form>
+            <Form.Group>
+              <Form.Label>Nama</Form.Label>
+              <Form.Control type="text" placeholder="Enter Pet Name" />
+            </Form.Group>
+            <Form.Group className="mb-4" id="gender">
+              <Form.Text>Gender</Form.Text>
+              <ButtonGroup toggle name="radiogroup">
+                <ToggleButton
+                  key={1}
+                  type="radio"
+                  variant={gender === "1" ? "primary" : ""}
+                  name="gender"
+                  value="1"
+                  checked={gender === "1"}
+                  onChange={(e) => setGender(e.currentTarget.value)}
+                >
+                  <VetMale />{" "}
+                  <span className={gender === "0" ? "text-white" : ""}>
+                    Male
+                  </span>
+                </ToggleButton>
+                <ToggleButton
+                  key={2}
+                  type="radio"
+                  variant={gender === "0" ? "pink" : ""}
+                  name="gender"
+                  value="0"
+                  checked={gender === "0"}
+                  onChange={(e) => setGender(e.currentTarget.value)}
+                >
+                  <VetFemale />
+                  <span className={gender === "1" ? "text-white" : ""}>
+                    Female
+                  </span>
+                </ToggleButton>
+              </ButtonGroup>
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={props.onHide}>Add Pet</Button>
+          <Button variant="danger" onClick={props.onHide}>Close</Button>
+        </Modal.Footer>
+      </Modal>
+    );
   };
+
   return (
     <>
       <Card>
@@ -59,7 +147,7 @@ export default function ProfileForm({ config: { mode }, data }) {
             Upload Photo
           </Card.Header>
           <Card.Body>
-          <VetPlusBox size={187}/>
+            <VetPlusBox size={187} />
           </Card.Body>
           {(mode === "veterinary" || mode === "clinic") && (
             <>
@@ -207,17 +295,23 @@ export default function ProfileForm({ config: { mode }, data }) {
 
         {mode === "patient" && (
           <>
-            <button onClick={addAnimal}>CLICK</button>
+            <Card.Header className={`font-weight-bold ${styles["bg-unset"]}`}>
+              Pets Details
+            </Card.Header>
+            <Card.Body className="d-flex">
+              <VetAddPets className="mx-2" onClick={() => setModalShow(true)} />
+              <Card
+                style={{ width: "206px" }}
+                className="d-flex align-items-center mx-2"
+              >
+                <VetPDog size={80} />
+                <Card.Text>Ramson/Dog</Card.Text>
+              </Card>
+            </Card.Body>
+            <PetModal show={modalShow} onHide={() => setModalShow(false)} />
           </>
         )}
       </Card>
-      <Button
-        className="font-weight-bold px-5 float-right my-3"
-        onClick={handleClick}
-        variant="warning"
-      >
-        Simpan
-      </Button>
     </>
   );
 }

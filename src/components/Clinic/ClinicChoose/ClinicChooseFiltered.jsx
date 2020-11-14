@@ -3,24 +3,23 @@ import React, {useState,useEffect} from "react";
 import { Dropdown,Card,Badge,Button, Container,Col,Row } from "react-bootstrap";
 //import SearchIcon from '@material-ui/icons/Search';
 // import styles from './App.module.css'
+import { useParams } from 'react-router-dom'
 import { clinic } from '../../../database'
 import {Link} from 'react-router-dom'
 import { VetMagnifier } from '../../../assets/icons'
-import { useHistory,useParams } from "react-router-dom";
-import Pagination from './Pagination'
-import DropdownButton from 'react-bootstrap/DropdownButton'
-import Skeleton from 'react-loading-skeleton'
+import axios from 'axios'
+import { useHistory } from "react-router-dom";
 
-export default function ClinicChoose() { 
+export default function ClinicChooseFiltered() { 
   const [ clinicData, setClinicData] = useState()
-  const { page } = useParams()
-  // const [ page, setPage ] = useState(1)
   const [ isSearch, setIsSearch ] = useState(false)
   const [ inputSearch, setInputSearch ] = useState('')
   let history = useHistory();
+  const {lokasi} = useParams()
   const handleChange = (e) => {
     setInputSearch(e.target.value);
   };
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,54 +27,41 @@ export default function ClinicChoose() {
       history.push(`/demo-Vet/booking/search/${inputSearch}`);
     }
   };
-
+  const [linkUrl,setLinkUrl] = useState(`https://vet-booking.herokuapp.com/clinic/filter/?city=`+lokasi)
   useEffect(()=>{
     var axios = require('axios');
 
     var config = {
       method: 'get',
-      url: 'https://vet-booking.herokuapp.com/clinic/?page='+page,
+      url: linkUrl,
       headers: { }
     };
-    
+
     axios(config)
     .then(function (response) {
       setClinicData(response?.data?.data)
+      console.log(response?.data?.data);
     })
     .catch(function (error) {
       console.log(error);
     });
   },[])
-
   
-
-
-
-  // useEffect(()=>{clinicData && console.log(clinicData)},[clinicData])
-
   const dropDownLokasi = (
     <Dropdown className="mr-4">
       <Dropdown.Toggle variant="outline-secondary" id="dropdown-basic" style={{borderColor:"#9C9C9C",color:"#9C9C9C",fontWeight:"bold"}}>
         Lokasi
       </Dropdown.Toggle>
-      <Dropdown.Menu className="mt-0">        
+      <Dropdown.Menu>
         <Dropdown.Item href="/demo-Vet/booking/lokasi/Jakarta">Jakarta</Dropdown.Item>
         <Dropdown.Item href="/demo-Vet/booking/lokasi/Medan">Medan</Dropdown.Item>
         <Dropdown.Item href="/demo-Vet/booking/lokasi/Surabaya">Surabaya</Dropdown.Item>
         <Dropdown.Item href="/demo-Vet/booking/lokasi/Pekanbaru">Pekanbaru</Dropdown.Item>
         <Dropdown.Item href="/demo-Vet/booking/lokasi/Bandung">Bandung</Dropdown.Item>
         <Dropdown.Item href="/demo-Vet/booking/lokasi/Denpasar">Denpasar</Dropdown.Item>
-        <Dropdown.Item href="/demo-Vet/booking/lokasi/Makasar">Makasar</Dropdown.Item>        
+        <Dropdown.Item href="/demo-Vet/booking/lokasi/Makasar">Makasar</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>)
-
-  const anotherDrop = (
-    <DropdownButton id="dropdown-basic-button" title="Dropdown button">
-      <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-      <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-      <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-    </DropdownButton>
-  )
 
   const binatangPeliharaan = (
     <Dropdown className="mr-4">
@@ -92,11 +78,11 @@ export default function ClinicChoose() {
   )
 
   const buttonSearch = (    
-      <Button variant="warning" className="mr-4" style={{backgroundColor:"#FDCB5A",fontWeight:"bold"}} onClick={()=>setIsSearch(true)}>        
-      <VetMagnifier />
-        {"  Cari Sekarang"}
-      </Button>    
-  )
+    <Button variant="warning" className="mr-4" style={{backgroundColor:"#FDCB5A",fontWeight:"bold"}} onClick={()=>setIsSearch(true)}>        
+    <VetMagnifier />
+      {"  Cari Sekarang"}
+    </Button>    
+)
 
   const input = (
     <input 
@@ -106,14 +92,10 @@ export default function ClinicChoose() {
     onKeyUp={handleSubmit}    
     ></input>
   )
-
-  // const r=clinicData
-  // const r = clinicData && clinicData
+  
   console.log("ini clinic",clinicData)
-  const r = clinicData && clinicData
-  // console.log(r)
-  const kartu = clinicData ? 
-    clinicData.map((value)=>(            
+  const r = clinicData && clinicData  
+  const kartu = clinicData && clinicData.map((value)=>(            
     <Card style={{ width: '16rem'}} className="mt-4 mb-4 mr-3 ml-2">
     <Card.Img variant="top" src={value.image} style={{objectFit:"cover", width:"16rem", height:"13rem"}}/>
     <Card.Body>
@@ -128,53 +110,29 @@ export default function ClinicChoose() {
       </Card.Text>
     </Card.Body>
     <Card.Footer style={{backgroundColor:"white"}}>
-      <Link to={`${process.env.PUBLIC_URL}/booking/detail/${value._id}/`}>
+      <Link to={`/demo-Vet/booking/detail/${value._id}/`}>
         <Button style={{borderColor:"#FDCB5A",backgroundColor:"#FDCB5A", width:"14rem",borderRadius:"4px",color:"black"}}>
           Book now
         </Button>
       </Link>
     </Card.Footer>
-  </Card>
-  
-  )) : [0,1,2,3,4,5,6,7].map((value)=>(            
-    <Card style={{ width: '16rem'}} className="mt-4 mb-4 mr-3 ml-2">
-    <Skeleton width={256} height={208}/>
-    <Card.Body>
-      <h6><Badge variant="secondary" style={{backgroundColor:"#E0E9F5", color:'black', width:"4rem", height:"1.2rem"}}>
-        <Skeleton width={64} height={19}/>
-      </Badge></h6>
-      <Card.Title>        
-      <Skeleton width={214} height={24} className="mb-3"/>
-      </Card.Title>
-      <Card.Text>
-        Buka 09:00-12:00
-      </Card.Text>
-    </Card.Body>
-    <Card.Footer style={{backgroundColor:"white"}}>
-      <Link to={``}>
-        <Button style={{borderColor:"#FDCB5A",backgroundColor:"#FDCB5A", width:"14rem",borderRadius:"4px",color:"black"}}>
-          Book now
-        </Button>
-      </Link>
-    </Card.Footer>
-  </Card>
-  
+  </Card>  
   ))
 
   return (
-    
+    <>    
     <div style={{paddingLeft:'3rem', paddingRight:'3rem'}}>
-      <Row className="justify-content-end" style={{marginTop:"0.5rem", marginBottom:"0.5rem"}}>
-        {dropDownLokasi}
-        {/* {binatangPeliharaan}     */}
-        {isSearch?
-        input:
-        buttonSearch}              
-      </Row>
-      <Row >      
+    <Row className="justify-content-end" style={{marginTop:"0.5rem"}}>
+      {dropDownLokasi}
+      {/* {binatangPeliharaan}     */}
+      {isSearch?
+      input:
+      buttonSearch}   
+    </Row>
+      <Row>
         {kartu}
       </Row>    
-      <Pagination />      
-    </div>    
+    </div>
+    </>
   );
 }

@@ -1,7 +1,7 @@
-import PatientBook from './book';
+import PatientAppointment from './appointment';
 import PatientHistory from './history';
 
 export {
-  PatientBook,
+  PatientAppointment,
   PatientHistory
 }

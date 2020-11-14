@@ -79,6 +79,17 @@ const reservation = ({
     ).then(res => res)
       .catch(err => err.response)
   }
+  if (method === "appointment") {
+    return axios.post(
+      `${configuration.url}/reservation/${data}`, 
+      {
+        headers: {
+          access_token
+        }
+      }
+    ).then(res => res)
+      .catch(err => err.response)
+  }
 }
 
 const user = ({

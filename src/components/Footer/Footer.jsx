@@ -1,41 +1,38 @@
 import {VetFacebook,VetTwitter,VetInstagram} from '../../assets/icons'
-import React,{useEffect} from "react"
+import React from "react"
 import Logo from "../../assets/Logo"
 import styles from "./Footer.module.css"
+import {Container} from 'react-bootstrap'
 
-const Footer = (props) =>{
-    useEffect(() => {
-        props.handleFooter(window.location.pathname)
-    },[props])
-    
+const Footer = () =>{
     return(
         <div 
-            className={`d-flex flex-row justify-content-between align-items-center p-4 ${!props.barState.footer && "hidden" }`}
+            className="d-flex flex-row justify-content-between align-items-center p-4" 
             style={{backgroundColor:"#1A3150",position:'relative',bottom:'0'}}
         >        
         <div className={styles.logoContainer}>
             <Logo height="3rem" width="5rem" className="d-flex flex-column align-items-center"/>    
             <div className={styles.vet}>V E T</div>                             
         </div>
-            <div>
+            <div className="d-flex flex-column">
                 <div style={{color:"white",fontWeight:"bold", marginBottom:"0.5rem",fontSize:"22px"}}>
                     Company
                 </div>
-                <ul style={{color:"white"}} className="d-flex flex-column">
+                <div style={{color:"white", listStyleType:"none"}} className="d-flex flex-column">
                     <a href="#" style={{textDecoration:"none",color:"white"}}>About Us</a>
                     <a href="#" style={{textDecoration:"none",color:"white"}}>Career</a>
                     <a href="#" style={{textDecoration:"none",color:"white"}}>Contact Us</a>                                        
-                </ul>                
+                </div>                
             </div>
-            <div>
+            <div className="d-flex flex-column">
                 <div style={{color:"white",fontWeight:"bold", marginBottom:"0.5rem", fontSize:"22px"}}>
                     Further Information
                 </div>
-                <ul style={{color:"white"}} className="d-flex flex-column">
+                <div style={{color:"white"}} className="d-flex flex-column">
                     <a href="#" style={{textDecoration:"none",color:"white"}}>About Us</a>
                     <a href="#" style={{textDecoration:"none",color:"white"}}>Career</a>
                     <a href="#" style={{textDecoration:"none",color:"white"}}>Contact Us</a>                                        
-                </ul>
+                </div>
             </div>
             <div >
                 <div style={{color:"white",fontWeight:"bold", marginBottom:"0.5rem",fontSize:"22px"}}>

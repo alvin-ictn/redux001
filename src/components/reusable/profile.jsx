@@ -11,6 +11,7 @@ import {
 import styles from "./profile.module.css";
 import Skeleton from "react-loading-skeleton";
 export default function Profile(props) {
+  console.log(props)
   const [userBadge, setUserBadge] = useState(null);
 
   useEffect(() => {

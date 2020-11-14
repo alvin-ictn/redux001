@@ -25,7 +25,6 @@ export const setLogin = (data) => {
           type: utility.SET_UTILITY_ACTION_LOAD,
           isLoading:false,
         })
-        console.log("RESPONSE",res.data.message)
         dispatch({
           type: auth.SET_AUTH_LOGIN,
           access_token: res.data.access_token,

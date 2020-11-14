@@ -18,6 +18,8 @@ import Home from "./components/Home/Home";
 import Users from "./pages/Users/";
 import { useHistory, Redirect  } from "react-router-dom";
 import {VetPaw} from './assets/icons'
+import ClinicChooseFiltered from './components/Clinic/ClinicChoose/ClinicChooseFiltered'
+import ClinicSearch from './components/Clinic/ClinicChoose/ClinicSearch'
 
 const Success = (props) => {
   useEffect(()=>{
@@ -142,17 +144,19 @@ function App() {
             <Route path={`${process.env.PUBLIC_URL}/DemoIcon`}>
               <DemoIcon />
             </Route>
-            <Route exact path={`${process.env.PUBLIC_URL}/booking`}>
-              <ClinicChoose SetBarState={SetBarState} />
+            <Route path={`${process.env.PUBLIC_URL}/booking/detail/resume`}>
+              <BookingResume />
             </Route>
-            <Route path={`${process.env.PUBLIC_URL}/booking/:id`}>
+            <Route path={`${process.env.PUBLIC_URL}/booking/detail/:id`}>
               <BookingDetail />
+            </Route>
+            <Route path="/demo-Vet/booking/search/:search" component={ClinicSearch} />
+            <Route path="/demo-Vet/booking/lokasi/:lokasi" component={ClinicChooseFiltered} />
+            <Route path={`${process.env.PUBLIC_URL}/booking/:page`}>
+              <ClinicChoose SetBarState={SetBarState} />
             </Route>
             <Route path={`${process.env.PUBLIC_URL}/success`}>
               <Success data={userDatas} SetBarState={SetBarState} />
-            </Route>
-            <Route path={`${process.env.PUBLIC_URL}/booking/detail/resume`}>
-              <BookingResume />
             </Route>
             <Route exact path={`${process.env.PUBLIC_URL}/`}>
               <Home SetBarState={SetBarState} />
