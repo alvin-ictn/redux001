@@ -16,37 +16,60 @@ import BookingResume from "./pages/BookingResume";
 import { Container, Navbar } from "react-bootstrap";
 import Home from "./components/Home/Home";
 import Users from "./pages/Users/";
-import { useHistory, Redirect  } from "react-router-dom";
-import {VetPaw} from './assets/icons'
-import ClinicChooseFiltered from './components/Clinic/ClinicChoose/ClinicChooseFiltered'
-import ClinicSearch from './components/Clinic/ClinicChoose/ClinicSearch'
+import { useHistory, Redirect } from "react-router-dom";
+import { VetPaw } from "./assets/icons";
+import ClinicChooseFiltered from "./components/Clinic/ClinicChoose/ClinicChooseFiltered";
+import ClinicSearch from "./components/Clinic/ClinicChoose/ClinicSearch";
 
+import { getUserData } from "./redux/actions/auth";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 const Success = (props) => {
-  useEffect(()=>{
+  useEffect(() => {
     props.SetBarState({
       footer: false,
-      navbar: false
-    })
-  },[])
-  return(
+      navbar: false,
+    });
+  }, []);
+  return (
     <div className="vet-paws-8">
-      {["..","G","N","I","D","A","O","L"].map((item,idx)=> 
-        idx%2 === 0 
-          ? <VetPaw className="vet-paw" size={60} style={{display:"block",transform:`rotateZ(${Math.floor(Math.random() * 35)+20}deg)`,position:"relative",left:"60px"}}>{item}</VetPaw> 
-          : <VetPaw className="vet-paw" size={60} style={{display:"block",transform:`rotateZ(-${Math.floor(Math.random() * 35)+20}deg)`}}>{item}</VetPaw>
+      {["..", "G", "N", "I", "D", "A", "O", "L"].map((item, idx) =>
+        idx % 2 === 0 ? (
+          <VetPaw
+            className="vet-paw"
+            size={60}
+            style={{
+              display: "block",
+              transform: `rotateZ(${Math.floor(Math.random() * 35) + 20}deg)`,
+              position: "relative",
+              left: "60px",
+            }}
+          >
+            {item}
+          </VetPaw>
+        ) : (
+          <VetPaw
+            className="vet-paw"
+            size={60}
+            style={{
+              display: "block",
+              transform: `rotateZ(-${Math.floor(Math.random() * 35) + 20}deg)`,
+            }}
+          >
+            {item}
+          </VetPaw>
+        )
       )}
     </div>
-  )
-}
+  );
+};
 
-function App() {
+function App(props) {
   // state declaration
   const [token, setToken] = useState(localStorage.getItem("VetToken") || "");
   const [isLoading, setLoading] = useState(false);
-  const [isLogin, setLogin] = useState(false)
+  const [isLogin, setLogin] = useState(false);
   const [postData, setData] = useState({});
   const [errorMsg, setError] = useState();
   const [userData, SetUserData] = useState(
@@ -61,11 +84,11 @@ function App() {
     footer: true,
   });
   useEffect(() => {
-
-  },[])
+    token.length && props.getUserData(token)
+  }, [token]);
   const history = useHistory();
   useEffect(() => {
-    userDatas && setLogin(true)
+    userDatas && setLogin(true);
   }, [userDatas]);
   // function declaration
   const HandleInput = (input) => {
@@ -102,7 +125,7 @@ function App() {
             "userData2",
             JSON.stringify({ ...res.data.data.user })
           );
-          console.log("apicall apps",res.data.data.user)
+          console.log("apicall apps", res.data.data.user);
           SetUserDatas({ ...res.data.data.user });
         });
       });
@@ -113,17 +136,19 @@ function App() {
   };
   return (
     <>
-      
       <div className="App">
         <Router>
-        {/* {isLogin && <Redirect to={`${process.env.PUBLIC_URL}/`} />} */}
-          <VetNavbar barState={barState} data={{
-            isLogin: isLogin,
-            userDatas: userDatas,
-          }}/>
+          {/* {isLogin && <Redirect to={`${process.env.PUBLIC_URL}/`} />} */}
+          <VetNavbar
+            barState={barState}
+            data={{
+              isLogin: isLogin,
+              userDatas: userDatas,
+            }}
+          />
           <Switch>
             <Route path={`${process.env.PUBLIC_URL}/user/:role`}>
-              <Users/>
+              <Users />
             </Route>
             <Route path={`${process.env.PUBLIC_URL}/auth`}>
               <Auth
@@ -155,8 +180,14 @@ function App() {
             <Route path={`${process.env.PUBLIC_URL}/booking/detail/:id`}>
               <BookingDetail />
             </Route>
-            <Route path="/demo-Vet/booking/search/:search" component={ClinicSearch} />
-            <Route path="/demo-Vet/booking/lokasi/:lokasi" component={ClinicChooseFiltered} />
+            <Route
+              path="/demo-Vet/booking/search/:search"
+              component={ClinicSearch}
+            />
+            <Route
+              path="/demo-Vet/booking/lokasi/:lokasi"
+              component={ClinicChooseFiltered}
+            />
             <Route path={`${process.env.PUBLIC_URL}/booking/:page`}>
               <ClinicChoose SetBarState={SetBarState} />
             </Route>
@@ -181,7 +212,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ setLogin }, dispatch);
+  return bindActionCreators({ getUserData }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)
+export default connect(mapStateToProps, mapDispatchToProps)(App);

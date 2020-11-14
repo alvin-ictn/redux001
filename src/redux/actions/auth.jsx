@@ -40,7 +40,6 @@ export const setLogin = (data) => {
           method: 'self',
           access_token : res.data.access_token
         }).then(res => {
-          console.log(res)
           if (res.status === 400) {
             dispatch({
               type: auth.SET_ERROR,
@@ -56,6 +55,36 @@ export const setLogin = (data) => {
               isLoading:false,
             })
           }
+        })
+      }
+    })
+  };
+};
+
+
+export const getUserData = (access_token) => {
+  return (dispatch) => {
+    dispatch({
+      type: utility.SET_UTILITY_ACTION_LOAD,
+      isLoading:true,
+    })
+    user({
+      method: 'self',
+      access_token
+    }).then(res => {
+      if (res.status === 400) {
+        dispatch({
+          type: auth.SET_ERROR,
+          errorMsg: res.data.message,
+        });
+      } else {
+        dispatch({
+          type: auth.SET_AUTH_USER_DATA,
+          user: res.data.data.user,
+        });
+        dispatch({
+          type: utility.SET_UTILITY_PAGE_LOAD,
+          isLoading:false,
         })
       }
     })
