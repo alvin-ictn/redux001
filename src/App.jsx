@@ -145,7 +145,7 @@ function App(props) {
         
         <Router>
           {/* {isLogin && <Redirect to={`${process.env.PUBLIC_URL}/`} />} */}
-         <PageLoad data="LOADING"/>
+         {props.AuthPayloads.isLoading && <PageLoad data="CONNECTING"/>}
           <VetNavbar
             barState={barState}
             data={{
