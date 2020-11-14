@@ -10,7 +10,7 @@ import { getAppointment, getHistory } from "../../redux/actions/appointment";
 function Appointment(props) {
   const { role } = useParams();
   useEffect(() => {
-
+    // console.log(Auth)
   }, [role]);
   const renderComponent = (role) => {
     switch (role) {
@@ -34,7 +34,6 @@ const mapStateToProps = (state) => {
     AppointmentPayloads: state.Appointment,
   };
 };
-
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ getAppointment, getHistory }, dispatch);

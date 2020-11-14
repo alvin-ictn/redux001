@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Switch, Link, Route } from "react-router-dom";
 
 import DemoIcon from "./demo/demoIcon";
 import {} from "./assets/icons";
-import VetNavbar from "./components/NavBar/NavBar";
+import VetNavbar from "./components/NavBar3/NavBar";
 import Footer from "./components/Footer/Footer";
 import ClinicChoose from "./components/Clinic/ClinicChoose/ClinicChoose";
 import { user } from "./database";
@@ -21,6 +21,7 @@ import { VetPaw } from "./assets/icons";
 import ClinicChooseFiltered from "./components/Clinic/ClinicChoose/ClinicChooseFiltered";
 import ClinicSearch from "./components/Clinic/ClinicChoose/ClinicSearch";
 
+import PageLoad from './components/reusable/utilities/pageLoad'
 import { getUserData } from "./redux/actions/auth";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -86,6 +87,7 @@ function App(props) {
   useEffect(() => {
     token.length && props.getUserData(token)
   }, [token]);
+
   const history = useHistory();
   useEffect(() => {
     userDatas && setLogin(true);
@@ -135,7 +137,7 @@ function App(props) {
     //console.log(option);
   };
   return (
-    <>
+    props.AuthPayloads ? <>
       <div className="App">
         <Router>
           {/* {isLogin && <Redirect to={`${process.env.PUBLIC_URL}/`} />} */}
@@ -201,7 +203,7 @@ function App(props) {
         </Router>
       </div>
       <Footer handleFooter={handleFooter} data={"test"} barState={barState} />
-    </>
+    </> : <PageLoad data="LOADING"/>
   );
 }
 

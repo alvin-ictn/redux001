@@ -81,6 +81,7 @@ export const getUserData = (access_token) => {
           type: utility.SET_UTILITY_PAGE_LOAD,
           isLoading:false,
         })
+        localStorage.clear();
       } else {
         dispatch({
           type: auth.SET_AUTH_USER_DATA,
