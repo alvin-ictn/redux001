@@ -12,7 +12,10 @@ function NavMenu(props) {
     console.log("ONNAVBAR",props.AuthPayloads)
   },[props])
   const [isLogin, setLoginState] = useState(null);
-  const [role] = useState(JSON.parse(localStorage.getItem('userData'))?.role || "doctor")
+  const [role, setRole] = useState("doctor")
+  useEffect(() => {
+    props.AuthPayloads.user.role && setRole(props.AuthPayloads.user.role)
+  },[props])
   const Logout = () => {
     localStorage.clear();
     setLoginState(false);
@@ -31,13 +34,13 @@ function NavMenu(props) {
       <NavLink to={`${process.env.PUBLIC_URL}/booking/1`} className={styles.link}>
         <span>Find a Clinic</span>
       </NavLink>
-      {props.data ? (
+      {props.AuthPayloads.user ? (
         <>
-          <Image width={50} src={props.data.image} />
-          <NavLink to={`${process.env.PUBLIC_URL}/${props.data.role}`} className={styles.name}>
-            <span>Hi, {props.data.name}</span>
+          <Image width={50} src={props.AuthPayloads.user.image} />
+          <NavLink to={`${process.env.PUBLIC_URL}/${props.AuthPayloads.user.role}`} className={styles.name}>
+            <span>Hi, {props.AuthPayloads.user.name}</span>
           </NavLink>
-          <NavDropdown data={props.data} logout={Logout}/>
+          <NavDropdown data={props.AuthPayloads.user} logout={Logout}/>
         </>
       ) : (
         <>
