@@ -21,6 +21,9 @@ import {VetPaw} from './assets/icons'
 import ClinicChooseFiltered from './components/Clinic/ClinicChoose/ClinicChooseFiltered'
 import ClinicSearch from './components/Clinic/ClinicChoose/ClinicSearch'
 
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+
 const Success = (props) => {
   useEffect(()=>{
     props.SetBarState({
@@ -57,7 +60,9 @@ function App() {
     navbar: true,
     footer: true,
   });
+  useEffect(() => {
 
+  },[])
   const history = useHistory();
   useEffect(() => {
     userDatas && setLogin(true)
@@ -169,4 +174,14 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    AuthPayloads: state.Auth,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ setLogin }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)
