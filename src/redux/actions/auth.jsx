@@ -77,6 +77,10 @@ export const getUserData = (access_token) => {
           type: auth.SET_ERROR,
           errorMsg: res.data.message,
         });
+        dispatch({
+          type: utility.SET_UTILITY_PAGE_LOAD,
+          isLoading:false,
+        })
       } else {
         dispatch({
           type: auth.SET_AUTH_USER_DATA,
