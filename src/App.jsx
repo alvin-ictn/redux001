@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Switch, Link, Route } from "react-router-dom";
 
 import DemoIcon from "./demo/demoIcon";
 import {} from "./assets/icons";
-import VetNavbar from "./components/NavBar3/NavBar";
+import VetNavbar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
 import ClinicChoose from "./components/Clinic/ClinicChoose/ClinicChoose";
 import { user } from "./database";
@@ -133,14 +133,19 @@ function App(props) {
       });
   };
 
+  useEffect(() => {
+    console.log("CHEKC ISLOAD HOEME",props.AuthPayloads.isLoading)
+  },[props])
   const handleFooter = (option) => {
     //console.log(option);
   };
   return (
-    props.AuthPayloads ? <>
+     <>
       <div className="App">
+        
         <Router>
           {/* {isLogin && <Redirect to={`${process.env.PUBLIC_URL}/`} />} */}
+         <PageLoad data="LOADING"/>
           <VetNavbar
             barState={barState}
             data={{
@@ -203,7 +208,7 @@ function App(props) {
         </Router>
       </div>
       <Footer handleFooter={handleFooter} data={"test"} barState={barState} />
-    </> : <PageLoad data="LOADING"/>
+    </>
   );
 }
 

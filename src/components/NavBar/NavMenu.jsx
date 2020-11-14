@@ -4,7 +4,13 @@ import { NavLink } from "react-router-dom";
 import styles from "./NavBar.module.css";
 import { VetArrowDown } from "../../assets/icons";
 import NavDropdown from "./NavDropdown";
-export default function NavMenu(props) {
+
+import { connect } from "react-redux";
+
+function NavMenu(props) {
+  useEffect(() => {
+    console.log("ONNAVBAR",props.AuthPayloads)
+  },[props])
   const [isLogin, setLoginState] = useState(null);
   const [role] = useState(JSON.parse(localStorage.getItem('userData'))?.role || "doctor")
   const Logout = () => {
@@ -46,3 +52,11 @@ export default function NavMenu(props) {
     </div>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    AuthPayloads: state.Auth,
+  };
+};
+
+export default connect(mapStateToProps, null)(NavMenu)
