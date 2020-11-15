@@ -10,42 +10,46 @@ import {
 } from "../../assets/icons";
 import styles from "./profile.module.css";
 import Skeleton from "react-loading-skeleton";
-export default function Profile(props) {
-  console.log(props)
+
+import { connect } from "react-redux";
+
+function Profile(props) {
   const [userBadge, setUserBadge] = useState(null);
 
   useEffect(() => {
-    props.mode === "patient"
+    props.AuthPayloads.user.role === "patient"
       ? setUserBadge("user")
-      : props.mode === "veterinary"
+      : props.AuthPayloads.user.role === "veterinary"
       ? setUserBadge("doctor")
-      : setUserBadge(props.mode);
-  }, []);
+      : setUserBadge(props.AuthPayloads.user.role);
+  }, [props]);
 
-  useEffect(() => {
-    console.log(props.data);
-  });
+    useEffect(() => {
+      console.log("TEST",props.AuthPayloads.user,Object.keys(props.AuthPayloads.user).length)
+    },[props])
+
+  
   return (
     <>
       <Card className="p-4 my-5">
         <Card.Body>
-          {props.data ? (
+          {Object.keys(props.AuthPayloads.user).length ? (
             <Image
               style={{ width: "50px", height: "50px", flexDirection: "row" }}
-              src={props.data.image}
+              src={props.AuthPayloads.user.image}
               roundedCircle
             />
           ) : (
             <Skeleton height={50} width={50} circle={true} />
           )}
-          <h4>{props.data ? props.data.name : <Skeleton />}</h4>
+          <h4>{Object.keys(props.AuthPayloads.user).length ? props.AuthPayloads.user.name : <Skeleton />}</h4>
           <Badge
             pill
             className="px-5 py-2"
             size="sm"
-            variant={userBadge === "user" ? "info" : "success"}
+            variant={props.AuthPayloads.user.role === "user" ? "info" : "success"}
           >
-            {props.data ? `${userBadge[0].toUpperCase()}${userBadge.slice(1)} `: <Skeleton/>}
+            {Object.keys(props.AuthPayloads.user).length ? `${props.AuthPayloads.user.role[0].toUpperCase()}${props.AuthPayloads.user.role.slice(1)} `: <Skeleton/>}
           </Badge>
           <Row className="pt-4">
             <Col
@@ -53,7 +57,7 @@ export default function Profile(props) {
               className="d-flex align-items-center"
               style={{ color: "green", fill: "green" }}
             >
-              {props.data ? (userBadge === "user" ? (
+              {Object.keys(props.AuthPayloads.user).length ? (props.AuthPayloads.user.role === "user" ? (
                 <>
                   <VetPaw /> 3 Pets
                 </>
@@ -67,24 +71,24 @@ export default function Profile(props) {
             </Col>
             <Col md={6} className="d-flex align-items-center justify-content-center">
               {
-                props.data ? 
-                (userBadge === "user" && props.value) > 1 ? (
+                Object.keys(props.AuthPayloads.user).length ? 
+                (props.AuthPayloads.user.role === "user" && props.value) > 1 ? (
                   <>
                     <VetSchedule /> {props.value} times
                   </>
-                ) : userBadge === "user" && props.value <= 1 ? (
+                ) : props.AuthPayloads.user.role === "user" && props.value <= 1 ? (
                   <>
                     <VetSchedule /> {props.value} time
                   </>
-                ) : userBadge === "doctor" && props.data.veterinary.experience > 1 ? (
+                ) : props.AuthPayloads.user.role === "veterinary" && props.AuthPayloads.user.veterinary.experience > 1 ? (
                   <>
                     <VetBriefcase />
-                    <span className="mx-2">{props.data.veterinary.experience} Years</span>
+                    <span className="mx-2">{props.AuthPayloads.user.veterinary.experience} Years</span>
                   </>
                 ) : (
                   <>
                     <VetBriefcase />
-                    <span className="mx-2">{props.data.veterinary.experience} Year</span>
+                    <span className="mx-2">{props.AuthPayloads.user.veterinary.experience || 0} Year</span>
                   </>
                 ) : <Skeleton width={100}/>}
               
@@ -113,3 +117,12 @@ export default function Profile(props) {
     </>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    AuthPayloads: state.Auth,
+  };
+};
+
+
+export default connect(mapStateToProps, null)(Profile);

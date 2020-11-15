@@ -26,7 +26,12 @@ import styles from "../../assets/sass/reusable/profileForm.module.scss";
 import "./profileForm.css";
 import Swal from "sweetalert2";
 
-export default function ProfileForm({ config: { mode }, data }) {
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+
+import { getAppointment, getHistory } from "../../redux/actions/appointment";
+
+function ProfileForm({ config: { mode }, data }) {
   console.log(data)
   const [status, setStatus] = useState("0");
   const [gender, setGender] = useState("1");
@@ -35,19 +40,6 @@ export default function ProfileForm({ config: { mode }, data }) {
   useEffect(() => {
     console.log(highlight);
   }, [highlight]);
-  const handleClick = () => {
-    Swal.fire({
-      title: "Update Sukses!",
-      icon: "success",
-      background: "#1A3150",
-      iconColor: "yellow",
-      showConfirmButton: false,
-
-      customClass: {
-        title: "text-light",
-      },
-    });
-  };
 
   const PetModal = (props) => {
     return (
@@ -75,20 +67,6 @@ export default function ProfileForm({ config: { mode }, data }) {
             <Card.Title className="text-center">Cat</Card.Title>
             <VetPCat className="m-3" size={"80"} />
           </Card>
-          {/* <Card
-            onClick={() => setHighlight(3)}
-            className={`m-3 ${highlight === 3 ? "selected-option" : ""}`}
-          >
-            <Card.Title className="text-center">Rabbit</Card.Title>
-            <VetPRabbit className="m-3" size={"80"} />
-          </Card>
-          <Card
-            onClick={() => setHighlight(4)}
-            className={`m-3 ${highlight === 4 ? "selected-option" : ""}`}
-          >
-            <Card.Title className="text-center">Hamster</Card.Title>
-            <VetPHamster className="m-3" size={"80"} />
-          </Card> */}
         </Modal.Body>
         <Modal.Body>
           <Form>
@@ -315,3 +293,16 @@ export default function ProfileForm({ config: { mode }, data }) {
     </>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    AuthPayloads: state.Auth,
+    AppointmentPayloads: state.Appointment,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ getAppointment, getHistory }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileForm)

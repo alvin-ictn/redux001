@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { VetPaw } from "../../../assets/icons";
 
 const PageLoad = (props) => {
-  console.log(props.style);
   useEffect(() => {
     props.SetBarState &&
       props.SetBarState({
@@ -30,6 +29,7 @@ const PageLoad = (props) => {
         .map((item, idx) =>
           idx % 2 === 0 ? (
             <VetPaw
+              key={idx}
               className="vet-paw"
               size={60}
               style={{
@@ -43,6 +43,7 @@ const PageLoad = (props) => {
             </VetPaw>
           ) : (
             <VetPaw
+              key={idx}
               className="vet-paw"
               size={60}
               style={{

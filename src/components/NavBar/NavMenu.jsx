@@ -9,17 +9,21 @@ import { connect } from "react-redux";
 
 function NavMenu(props) {
   useEffect(() => {
-    console.log("ONNAVBAR",props.AuthPayloads)
+    // console.log("ONNAVBAR",props.AuthPayloads)
   },[props])
+
   const [isLogin, setLoginState] = useState(null);
   const [role, setRole] = useState("doctor")
+
   useEffect(() => {
     props.AuthPayloads.user.role && setRole(props.AuthPayloads.user.role)
   },[props])
+
   const Logout = () => {
     localStorage.clear();
     setLoginState(false);
   }
+
   return (
     <div className="ml-auto d-flex flex-row align-items-center justify-content-between">
       <NavLink to={`${process.env.PUBLIC_URL}`} className={styles.link}>
@@ -34,7 +38,7 @@ function NavMenu(props) {
       <NavLink to={`${process.env.PUBLIC_URL}/booking/1`} className={styles.link}>
         <span>Find a Clinic</span>
       </NavLink>
-      {props.AuthPayloads.user ? (
+      {Object.keys(props.AuthPayloads.user).length ? (
         <>
           <Image width={50} src={props.AuthPayloads.user.image} />
           <NavLink to={`${process.env.PUBLIC_URL}/${props.AuthPayloads.user.role}`} className={styles.name}>

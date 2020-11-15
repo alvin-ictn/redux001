@@ -30,7 +30,7 @@ export const setLogin = (data) => {
           access_token: res.data.access_token,
           successMsg: res.data.message
         });
-        localStorage.setItem("token", res.data.access_token);
+        localStorage.setItem("VetToken", res.data.access_token);
         dispatch({
           type: utility.SET_UTILITY_PAGE_LOAD,
           isLoading:true,
@@ -54,6 +54,7 @@ export const setLogin = (data) => {
               type: utility.SET_UTILITY_PAGE_LOAD,
               isLoading:false,
             })
+            document.location.href="/"; 
           }
         })
       }
@@ -82,6 +83,7 @@ export const getUserData = (access_token) => {
           isLoading:false,
         })
         localStorage.clear();
+        document.location.href="/"; 
       } else {
         dispatch({
           type: auth.SET_AUTH_USER_DATA,
