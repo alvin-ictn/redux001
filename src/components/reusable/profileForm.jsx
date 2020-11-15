@@ -28,13 +28,15 @@ import { bindActionCreators } from "redux";
 
 import { getAppointment, getHistory } from "../../redux/actions/appointment";
 
-function ProfileForm({ config: { mode }, data }) {
-  console.log(data)
+function ProfileForm({ config: { mode }, data:{postData}, function: {
+  HandleInput
+},AuthPayloads }) {
+  console.log(AuthPayloads,postData)
   const [status, setStatus] = useState("0");
   const [gender, setGender] = useState("1");
   const [modalShow, setModalShow] = useState(false);
   const [highlight, setHighlight] = useState(0);
-  
+
   useEffect(() => {
     console.log(highlight);
   }, [highlight]);
@@ -196,14 +198,18 @@ function ProfileForm({ config: { mode }, data }) {
             <Form.Group className="mb-4" id="status">
               <Form.Text>Username</Form.Text>
               <Form.Control
+                onChange={(e) => HandleInput(e)}
+                name="name"
                 type="text"
                 placeholder="It's my name"
-                value="Alvin Mantovani"
+                value={postData.name || AuthPayloads.user.name}
               />
             </Form.Group>
             <Form.Group className="mb-4" id="gender">
               <Form.Text>Gender</Form.Text>
-              <ButtonGroup toggle name="radiogroup">
+              <ButtonGroup toggle name="radiogroup"
+                onChange={(e) => HandleInput(e)}
+              >
                 <ToggleButton
                   key={1}
                   type="radio"

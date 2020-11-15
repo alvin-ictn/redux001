@@ -88,7 +88,7 @@ function Profile(props) {
                 ) : (
                   <>
                     <VetBriefcase />
-                    <span className="mx-2">{props.AuthPayloads.user.veterinary.experience || 0} Year</span>
+                    <span className="mx-2">{props.AuthPayloads.user?.veterinary?.experience || props.AuthPayloads.user.clinic.schedules} Year</span>
                   </>
                 ) : <Skeleton width={100}/>}
               
