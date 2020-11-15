@@ -80,7 +80,7 @@ const reservation = ({
       .catch(err => err.response)
   }
   if (method === "appointment") {
-    return axios.post(
+    return axios.get(
       `${configuration.url}/reservation/${data}`, 
       {
         headers: {

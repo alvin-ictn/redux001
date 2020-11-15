@@ -5,7 +5,7 @@ import CardItem from "../../../reusable/cardItem";
 
 import doctorImg from "../../../../assets/img/doctorProfile.png";
 
-export default function AppointmentBook() {
+export default function PatientAppointment() {
   return (
     <Card.Body>
       <CardItem

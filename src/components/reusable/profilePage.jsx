@@ -15,7 +15,7 @@ function Appointment(props) {
       props.getAppointment(props.AuthPayloads.access_token,props.AuthPayloads.user.role);
       props.getHistory(props.AuthPayloads.access_token,props.AuthPayloads.user.role);
     } 
-  },[props])
+  },[])
   const { role } = useParams();
   useEffect(() => {
     // console.log(Auth)
