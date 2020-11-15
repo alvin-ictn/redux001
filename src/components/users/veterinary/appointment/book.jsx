@@ -5,7 +5,7 @@ import CardItem from "../../../reusable/cardItem";
 
 import doctorImg from "../../../../assets/img/doctorProfile.png";
 import {connect} from 'react-redux'
-export default function VeterinaryBook() {
+function VeterinaryBook() {
   return (
     <Card.Body>
       <CardItem
@@ -37,3 +37,11 @@ export default function VeterinaryBook() {
     </Card.Body>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    AppointmentPayloads: state.Appointment,
+  };
+};
+
+export default connect(mapStateToProps,null)(VeterinaryBook)
