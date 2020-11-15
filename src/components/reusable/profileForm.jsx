@@ -10,14 +10,11 @@ import {
 
 import {
   VetPlusBox,
-  VetPlus,
   VetFemale,
   VetMale,
   VetUnavailable,
   VetSun,
   VetPDog,
-  VetPRabbit,
-  VetPHamster,
   VetPCat,
   VetAddPets,
 } from "../../assets/icons";
@@ -37,6 +34,7 @@ function ProfileForm({ config: { mode }, data }) {
   const [gender, setGender] = useState("1");
   const [modalShow, setModalShow] = useState(false);
   const [highlight, setHighlight] = useState(0);
+  
   useEffect(() => {
     console.log(highlight);
   }, [highlight]);
