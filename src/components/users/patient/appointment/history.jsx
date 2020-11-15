@@ -2,8 +2,9 @@ import React from "react";
 import { Card } from "react-bootstrap";
 
 import CardItem from "../../../reusable/cardItem";
+import {connect} from 'react-redux'
 
-export default function PatientHistory() {
+function PatientHistory(props) {
   return (
     <Card.Body>
       <CardItem
@@ -37,3 +38,11 @@ export default function PatientHistory() {
     </Card.Body>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    AppointmentPayloads: state.Appointment,
+  };
+};
+
+export default connect(mapStateToProps,null)(PatientHistory)
