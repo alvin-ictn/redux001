@@ -155,7 +155,14 @@ function App(props) {
           />
           <Switch>
             <Route path={`${process.env.PUBLIC_URL}/user/:role`}>
-              <Users />
+              <Users function={{
+                  HandleInput: HandleInput,
+                  SetVisibility: SetVisibility,
+                  SubmitData: SubmitData,
+                }}
+                data={{
+                  postData: postData,
+                }}/>
             </Route>
             <Route path={`${process.env.PUBLIC_URL}/auth`}>
               <Auth

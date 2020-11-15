@@ -7,17 +7,19 @@ import ProfileForm from "../../components/reusable/profileForm";
 import { Container, Row, Col } from "react-bootstrap";
 import { user } from '../../database'
 
-export default function Users() {
+export default function Users(props) {
   const { role } = useParams();
   const [passData,SetPassData] = useState(null);
   
+  
   useEffect(() => {
-    user({
-      method: "self",
-      access_token : localStorage.getItem('VetToken')
-    }).then(res => {
-      res.status === 200 && SetPassData(res.data.data.user)
-    })
+    console.log("YUSER",props)
+    // user({
+    //   method: "self",
+    //   access_token : localStorage.getItem('VetToken')
+    // }).then(res => {
+    //   res.status === 200 && SetPassData(res.data.data.user)
+    // })
   },[])
 
   useEffect(() => {
@@ -27,7 +29,7 @@ export default function Users() {
     <Container>
       <Row>
         <Col lg={4}>
-          <UserProfile src={doctorImg} mode={role} value={5}  data = {passData}/>
+          <UserProfile src={doctorImg} mode={role} value={5}/>
         </Col>
         <Col lg={8} className="my-5 text-left">
           <Switch>
@@ -37,7 +39,7 @@ export default function Users() {
                   mode: role,
                 }}
                 src={doctorImg}
-                data = {passData}
+                {...props}
               />
             </Route>
             <Route path={`${process.env.PUBLIC_URL}/user/:role`}>
