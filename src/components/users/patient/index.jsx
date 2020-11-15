@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Switch, Route, Link } from "react-router-dom";
+import { Switch, Route, NavLink } from "react-router-dom";
 import { PatientHistory, PatientAppointment } from './appointment'
 
 import { Card, Nav } from "react-bootstrap";
@@ -19,19 +19,14 @@ export default function Appointment(props) {
           }`}
         >
           <Nav.Item>
-            <Nav.Link href="#book" onClick={(e) => console.log(e)}>
-              <Link to={`${process.env.PUBLIC_URL}/user/patient/appointment`}>
+            <NavLink className="vet-title-2 v-text-donker" to={`${process.env.PUBLIC_URL}/user/patient/appointment`} onClick={(e) => console.log(e)}>
                 Appointment
-              </Link>
-            </Nav.Link>
+            </NavLink>
           </Nav.Item>
-
           <Nav.Item>
-            <Nav.Link href="#history">
-              <Link to={`${process.env.PUBLIC_URL}/user/patient/history`}>
+            <NavLink className="vet-title-2 v-text-donker" to={`${process.env.PUBLIC_URL}/user/patient/history`} onClick={(e) => console.log(e)}>
                 History
-              </Link>
-            </Nav.Link>
+            </NavLink>
           </Nav.Item>
         </Nav>
       </Card.Header>

@@ -4,23 +4,16 @@ import { Card } from "react-bootstrap";
 import CardItem from "../../../reusable/cardItem";
 
 import doctorImg from "../../../../assets/img/doctorProfile.png";
+import { connect } from "react-redux";
 
-export default function PatientAppointment() {
+function PatientAppointment(props) {
   return (
     <Card.Body>
       <CardItem
-        buttonMode={1}
         textMode={0}
-        buttonText={"Book Again"}
-        status={"Finished"}
-        name={"Klinik Hewan"}
-        src={doctorImg}
-      />
-      <CardItem
         buttonMode={2}
-        textMode={0}
         buttonText={"Approve"}
-        date={"10.20"}
+        date={"14:10"}
       />
       <CardItem
         textMode={0}
@@ -29,11 +22,24 @@ export default function PatientAppointment() {
         date={"14:10"}
       />
       <CardItem
-        buttonMode={3}
-        textMode={1}
+        textMode={0}
+        buttonMode={2}
+        buttonText={"Disapprove"}
         date={"14:10"}
-        buttonText={["Approve", "Disapprove"]}
+      />
+      <CardItem
+        textMode={0}
+        buttonMode={2}
+        buttonText={"Disapprove"}
+        date={"14:10"}
       />
     </Card.Body>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    AppointmentPayloads: state.Appointment,
+  };
+};
+export default connect(mapStateToProps,null)(PatientAppointment)

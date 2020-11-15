@@ -72,11 +72,11 @@ function Profile(props) {
             <Col md={6} className="d-flex align-items-center justify-content-center">
               {
                 Object.keys(props.AuthPayloads.user).length ? 
-                (props.AuthPayloads.user.role === "user" && props.value) > 1 ? (
+                (props.AuthPayloads.user.role === "patient" && props.value) > 1 ? (
                   <>
                     <VetSchedule /> {props.value} times
                   </>
-                ) : props.AuthPayloads.user.role === "user" && props.value <= 1 ? (
+                ) : props.AuthPayloads.user.role === "patient" && props.value <= 1 ? (
                   <>
                     <VetSchedule /> {props.value} time
                   </>
