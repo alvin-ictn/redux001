@@ -4,8 +4,8 @@ import { Card } from "react-bootstrap";
 import CardItem from "../../../reusable/cardItem";
 
 import doctorImg from "../../../../assets/img/doctorProfile.png";
-
-export default function AppointmentBook() {
+import {connect} from 'react-redux'
+export default function VeterinaryBook() {
   return (
     <Card.Body>
       <CardItem
