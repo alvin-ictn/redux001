@@ -14,6 +14,9 @@ const authReducers = (state = initialState, action) => {
   switch (action.type) {
     case auth.SET_AUTH_LOGIN:
       return { ...state, access_token: action.access_token, errorMsg:[], successMsg:action.successMsg, isLogin: true };
+    
+    case auth.SET_AUTH_USER_TOKEN:
+      return {...state,access_token: action.access_token,errorMsg:[],successMsg:[]}
 
     case auth.SET_AUTH_USER_DATA:
       return { ...state, user: action.user,successMsg:[], isLogin: true };

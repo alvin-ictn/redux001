@@ -151,6 +151,10 @@ export const getUserData = (access_token) => {
           user: res.data.data.user,
         });
         dispatch({
+          type: auth.SET_AUTH_USER_TOKEN,
+          access_token
+        })
+        dispatch({
           type: utility.SET_UTILITY_PAGE_LOAD,
           isLoading:false,
         })
