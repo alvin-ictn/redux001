@@ -37,7 +37,8 @@
   justify-self: flex-start;
   position: relative;
   top: -3.75rem;
-  right: -22rem;
+  right: -32.5rem;
+  text-align:right;
 }
 
 .login {
@@ -148,7 +149,7 @@ $animate_time: 1.4s;
 
 @media only screen and (max-width:1199px) {
   .register-eye {
-    right: -14.5rem;
+    right: -24.5rem;
   }
 }
 
@@ -159,7 +160,7 @@ $animate_time: 1.4s;
   }
 
   .register-eye {
-    right: -19.5rem;
+    right: -29.5rem;
   }
 }
 
@@ -173,7 +174,7 @@ $animate_time: 1.4s;
   }
 
   .register-eye {
-    right: -20.5rem;
+    right: -25.5rem;
   }
 }
 

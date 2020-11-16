@@ -4,6 +4,11 @@ import "../register.css";
 import {
   VetEyeShow,
   VetEyeHidden,
+  VetArrowRight,
+  VetClinic,
+  VetUser,
+  VetDoctor,
+  VetHospital,
 } from "../../../assets/icons";
 import { useParams } from "react-router-dom";
 import { user } from "../../../database";
@@ -46,10 +51,13 @@ export default function Register() {
 
   useEffect(() => {
     token.length && localStorage.setItem("VetToken", token);
-    token.length && user({
-      method: "self",
-      access_token: token
-    }).then(res => localStorage.setItem('userData',JSON.stringify({...res.data.data})))
+    token.length &&
+      user({
+        method: "self",
+        access_token: token,
+      }).then((res) =>
+        localStorage.setItem("userData", JSON.stringify({ ...res.data.data }))
+      );
     token.length && history.push(`${process.env.PUBLIC_URL}/`);
   }, [token]);
 
@@ -77,11 +85,11 @@ export default function Register() {
   };
 
   useEffect(() => {
-      (postData.email.length &&
+    postData.email.length &&
       postData.password.length &&
       postData.role.length &&
       postData.phone.length &&
-      postData.name.length) &&
+      postData.name.length &&
       setReady(false);
   }, [postData]);
 
@@ -97,10 +105,30 @@ export default function Register() {
   return (
     <>
       <Row className="mx-4 justify-content-center flex-column">
-        <p className="vet-heading v-text-donker">Buat Akun Baru</p>
-        <p className="vet-body-1 v-text-donker">
-          Daftarkan dirimu untuk menggunakan Aplikasi Kami
+        <p className="vet-heading v-text-donker">
+          Register{" "}
+          {id == 1
+            ? "as Clinic"
+            : id == 2
+            ? "as Patient"
+            : id == 3
+            ? "as Veterinary"
+            : "New Account"}
         </p>
+        <p className="vet-body-1 v-text-donker">
+          Register yourself to use our application
+        </p>
+        <div style={{ position: "absolute", right: "0" }}>
+          {id == 1 ? (
+            <VetClinic />
+          ) : id == 2 ? (
+            <VetUser />
+          ) : id == 3 ? (
+            <VetDoctor />
+          ) : (
+            ""
+          )}
+        </div>
       </Row>
       <Row className="register-section mt-4 px-5 d-flex justify-content-center">
         <Form className="register-form w-100 mx-5 registerForm">
@@ -109,7 +137,7 @@ export default function Register() {
               onChange={(value) => handleInput(value)}
               name="email"
               type="email"
-              placeholder="Alamat Email Kamu"
+              placeholder="Your Email"
             />
             <Form.Text className="text-danger">
               {errorMsg.email || " "}
@@ -120,7 +148,7 @@ export default function Register() {
               onChange={(value) => handleInput(value)}
               name="name"
               type="text"
-              placeholder="Username Kamu"
+              placeholder="Your Username"
             />
             <Form.Text className="text-danger">
               {errorMsg.name || " "}
@@ -131,7 +159,7 @@ export default function Register() {
               onChange={(value) => handleInput(value)}
               name="password"
               type={passvisibility ? "text" : "password"}
-              placeholder="Password Kamu"
+              placeholder="Your Password"
             />
             <Form.Text className="text-danger">
               {errorMsg.password || " "}
@@ -151,7 +179,7 @@ export default function Register() {
               onChange={(value) => handleInput(value)}
               name="phone"
               type="text"
-              placeholder="Nomor Telefon Kamu"
+              placeholder="Your Phone Number"
             />
             <Form.Text className="text-danger">
               {errorMsg.phone || " "}
@@ -163,7 +191,7 @@ export default function Register() {
               disabled={isLoading || readyState}
               onClick={!isLoading ? handleClick : null}
             >
-              {isLoading ? "Loading…" : "Daftarkan Saya"}
+              {isLoading ? "Loading…" : "Register"}
             </Button>
           </Row>
         </Form>
