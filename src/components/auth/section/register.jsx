@@ -103,7 +103,7 @@ export default function Register() {
   };
 
   return (
-    <>
+    <div style={{height:"90%"}} className="">
       <Row className="mx-4 justify-content-center flex-column">
         <p className="vet-heading v-text-donker">
           Register{" "}
@@ -118,7 +118,7 @@ export default function Register() {
         <p className="vet-body-1 v-text-donker">
           Register yourself to use our application
         </p>
-        <div style={{ position: "absolute", right: "0" }}>
+        <div style={{ position: "absolute", right: "20px",top:"20px" }}>
           {id == 1 ? (
             <VetClinic />
           ) : id == 2 ? (
@@ -185,7 +185,7 @@ export default function Register() {
               {errorMsg.phone || " "}
             </Form.Text>
           </Form.Group>
-          <Row className="p-0 m-0 d-flex justify-content-center">
+          <Row className="p-0 m-0 d-flex justify-content-center w-75" style={{position:"absolute",bottom:"10%"}}>
             <Button
               className="v-bg-mustard v-text-donker border-0 font-weight-bold w-100 py-3"
               disabled={isLoading || readyState}
@@ -196,6 +196,6 @@ export default function Register() {
           </Row>
         </Form>
       </Row>
-    </>
+    </div>
   );
 }

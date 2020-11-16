@@ -42,10 +42,10 @@ export function VetUser(props) {
       width={props.size || "62"}
       height={
         `${
-          props.size.includes("vw")
-            ? (props.size.slice(0, props.size.length - 2) * 62) / 66
-            : (props.size * 62) / 66
-        }${props.size.includes("vw") ? "vw" : ""}` || "66"
+          props?.size?.includes("vw")
+            ? (props?.size.slice(0, props?.size.length - 2) * 62) / 66
+            : (props?.size * 62) / 66
+        }${props?.size?.includes("vw") ? "vw" : ""}` || "66"
       }
       viewBox="0 0 62 66"
       fill="none"

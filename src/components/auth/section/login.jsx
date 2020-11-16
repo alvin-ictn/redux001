@@ -14,37 +14,37 @@ const Login = (props) => {
   const history = useHistory();
 
   useEffect(() => {
-    props.data.postData?.email?.length && props.data.postData?.password?.length && setReady(false);
+    props.data.postData?.email?.length &&
+      props.data.postData?.password?.length &&
+      setReady(false);
   }, [props.data.postData]);
 
   const handleSubmit = () => {
     props.setLogin(props.data.postData);
   };
   return (
-    <>
+    <div style={{height:"90%"}} className="">
       <Row className="mx-4 justify-content-center flex-column">
-        <p className="vet-heading v-text-donker">Buat Akun Baru</p>
-        <p className="vet-body-1 v-text-donker">
-          Daftarkan dirimu untuk menggunakan Aplikasi Kami
-        </p>
+        <p className="vet-heading v-text-donker">Welcome Back</p>
+        <p className="vet-body-1 v-text-donker">Log In to start your Journey</p>
       </Row>
-      <Row className="register-section m-4 px-5 d-flex justify-content-center">
-        <Form className="register-form w-100 mx-5 registerForm px-5">
-          <Form.Group className="form-register">
+      <Row className="register-section mt-4 px-5 d-flex justify-content-center align-items-center" style={{height:"70%"}}>
+        <Form className="register-form w-100 registerForm px-5">
+          <Form.Group className="form-register my-5">
             <Form.Control
               onChange={(e) => props.function.HandleInput(e)}
               name="email"
               type="email"
-              placeholder="Alamat Email Kamu"
+              placeholder="Your Email Address"
             />
           </Form.Group>
-          <Form.Group className="form-register">
+          <Form.Group className="form-register my-5">
             <Form.Control
               onChange={(value) => props.function.HandleInput(value)}
               name="password"
               value={props.postData?.password}
               type={props.passVisibility ? "text" : "password"}
-              placeholder="Password Kamu"
+              placeholder="Your Password"
             />
             {props.passVisibility ? (
               <div onClick={() => props.function.SetVisibility(0)}>
@@ -64,18 +64,20 @@ const Login = (props) => {
             </Form.Text>
           </Form.Group>
 
-          <Row className="p-0 m-0 d-flex justify-content-center">
+          <Row className="p-0 m-0 d-flex justify-content-center w-75" style={{position:"absolute",bottom:"10%"}}>
             <Button
               className="v-bg-mustard v-text-donker border-0 font-weight-bold w-100 py-3"
               disabled={props.AuthPayloads.isLoading || readyState}
-              onClick={!props.AuthPayloads.isLoading ? () => handleSubmit() : null}
+              onClick={
+                !props.AuthPayloads.isLoading ? () => handleSubmit() : null
+              }
             >
               {props.AuthPayloads.isLoading ? "Loading…" : "Login"}
             </Button>
           </Row>
         </Form>
       </Row>
-    </>
+    </div>
   );
 };
 
