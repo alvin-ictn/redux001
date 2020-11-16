@@ -9,21 +9,32 @@ function VeterinaryBook() {
   return (
     <Card.Body>
       <CardItem
+        name="Megumin"
         buttonMode={3}
+        day = {20}
+        month = {"Nov"}
         textMode={1}
-        date={"14:10"}
+        pets={1}
+        date={"09:00 - 12.00"}
         buttonText={["Approve", "Disapprove"]}
       />
        <CardItem
+        name="Jacky Sanjaya"
         buttonMode={3}
+        day = {1}
+        month = {"Des"}
         textMode={1}
-        date={"14:10"}
+        pets={2}
+        date={"14:30 - 17.30"}
         buttonText={["Approve", "Disapprove"]}
       />
        <CardItem
+        name="Sallo"
         buttonMode={3}
+        day = {25}
+        month = {"Nov"}
         textMode={1}
-        date={"14:10"}
+        date={"11:00 - 14.00"}
         buttonText={["Approve", "Disapprove"]}
       />
     </Card.Body>

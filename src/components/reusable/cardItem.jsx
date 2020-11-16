@@ -9,18 +9,18 @@ export default function CardItem(props) {
           {props.src ? (
             <Image src={props.src} className="rounded" />
           ) : (
-            <Badge variant="primary">
-              <p className="p-0 m-0">12</p>Okt
+            <Badge className="v-bg-donker v-text-white">
+              <p className="p-0 m-0">{props.day || 12}</p>{props.month || "Okt"}
             </Badge>
           )}
         </Col>
         <Col>{props.name || "Alvin Mantovani"}</Col>
-        {props.textMode === 1 && <Col>99 Pets</Col>}
+        {props.textMode === 1 && <Col>{props.pets || 99} Pets</Col>}
         <Col className="v-text-caramel">{props.date ? props.date : props.status}</Col>
         <Col className="d-flex">
           <Col className="button--action">
             {props.buttonMode === 1 || props.buttonMode === 3
-            ? <Button size="sm" variant="outline-warning">
+            ? <Button size="sm" className="v-btn-outline-sp-mustard">
                 {props.buttonText && (Array.isArray(props.buttonText) ? props.buttonText[0] : props.buttonText )}
               </Button>
             : <Badge className="px-3 py-1" pill variant={
@@ -35,7 +35,7 @@ export default function CardItem(props) {
           {console.log(props.mode)}
           {props.buttonMode === 3 && (
             <Col className="button--action">
-              <Button size="sm" variant="outline-danger">
+              <Button size="sm" className="v-btn-outline-sp-imperial">
                 {props.buttonText[1]}
               </Button>
             </Col>
