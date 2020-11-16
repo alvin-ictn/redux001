@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import "./../register.css";
 import { VetClinic, VetUser, VetDoctor } from "../../../assets/icons";
-import { Link,useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 // import { role } from "../../../database"
 
 function simulateNetworkRequest() {
@@ -13,7 +13,7 @@ export default function Role() {
   const [option, setOption] = useState(true);
   const [highlight, setHighlight] = useState(0);
   const history = useHistory();
-  
+
   useEffect(() => {
     if (isLoading) {
       simulateNetworkRequest().then(() => {
@@ -31,20 +31,24 @@ export default function Role() {
   const handleClick = () => {
     setLoading(true);
   };
-  
+
   return (
-    <div style={{height:"85%"}} className="">
+    <div style={{ height: "85%" }} className="">
       <Row className="mx-4 justify-content-center flex-column">
         <p className="vet-heading v-text-donker">Choice your Role</p>
         <p className="vet-body-1 v-text-donker">
-        Register yourself to use our application
+          Register yourself to use our application
         </p>
+        <i className="v-text-donker v-title">Pets Health, Vet Passion <strong>'Your best paws deserves the best care'</strong></i>
       </Row>
-      <Row className="m-2 d-flex justify-content-center align-items-center" style={{height:"70%"}}>
+      <Row
+        className="m-2 d-flex justify-content-center align-items-center"
+        style={{ height: "63%" }}
+      >
         <Col lg={3} className="my-2 mx-3 p-0">
           <Col
             onClick={() => handleChoice(1)}
-            className={`m-0 border-0 register py-4 v-bg-donker rounded-lg ${
+            style={{padding:"2.11rem 0"}} className={`m-0 border-0 register v-bg-donker rounded-lg ${
               highlight === 1 ? "selected-option" : ""
             }`}
           >
@@ -57,7 +61,7 @@ export default function Role() {
         <Col lg={3} className="m-2 p-0">
           <Col
             onClick={() => handleChoice(2)}
-            className={`m-0 border-0 register py-4 v-bg-donker rounded-lg ${
+            style={{padding:"2.11rem 0"}} className={`m-0 border-0 register v-bg-donker rounded-lg ${
               highlight === 2 ? "selected-option" : ""
             }`}
           >
@@ -70,7 +74,7 @@ export default function Role() {
         <Col lg={3} className="m-2 p-0">
           <Col
             onClick={() => handleChoice(3)}
-            className={`m-0 border-0 register py-4 v-bg-donker rounded-lg ${
+            style={{padding:"2.11rem 0"}} className={`m-0 border-0 register v-bg-donker rounded-lg ${
               highlight === 3 ? "selected-option" : ""
             }`}
           >
@@ -81,13 +85,16 @@ export default function Role() {
           </Col>
         </Col>
       </Row>
-      <Row className="p-0 m-0 d-flex justify-content-center w-100" style={{position:"absolute",bottom:"15%"}}>
+      <Row
+        className="p-0 m-0 d-flex justify-content-center w-100"
+        style={{ position: "absolute", bottom: "15%" }}
+      >
         <Button
           className="v-bg-mustard border-0 w-50 rounded-lg v-text-donker font-weight-bold bg-transparent border-0 py-3"
           disabled={isLoading || option}
           onClick={!isLoading ? handleClick : null}
         >
-            <span>{isLoading ? "Loading…" : "Next"}</span>
+          <span>{isLoading ? "Loading…" : "Next"}</span>
         </Button>
       </Row>
     </div>
