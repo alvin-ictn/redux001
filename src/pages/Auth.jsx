@@ -22,44 +22,15 @@ export default function Auth(props) {
   useEffect(() => {
     props.SetBarState({
       footer: false,
-      navbar: false
+      navbar: true
     })
   },[])
   return (
-    <Container className="d-flex bg-white justify-self-center align-self-center p-0">
+    <Container style={{transform: "translateY(calc((100% / 4) - 86px))"}} className="d-flex bg-white justify-self-center align-self-center p-0">
       <Col className="col-4 d-flex justify-content-start p-0 LoginSideImage">
         <Image style={{ width: "inherit" }} src={imageFile} />
       </Col>
-      <Col>
-        <Row>
-          <Nav
-            variant="pills"
-            className="d-flex align-items-center justify-content-center w-100 mt-4 register-nav"
-          >
-            <Nav.Item>
-              <Nav.Link href={`${process.env.PUBLIC_URL}/home`} className="vet-title-2">
-                Home
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link eventKey="link-1" className="vet-title-2">
-                Khusus Doctor
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link eventKey="link-1" className="vet-title-2">
-                Cari Klinik
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link eventKey="link-1">
-                <Button className="vet-title-2 px-4 v-text-donker v-bg-mustard border-0">
-                  Login
-                </Button>
-              </Nav.Link>
-            </Nav.Item>
-          </Nav>
-        </Row>
+      <Col className="pt-4">
         <Switch>
           <Route exact path={`${process.env.PUBLIC_URL}/auth`} component={Role} />
           <Route exact path={`${process.env.PUBLIC_URL}/auth/register/:id`} render={() => <Register {...props}/>} />

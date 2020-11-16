@@ -6,6 +6,7 @@ import {
   ToggleButton,
   Button,
   Modal,
+  InputGroup
 } from "react-bootstrap";
 
 import {
@@ -35,7 +36,7 @@ function ProfileForm({
   AuthPayloads,
   editUser,
 }) {
-  console.log(postData);
+  console.log(postData)
   const [status, setStatus] = useState("0");
   const [gender, setGender] = useState(AuthPayloads?.user?.patient?.gender);
   const [modalShow, setModalShow] = useState(false);
@@ -178,7 +179,7 @@ function ProfileForm({
                       checked={postData.status == "true"}
                       onChange={(e) => HandleInput(e)}
                     >
-                      <VetSun size={"24px"} />
+                      <VetSun size={"24px"} color={postData.status == "true" && "white"} />
                       <span className="mx-3 my-0">
                         {mode == "veterinary" ? "Active" : "Buka"}
                       </span>
@@ -193,7 +194,7 @@ function ProfileForm({
                       checked={postData.status == "false"}
                       onChange={(e) => HandleInput(e)}
                     >
-                      <VetUnavailable size={"24px"} />
+                      <VetUnavailable size={"24px"} color={postData.status == "false" && "white"}/>
                       <span className="mx-3 my-0">
                         {mode == "veterinary" ? "Offline" : "Tutup"}
                       </span>
@@ -241,9 +242,9 @@ function ProfileForm({
                   checked={postData.gender == "true"}
                   onChange={(e) => HandleInput(e)}
                 >
-                  <VetMale />{" "}
+                  <VetMale size={22} color={postData.gender == "true" && "white"}/>
                   <span
-                    className={postData.gender == "false" ? "text-white" : ""}
+                    className={`mx-3 ${postData.gender == "false" ? "text-white" : ""}`}
                   >
                     Male
                   </span>
@@ -257,9 +258,9 @@ function ProfileForm({
                   checked={postData.gender == "false"}
                   onChange={(e) => HandleInput(e)}
                 >
-                  <VetFemale />
+                  <VetFemale size={34} color={postData.gender == "false" && "white"} />
                   <span
-                    className={postData.gender == "true" ? "text-white" : ""}
+                    className={`mx-3 ${postData.gender == "true" ? "text-white" : ""}`}
                   >
                     Female
                   </span>
@@ -269,11 +270,19 @@ function ProfileForm({
             {mode == "veterinary" && (
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>Experience</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="It's my name"
-                  value="1 Days"
-                />
+                <InputGroup>
+                  <Form.Control
+                    onChange={(e) => HandleInput(e)}
+                    type="number"
+                    placeholder="It's my name"
+                    name="experience"
+                    value={postData?.experience || (AuthPayloads.user?.veterinary?.experience !== null ? AuthPayloads.user?.veterinary?.experience : 0 ) }
+                  />
+                  <InputGroup.Prepend>
+                    <InputGroup.Text id="inputGroupPrepend">Years</InputGroup.Text>
+                  </InputGroup.Prepend>
+                </InputGroup>
+
                 <Form.Text className="text-muted">Doctor Experience.</Form.Text>
               </Form.Group>
             )}

@@ -4,12 +4,12 @@ import Logo from "../../assets/Logo"
 import styles from "./Footer.module.css"
 import {Container} from 'react-bootstrap'
 
-const Footer = () =>{
+const Footer = (props) =>{
     return(
         <div 
-            className="d-flex flex-row justify-content-between align-items-center p-4" 
+            className={`d-flex flex-row justify-content-between align-items-center p-4 ${!props.barState.footer && "hidden" }`}
             style={{backgroundColor:"#1A3150",position:'relative',bottom:'0'}}
-        >        
+        >       
         <div className={styles.logoContainer}>
             <Logo height="3rem" width="5rem" className="d-flex flex-column align-items-center"/>    
             <div className={styles.vet}>V E T</div>                             

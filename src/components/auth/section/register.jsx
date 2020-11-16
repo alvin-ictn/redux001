@@ -102,9 +102,9 @@ export default function Register() {
           Daftarkan dirimu untuk menggunakan Aplikasi Kami
         </p>
       </Row>
-      <Row className="register-section m-4 px-5 d-flex justify-content-center">
-        <Form className="register-form w-100 mx-5 registerForm px-5">
-          <Form.Group className="form-register">
+      <Row className="register-section mt-4 px-5 d-flex justify-content-center">
+        <Form className="register-form w-100 mx-5 registerForm">
+          <Form.Group className="form-register mb-1">
             <Form.Control
               onChange={(value) => handleInput(value)}
               name="email"
@@ -115,7 +115,7 @@ export default function Register() {
               {errorMsg.email || " "}
             </Form.Text>
           </Form.Group>
-          <Form.Group className="form-register">
+          <Form.Group className="form-register mb-1">
             <Form.Control
               onChange={(value) => handleInput(value)}
               name="name"
@@ -126,7 +126,7 @@ export default function Register() {
               {errorMsg.name || " "}
             </Form.Text>
           </Form.Group>
-          <Form.Group className="form-register">
+          <Form.Group className="form-register mb-1">
             <Form.Control
               onChange={(value) => handleInput(value)}
               name="password"
@@ -146,7 +146,7 @@ export default function Register() {
               </div>
             )}
           </Form.Group>
-          <Form.Group className="form-register">
+          <Form.Group className="form-register mb-1">
             <Form.Control
               onChange={(value) => handleInput(value)}
               name="phone"

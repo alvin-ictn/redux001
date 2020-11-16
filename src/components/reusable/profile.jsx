@@ -7,6 +7,7 @@ import {
   VetPaw,
   VetSchedule,
   VetDoor,
+  VetClock
 } from "../../assets/icons";
 import styles from "./profile.module.css";
 import Skeleton from "react-loading-skeleton";
@@ -72,25 +73,39 @@ function Profile(props) {
             <Col md={6} className="d-flex align-items-center justify-content-center">
               {
                 Object.keys(props.AuthPayloads.user).length ? 
-                (props.AuthPayloads.user.role === "patient" && props.value) > 1 ? (
+                  (props.AuthPayloads.user.role === "patient" && props.value) > 1 
+                  ? (
+                      <>
+                        <VetSchedule /> {props.value} times
+                      </>
+                    ) 
+                  : props.AuthPayloads.user.role === "patient" && props.value <= 1 
+                  ? (
+                      <>
+                        <VetSchedule /> {props.value || 0} time
+                      </>
+                    ) 
+                  : props.AuthPayloads.user.role === "veterinary" && props.AuthPayloads.user.veterinary.experience > 1 
+                  ? (
+                    <>
+                      <VetBriefcase />
+                      <span className="mx-2">{props.AuthPayloads.user.veterinary.experience} Years</span>
+                    </>
+                  ) 
+                  : props.AuthPayloads.user.role === "veterinary" && props.AuthPayloads.user.veterinary.experience <= 1 
+                  ? (
+                    <>
+                      <VetBriefcase />
+                      <span className="mx-2">{props.AuthPayloads.user?.veterinary?.experience || 0} Year</span>
+                    </>
+                    )
+                  : props.AuthPayloads.user.role === "clinic" ? 
                   <>
-                    <VetSchedule /> {props.value} times
-                  </>
-                ) : props.AuthPayloads.user.role === "patient" && props.value <= 1 ? (
-                  <>
-                    <VetSchedule /> {props.value} time
-                  </>
-                ) : props.AuthPayloads.user.role === "veterinary" && props.AuthPayloads.user.veterinary.experience > 1 ? (
-                  <>
-                    <VetBriefcase />
-                    <span className="mx-2">{props.AuthPayloads.user.veterinary.experience} Years</span>
-                  </>
-                ) : (
-                  <>
-                    <VetBriefcase />
-                    <span className="mx-2">{props.AuthPayloads.user?.veterinary?.experience || props.AuthPayloads.user.clinic.schedules} Year</span>
-                  </>
-                ) : <Skeleton width={100}/>}
+                    <VetClock/>
+                    <span className="mx-2">{props.AuthPayloads.user.clinic.schedules}</span>
+                  </> :
+                  ""
+                : <Skeleton width={100}/>}
               
             </Col>
           </Row>

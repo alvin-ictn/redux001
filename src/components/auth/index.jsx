@@ -40,12 +40,7 @@ export default function Auth(props) {
             </Nav.Item>
             <Nav.Item>
               <Nav.Link eventKey="link-1" className="vet-title-2">
-                Khusus Doctor
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link eventKey="link-1" className="vet-title-2">
-                Cari Klinik
+                Search Clinic
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
