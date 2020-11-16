@@ -73,6 +73,7 @@ function App(props) {
   const [isLogin, setLogin] = useState(false);
   const [postData, setData] = useState({});
   const [errorMsg, setError] = useState();
+  const [imgPreview, SetImgPreview] = useState(null);
   const [userData, SetUserData] = useState(
     localStorage.getItem("userData") || ""
   );
@@ -97,6 +98,13 @@ function App(props) {
     input.preventDefault();
     let data = { ...postData, [input.target.name]: input.target.value };
     setData(data);
+  };
+
+  const HandleInputFile = (input) => {
+    input.preventDefault();
+    let data = { ...postData, [input.target.name]: input.target.files[0] };
+    setData(data);
+    SetImgPreview(input.target.files[0]);
   };
 
   const SetVisibility = (res) => {
@@ -127,14 +135,14 @@ function App(props) {
             "userData2",
             JSON.stringify({ ...res.data.data.user })
           );
-          console.log("apicall apps", res.data.data.user);
+          //console.log("apicall apps", res.data.data.user);
           SetUserDatas({ ...res.data.data.user });
         });
       });
   };
 
   useEffect(() => {
-    console.log("CHEKC ISLOAD HOEME",props.AuthPayloads.isLoading)
+    //console.log("CHEKC ISLOAD HOEME",props.AuthPayloads.isLoading)
   },[props])
   const handleFooter = (option) => {
     //console.log(option);
@@ -157,11 +165,13 @@ function App(props) {
             <Route path={`${process.env.PUBLIC_URL}/user/:role`}>
               <Users function={{
                   HandleInput: HandleInput,
+                  HandleInputFile: HandleInputFile,
                   SetVisibility: SetVisibility,
                   SubmitData: SubmitData,
                 }}
                 data={{
                   postData: postData,
+                  imgPreview: imgPreview,
                 }}/>
             </Route>
             <Route path={`${process.env.PUBLIC_URL}/auth`}>

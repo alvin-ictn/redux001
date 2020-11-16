@@ -10,7 +10,7 @@ import { getAppointment, getHistory } from "../../redux/actions/appointment";
 function Appointment(props) {
 
   useEffect(() => {
-    console.log("PROFILE{AGE",props.AuthPayloads.user.role)
+    //console.log("PROFILE{AGE",props.AuthPayloads.user.role)
     if(Object.keys(props.AuthPayloads.user).length){
       props.getAppointment(props.AuthPayloads.access_token,props.AuthPayloads.user.role);
       props.getHistory(props.AuthPayloads.access_token,props.AuthPayloads.user.role);

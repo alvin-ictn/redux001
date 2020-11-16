@@ -25,7 +25,7 @@ function Profile(props) {
   }, [props]);
 
     useEffect(() => {
-      console.log("TEST",props.AuthPayloads.user,Object.keys(props.AuthPayloads.user).length)
+      //console.log("TEST",props.AuthPayloads.user,Object.keys(props.AuthPayloads.user).length)
     },[props])
 
   
