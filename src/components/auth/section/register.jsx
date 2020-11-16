@@ -103,8 +103,9 @@ export default function Register() {
   };
 
   return (
-    <div style={{height:"90%"}} className="">
+    <div style={{height:"85%"}} className="">
       <Row className="mx-4 justify-content-center flex-column">
+        <VetArrowRight style={{position:"absolute",top:"20px",left:"20px"}}/>
         <p className="vet-heading v-text-donker">
           Register{" "}
           {id == 1
@@ -185,7 +186,7 @@ export default function Register() {
               {errorMsg.phone || " "}
             </Form.Text>
           </Form.Group>
-          <Row className="p-0 m-0 d-flex justify-content-center w-75" style={{position:"absolute",bottom:"10%"}}>
+          <Row className="p-0 m-0 d-flex justify-content-center w-75" style={{position:"absolute",bottom:"15%"}}>
             <Button
               className="v-bg-mustard v-text-donker border-0 font-weight-bold w-100 py-3"
               disabled={isLoading || readyState}

@@ -33,7 +33,7 @@ export default function Role() {
   };
   
   return (
-    <div style={{height:"90%"}} className="">
+    <div style={{height:"85%"}} className="">
       <Row className="mx-4 justify-content-center flex-column">
         <p className="vet-heading v-text-donker">Choice your Role</p>
         <p className="vet-body-1 v-text-donker">
@@ -81,7 +81,7 @@ export default function Role() {
           </Col>
         </Col>
       </Row>
-      <Row className="p-0 m-0 d-flex justify-content-center w-100" style={{position:"absolute",bottom:"10%"}}>
+      <Row className="p-0 m-0 d-flex justify-content-center w-100" style={{position:"absolute",bottom:"15%"}}>
         <Button
           className="v-bg-mustard border-0 w-50 rounded-lg v-text-donker font-weight-bold bg-transparent border-0 py-3"
           disabled={isLoading || option}
