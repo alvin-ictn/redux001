@@ -39,7 +39,7 @@ export default function Role() {
         <p className="vet-body-1 v-text-donker">
           Register yourself to use our application
         </p>
-        <i className="v-text-donker v-title">Pets Health, Vet Passion <strong>'Your best paws deserves the best care'</strong></i>
+        <i className="v-text-donker vet-title">Pets Health, Vet Passion <strong>'Your best paws deserves the best care'</strong></i>
       </Row>
       <Row
         className="m-2 d-flex justify-content-center align-items-center"

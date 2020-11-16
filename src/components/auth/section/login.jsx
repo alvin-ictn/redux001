@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Col, Nav, Row, Form } from "react-bootstrap";
 import "../register.css";
-import { VetEyeShow, VetEyeHidden } from "../../../assets/icons";
+import { VetEyeShow, VetEyeHidden,VetPaw } from "../../../assets/icons";
 import { user } from "../../../database";
 import { useHistory } from "react-router-dom";
 import { setLogin } from "../../../redux/actions/auth";
@@ -23,12 +23,22 @@ const Login = (props) => {
     props.setLogin(props.data.postData);
   };
   return (
-    <div style={{height:"90%"}} className="">
+    <div style={{height:"85%"}} className="">
       <Row className="mx-4 justify-content-center flex-column">
         <p className="vet-heading v-text-donker">Welcome Back</p>
         <p className="vet-body-1 v-text-donker">Log In to start your Journey</p>
+        <i className="v-text-donker my-3">Pets Health, Vet Passion <strong>'Your best paws deserves the best care'</strong></i>
+        {/* <div>
+          {["V","E","T","F","O","R","P","E","T"].map(item => <VetPaw key={item} size={40}
+              className="mx-2"
+              style={{
+                transform: `rotateZ(${Math.floor(Math.random() * 70) + 40}deg)`,
+                position: "relative",
+              
+              }}>{item}</VetPaw>)}
+        </div> */}
       </Row>
-      <Row className="register-section mt-4 px-5 d-flex justify-content-center align-items-center" style={{height:"70%"}}>
+      <Row className="register-section mt-2 px-5 d-flex justify-content-center align-items-center" style={{height:"50%"}}>
         <Form className="register-form w-100 registerForm px-5">
           <Form.Group className="form-register my-5">
             <Form.Control
@@ -64,7 +74,7 @@ const Login = (props) => {
             </Form.Text>
           </Form.Group>
 
-          <Row className="p-0 m-0 d-flex justify-content-center w-75" style={{position:"absolute",bottom:"10%"}}>
+          <Row className="p-0 m-0 d-flex justify-content-center w-75" style={{position:"absolute",bottom:"15%"}}>
             <Button
               className="v-bg-mustard v-text-donker border-0 font-weight-bold w-100 py-3"
               disabled={props.AuthPayloads.isLoading || readyState}

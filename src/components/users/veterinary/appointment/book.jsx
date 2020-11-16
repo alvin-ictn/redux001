@@ -9,26 +9,18 @@ function VeterinaryBook() {
   return (
     <Card.Body>
       <CardItem
-        buttonMode={1}
-        textMode={0}
-        buttonText={"Book Again"}
-        status={"Finished"}
-        name={"Klinik Hewan"}
-        src={doctorImg}
-      />
-      <CardItem
-        buttonMode={2}
-        textMode={0}
-        buttonText={"Approve"}
-        date={"10.20"}
-      />
-      <CardItem
-        textMode={0}
-        buttonMode={2}
-        buttonText={"Disapprove"}
+        buttonMode={3}
+        textMode={1}
         date={"14:10"}
+        buttonText={["Approve", "Disapprove"]}
       />
-      <CardItem
+       <CardItem
+        buttonMode={3}
+        textMode={1}
+        date={"14:10"}
+        buttonText={["Approve", "Disapprove"]}
+      />
+       <CardItem
         buttonMode={3}
         textMode={1}
         date={"14:10"}
