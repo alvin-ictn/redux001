@@ -35,9 +35,9 @@ export default function Role() {
   return (
     <div style={{height:"90%"}} className="">
       <Row className="mx-4 justify-content-center flex-column">
-        <p className="vet-heading v-text-donker">Pilih Role Kamu</p>
+        <p className="vet-heading v-text-donker">Choice your Role</p>
         <p className="vet-body-1 v-text-donker">
-          Daftarkan dirimu untuk menggunakan Aplikasi Kami
+        Register yourself to use our application
         </p>
       </Row>
       <Row className="m-2 d-flex justify-content-center align-items-center" style={{height:"70%"}}>
@@ -87,7 +87,7 @@ export default function Role() {
           disabled={isLoading || option}
           onClick={!isLoading ? handleClick : null}
         >
-            <span>{isLoading ? "Loading…" : "Selanjutnya"}</span>
+            <span>{isLoading ? "Loading…" : "Next"}</span>
         </Button>
       </Row>
     </div>

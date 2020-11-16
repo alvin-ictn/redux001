@@ -13,7 +13,7 @@ function NavMenu(props) {
   },[props])
 
   const [isLogin, setLoginState] = useState(null);
-  const [role, setRole] = useState("doctor")
+  const [role, setRole] = useState("")
 
   useEffect(() => {
     props.AuthPayloads.user.role && setRole(props.AuthPayloads.user.role)
@@ -32,9 +32,9 @@ function NavMenu(props) {
       <NavLink to={`${process.env.PUBLIC_URL}/clinic`} className={styles.link}>
         <span>Clinic Chat</span>
       </NavLink>  
-      <NavLink to={`${process.env.PUBLIC_URL}/user/${role}`} className={styles.link}>
+      {role && <NavLink to={`${process.env.PUBLIC_URL}/user/${role}`} className={styles.link}>
       <span>{role[0].toUpperCase()}{role.slice(1)}</span>
-      </NavLink>
+      </NavLink>}
       <NavLink to={`${process.env.PUBLIC_URL}/booking/1`} className={styles.link}>
         <span>Find a Clinic</span>
       </NavLink>
