@@ -1015,7 +1015,7 @@ export function VetArrowDown(props) {
       <rect width="19" height="11" fill={props.bgcolor || "transparent"} />
       <path
         d="M2.71429 0L9.5 6.875L16.2857 0L19 1.375L9.5 11L0 1.375L2.71429 0Z"
-        fill={props.color || "white"}
+        fill={props.color || "black"}
       />
     </svg>
   );
@@ -1033,7 +1033,7 @@ export function VetArrowLeft(props) {
       <rect width="14" height="23" fill={props.bgcolor || "transparent"} />
       <path
         d="M13.0073 3.92456L5.25078 11.7324L13.0586 19.4889L11.5125 22.6069L0.581487 11.7478L11.4406 0.816825L13.0073 3.92456Z"
-        fill={props.color || "white"}
+        fill={props.color || "black"}
       />
     </svg>
   );
@@ -1051,7 +1051,7 @@ export function VetArrowRight(props) {
       <rect width="13" height="23" fill={props.bgcolor || "transparent"} />
       <path
         d="M0.300837 19.3567L8.05732 11.5489L0.249488 3.79237L1.79565 0.674373L12.7266 11.5335L1.86754 22.4644L0.300837 19.3567Z"
-        fill={props.color || "white"}
+        fill={props.color || "black"}
       />
     </svg>
   );
@@ -1077,7 +1077,7 @@ export function VetArrowLeftBox(props) {
       />
       <path
         d="M28.007 13.9246L20.2505 21.7324L28.0584 29.4889L26.5122 32.6069L15.5812 21.7478L26.4403 10.8168L28.007 13.9246Z"
-        fill={props.color || "white"}
+        fill={props.color || "black"}
       />
     </svg>
   );
@@ -1101,7 +1101,7 @@ export function VetArrowRightBox(props) {
       />
       <path
         d="M16.3008 29.3567L24.0573 21.5489L16.2495 13.7924L17.7956 10.6744L28.7266 21.5335L17.8675 32.4644L16.3008 29.3567Z"
-        fill={props.color || "white"}
+        fill={props.color || "black"}
       />
     </svg>
   );

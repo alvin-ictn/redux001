@@ -10,6 +10,7 @@ $colorList:(
   "salmon": #FF7E6E,
   "caramel": #875C25,
   "cream": #F6E8C8,
+  "grass": #22A017,
 );
 
 @each $name, $color in $colorList {
@@ -58,6 +59,12 @@ $colorList:(
 
   .v-badge-#{$name}{
     color: invert($color: $color);
+    border-color: $color;
+    background-color: $color;
+  }
+
+  .v-badge-half-#{$name}{
+    color: $color;
     border-color: $color;
     background-color: $color;
   }

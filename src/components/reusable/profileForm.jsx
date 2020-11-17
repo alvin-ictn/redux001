@@ -18,11 +18,14 @@ import {
   VetPDog,
   VetPCat,
   VetAddPets,
+  VetArrowLeft
 } from "../../assets/icons";
 
 import styles from "../../assets/sass/reusable/profileForm.module.scss";
 import "./profileForm.css";
 import Swal from "sweetalert2";
+
+import { useHistory } from 'react-router-dom'
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -34,14 +37,13 @@ function ProfileForm({
   data: { postData, imgPreview },
   function: { HandleInput, HandleInputFile },
   AuthPayloads,
-  editUser,
+  editUser
 }) {
-  console.log(postData)
   const [status, setStatus] = useState("0");
   const [gender, setGender] = useState(AuthPayloads?.user?.patient?.gender);
   const [modalShow, setModalShow] = useState(false);
   const [highlight, setHighlight] = useState(0);
-
+  const history = useHistory()
   const PetModal = (props) => {
     return (
       <Modal
@@ -126,6 +128,9 @@ function ProfileForm({
         <Form>
           <Card.Header className={`font-weight-bold ${styles["bg-unset"]}`}>
             Upload Photo
+            <span className="float-right d-flex" style={{cursor:"pointer"}} onClick={() => history.goBack()}>
+              <VetArrowLeft/> <strong className="mx-4">Back</strong>
+            </span>
           </Card.Header>
           <Card.Body>
             <input
