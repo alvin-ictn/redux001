@@ -1015,7 +1015,7 @@ export function VetArrowDown(props) {
       <rect width="19" height="11" fill={props.bgcolor || "transparent"} />
       <path
         d="M2.71429 0L9.5 6.875L16.2857 0L19 1.375L9.5 11L0 1.375L2.71429 0Z"
-        fill={props.color || "black"}
+        fill={props.color || "white"}
       />
     </svg>
   );

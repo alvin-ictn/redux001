@@ -194,13 +194,54 @@ const HistoryClinic = ({ data }) => {
           </Col>
           <Col>{data.patient.name}</Col>
           <Col>
-            {data.animals.map((item) =>
-              item.type == "Dog" ? (
-                <VetPDog size={"40"} />
-              ) : (
-                <VetPCat size={"40"} />
-              )
-            )}
+            {data.animals &&
+              data.animals.map((item) =>
+                item.type == "Dog" ? (
+                  <OverlayTrigger
+                    trigger="hover"
+                    key={item._id}
+                    placement={"top"}
+                    overlay={
+                      <Popover id={`popover-positioned-top`}>
+                        <Popover.Title as="h3">{`${item.name}'s Info`}</Popover.Title>
+                        <Popover.Content>
+                          <div>
+                            <strong>Name</strong> : {item.name}
+                          </div>
+                          <div>
+                            <strong>Gender</strong> :{" "}
+                            {item.gender ? <VetMale /> : <VetFemale />}
+                          </div>
+                        </Popover.Content>
+                      </Popover>
+                    }
+                  >
+                    <VetPDog size={"40"} />
+                  </OverlayTrigger>
+                ) : (
+                  <OverlayTrigger
+                    trigger="hover"
+                    key={item._id}
+                    placement={"top"}
+                    overlay={
+                      <Popover id={`popover-positioned-top`}>
+                        <Popover.Title as="h3">{`${item.name}'s Info`}</Popover.Title>
+                        <Popover.Content>
+                          <div>
+                            <strong>Name</strong> : {item.name}
+                          </div>
+                          <div>
+                            <strong>Gender</strong> :{" "}
+                            {item.gender ? <VetMale /> : <VetFemale />}
+                          </div>
+                        </Popover.Content>
+                      </Popover>
+                    }
+                  >
+                    <VetPCat size={"40"} />
+                  </OverlayTrigger>
+                )
+              )}
           </Col>
         </Row>
       </Card>
@@ -224,7 +265,7 @@ const AppointmentPatient = ({ data }) => {
                 {datePost[1]}
               </Badge>
             </Col>
-            <Col className="book--item col-1 mr-4">
+            <Col className="book--item col-1 mr-4 px-4">
               <Image
                 style={{ height: "48px" }}
                 src={data.schedule.clinic.image}
@@ -250,58 +291,65 @@ const AppointmentPatient = ({ data }) => {
           </Col>
         </Row>
         <Row className="align-items-center book--row m-3 appointment-card-side">
-          <Col md={2} className="book--item justify-content-center align-items-center d-flex mx-3">
-            <Image src={data.schedule.veterinary.image} className="rounded mx-4" />
+          <Col
+            md={2}
+            className="book--item justify-content-center align-items-center d-flex mx-3"
+          >
+            <Image
+              src={data.schedule.veterinary.image}
+              className="rounded mx-4"
+            />
           </Col>
           <Col className="pl-5">{data.schedule.veterinary.name}</Col>
           <Col>
-            {data.animals.map((item) =>
-              item.type == "Dog" ? (
-                <OverlayTrigger
-                  trigger="hover"
-                  key={item._id}
-                  placement={"top"}
-                  overlay={
-                    <Popover id={`popover-positioned-top`}>
-                      <Popover.Title as="h3">{`${item.name}'s Info`}</Popover.Title>
-                      <Popover.Content>
-                        <div>
-                          <strong>Name</strong> : {item.name}
-                        </div>
-                        <div>
-                          <strong>Gender</strong> :{" "}
-                          {item.gender ? <VetMale /> : <VetFemale />}
-                        </div>
-                      </Popover.Content>
-                    </Popover>
-                  }
-                >
-                  <VetPDog size={"40"} />
-                </OverlayTrigger>
-              ) : (
-                <OverlayTrigger
-                  trigger="hover"
-                  key={item._id}
-                  placement={"top"}
-                  overlay={
-                    <Popover id={`popover-positioned-top`}>
-                      <Popover.Title as="h3">{`${item.name}'s Info`}</Popover.Title>
-                      <Popover.Content>
-                        <div>
-                          <strong>Name</strong> : {item.name}
-                        </div>
-                        <div>
-                          <strong>Gender</strong> :{" "}
-                          {item.gender ? <VetMale /> : <VetFemale />}
-                        </div>
-                      </Popover.Content>
-                    </Popover>
-                  }
-                >
-                  <VetPCat size={"40"} />
-                </OverlayTrigger>
-              )
-            )}
+            {data.animals &&
+              data.animals.map((item) =>
+                item.type == "Dog" ? (
+                  <OverlayTrigger
+                    trigger="hover"
+                    key={item._id}
+                    placement={"top"}
+                    overlay={
+                      <Popover id={`popover-positioned-top`}>
+                        <Popover.Title as="h3">{`${item.name}'s Info`}</Popover.Title>
+                        <Popover.Content>
+                          <div>
+                            <strong>Name</strong> : {item.name}
+                          </div>
+                          <div>
+                            <strong>Gender</strong> :{" "}
+                            {item.gender ? <VetMale /> : <VetFemale />}
+                          </div>
+                        </Popover.Content>
+                      </Popover>
+                    }
+                  >
+                    <VetPDog size={"40"} />
+                  </OverlayTrigger>
+                ) : (
+                  <OverlayTrigger
+                    trigger="hover"
+                    key={item._id}
+                    placement={"top"}
+                    overlay={
+                      <Popover id={`popover-positioned-top`}>
+                        <Popover.Title as="h3">{`${item.name}'s Info`}</Popover.Title>
+                        <Popover.Content>
+                          <div>
+                            <strong>Name</strong> : {item.name}
+                          </div>
+                          <div>
+                            <strong>Gender</strong> :{" "}
+                            {item.gender ? <VetMale /> : <VetFemale />}
+                          </div>
+                        </Popover.Content>
+                      </Popover>
+                    }
+                  >
+                    <VetPCat size={"40"} />
+                  </OverlayTrigger>
+                )
+              )}
           </Col>
         </Row>
       </Card>
@@ -309,6 +357,113 @@ const AppointmentPatient = ({ data }) => {
   );
 };
 
+const HistoryPatient = ({ data }) => {
+  let datePost = new Date(data.date).toDateString().split(" ");
+  return (
+    <div class="appointment-card">
+      <Card
+        style={{ boxShadow: "(0,0,0,0.3)" }}
+        className="my-2 card--group appointment-card-inner"
+      >
+        <Row className="align-items-center book--row m-3 appointment-card-main">
+          <Col className="d-flex" md={4}>
+            <Col className="book--item col-1 mr-4">
+              <Badge className="v-bg-donker v-text-white">
+                <p className="p-0 m-0">{datePost[2]}</p>
+                {datePost[1]}
+              </Badge>
+            </Col>
+            <Col className="book--item col-1 mr-4 px-4">
+              <Image
+                style={{ height: "48px" }}
+                src={data.schedule.clinic.image}
+                className="rounded"
+              />
+            </Col>
+          </Col>
+
+          <Col>{data.schedule.clinic.name}</Col>
+
+          <Col className="d-flex">
+            <Badge
+              pill
+              className={`px-4 py-2 w-100 ${
+                data.status == "finished"
+                  ? "v-badge-half-grass"
+                  : "v-badge-half-imperial"
+              }`}
+            >
+              {data.status[0].toUpperCase()}
+              {data.status.slice(1)}
+            </Badge>
+          </Col>
+        </Row>
+        <Row className="align-items-center book--row m-3 appointment-card-side">
+          <Col
+            md={2}
+            className="book--item justify-content-center align-items-center d-flex mx-3"
+          >
+            <Image
+              src={data.schedule.veterinary.image}
+              className="rounded mx-4"
+            />
+          </Col>
+          <Col className="pl-5">{data.schedule.veterinary.name}</Col>
+          <Col>
+            {data.animals &&
+              data.animals.map((item) =>
+                item.type == "Dog" ? (
+                  <OverlayTrigger
+                    trigger="hover"
+                    key={item._id}
+                    placement={"top"}
+                    overlay={
+                      <Popover id={`popover-positioned-top`}>
+                        <Popover.Title as="h3">{`${item.name}'s Info`}</Popover.Title>
+                        <Popover.Content>
+                          <div>
+                            <strong>Name</strong> : {item.name}
+                          </div>
+                          <div>
+                            <strong>Gender</strong> :{" "}
+                            {item.gender ? <VetMale /> : <VetFemale />}
+                          </div>
+                        </Popover.Content>
+                      </Popover>
+                    }
+                  >
+                    <VetPDog size={"40"} />
+                  </OverlayTrigger>
+                ) : (
+                  <OverlayTrigger
+                    trigger="hover"
+                    key={item._id}
+                    placement={"top"}
+                    overlay={
+                      <Popover id={`popover-positioned-top`}>
+                        <Popover.Title as="h3">{`${item.name}'s Info`}</Popover.Title>
+                        <Popover.Content>
+                          <div>
+                            <strong>Name</strong> : {item.name}
+                          </div>
+                          <div>
+                            <strong>Gender</strong> :{" "}
+                            {item.gender ? <VetMale /> : <VetFemale />}
+                          </div>
+                        </Popover.Content>
+                      </Popover>
+                    }
+                  >
+                    <VetPCat size={"40"} />
+                  </OverlayTrigger>
+                )
+              )}
+          </Col>
+        </Row>
+      </Card>
+    </div>
+  );
+};
 const renderComponent = (type, props) => {
   switch (type) {
     case "appointment-clinic":
@@ -319,6 +474,11 @@ const renderComponent = (type, props) => {
       return <AppointmentClinic {...props} />;
     case "history-clinic":
       return <HistoryClinic {...props} />;
+    case "history-patient":
+      return <HistoryPatient {...props} />;
+    case "history-veterinary":
+      return <HistoryClinic {...props} />;
+
     default:
       return;
   }
