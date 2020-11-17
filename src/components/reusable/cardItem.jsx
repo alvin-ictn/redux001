@@ -1,6 +1,6 @@
 import React from "react";
 import { Badge, Card, Col, Row, Button, Image } from "react-bootstrap";
-import { VetPDog, VetPCat } from '../../assets/icons'
+import { VetPDog, VetPCat } from "../../assets/icons";
 
 const AppointmentClinic = (props) => {
   return (
@@ -63,7 +63,7 @@ const AppointmentClinic = (props) => {
                 </Badge>
               )}
             </Col>
-            
+
             {props.buttonMode === 3 && (
               <Col className="button--action">
                 <Button
@@ -130,7 +130,7 @@ const AppointmentClinic = (props) => {
                 </Badge>
               )}
             </Col>
-            
+
             {props.buttonMode === 3 && (
               <Col className="button--action">
                 <Button
@@ -149,7 +149,6 @@ const AppointmentClinic = (props) => {
 };
 
 const HistoryClinic = ({ data }) => {
-  
   let datePost = new Date(data.date).toDateString().split(" ");
   return (
     <div class="appointment-card">
@@ -172,19 +171,73 @@ const HistoryClinic = ({ data }) => {
                   : "v-badge-half-imperial"
               }`}
             >
-              {data.status[0].toUpperCase()}{data.status.slice(1)}
+              {data.status[0].toUpperCase()}
+              {data.status.slice(1)}
             </Badge>
           </Col>
         </Row>
         <Row className="align-items-center book--row m-3 appointment-card-side">
           <Col className="book--item col-1 mr-4">
-              <Badge className="v-bg-donker v-text-white">
-                <p className="p-0 m-0">{datePost[2]}</p>
-               {datePost[1]}
-              </Badge>
+            <Badge className="v-bg-donker v-text-white">
+              <p className="p-0 m-0">{datePost[2]}</p>
+              {datePost[1]}
+            </Badge>
           </Col>
           <Col>{data.patient.name}</Col>
-          <Col>{data.animals.map(item => item.type == "Dog" ? <VetPDog size={"40"}/> : <VetPCat size={"40"}/> )}</Col>
+          <Col>
+            {data.animals.map((item) =>
+              item.type == "Dog" ? (
+                <VetPDog size={"40"} />
+              ) : (
+                <VetPCat size={"40"} />
+              )
+            )}
+          </Col>
+        </Row>
+      </Card>
+    </div>
+  );
+};
+
+const AppointmentPatient = ({ data }) => {
+  let datePost = new Date(data.date).toDateString().split(" ");
+  return (
+    <div class="appointment-card">
+      <Card
+        style={{ boxShadow: "(0,0,0,0.3)" }}
+        className="my-2 card--group appointment-card-inner"
+      >
+        <Row className="align-items-center book--row m-3 appointment-card-main">
+          <Col className="book--item col-1 mr-4">
+            <Image src={data.schedule.veterinary.image} className="rounded" />
+          </Col>
+          <Col>{data.schedule.veterinary.name}</Col>
+
+          <Col className="d-flex">
+            <Badge
+              pill
+              className={`px-4 py-2 w-100 ${
+                data.status == "finished"
+                  ? "v-badge-half-grass"
+                  : "v-badge-half-imperial"
+              }`}
+            >
+              {data.status[0].toUpperCase()}
+              {data.status.slice(1)}
+            </Badge>
+          </Col>
+        </Row>
+        <Row className="align-items-center book--row m-3 appointment-card-side">
+          <Col className="book--item col-1 mr-4">
+            <Badge className="v-bg-donker v-text-white">
+              <p className="p-0 m-0">{datePost[2]}</p>
+              {datePost[1]}
+            </Badge>
+          </Col>
+          <Col>{data.schedule.clinic.name}</Col>
+          <Col>
+            
+          </Col>
         </Row>
       </Card>
     </div>
@@ -194,6 +247,10 @@ const HistoryClinic = ({ data }) => {
 const renderComponent = (type, props) => {
   switch (type) {
     case "appointment-clinic":
+      return <AppointmentClinic {...props} />;
+    case "appointment-patient":
+      return <AppointmentPatient {...props} />;
+    case "appointment-veterinary":
       return <AppointmentClinic {...props} />;
     case "history-clinic":
       return <HistoryClinic {...props} />;
