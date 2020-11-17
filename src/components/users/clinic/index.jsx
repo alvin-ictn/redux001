@@ -44,9 +44,7 @@ export function Clinic() {
           path={`${process.env.PUBLIC_URL}/user/clinic/appointment`}
           component={ClinicAppointment}
         />
-        <Route path={`${process.env.PUBLIC_URL}/user/clinic/history`}>
-          <ClinicHistory />
-        </Route>
+        <Route path={`${process.env.PUBLIC_URL}/user/clinic/history`} render={() => <ClinicHistory/>}/>
       </Switch>
     </Card>
   );

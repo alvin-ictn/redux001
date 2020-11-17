@@ -3,7 +3,6 @@ import { Badge, Card, Col, Row, Button, Image } from "react-bootstrap";
 import { VetPDog, VetPCat } from '../../assets/icons'
 
 const AppointmentClinic = (props) => {
-  console.log(props);
   return (
     <div class="appointment-card">
       <Card
@@ -64,7 +63,7 @@ const AppointmentClinic = (props) => {
                 </Badge>
               )}
             </Col>
-            {console.log(props.mode)}
+            
             {props.buttonMode === 3 && (
               <Col className="button--action">
                 <Button
@@ -131,7 +130,7 @@ const AppointmentClinic = (props) => {
                 </Badge>
               )}
             </Col>
-            {console.log(props.mode)}
+            
             {props.buttonMode === 3 && (
               <Col className="button--action">
                 <Button
@@ -150,7 +149,7 @@ const AppointmentClinic = (props) => {
 };
 
 const HistoryClinic = ({ data }) => {
-  console.log(data);
+  
   let datePost = new Date(data.date).toDateString().split(" ");
   return (
     <div class="appointment-card">
@@ -185,7 +184,7 @@ const HistoryClinic = ({ data }) => {
               </Badge>
           </Col>
           <Col>{data.patient.name}</Col>
-          <Col>{data.animals.map(item => item.type == "Dog" ? <VetPDog/> : <VetPCat/> )}</Col>
+          <Col>{data.animals.map(item => item.type == "Dog" ? <VetPDog size={"40"}/> : <VetPCat size={"40"}/> )}</Col>
         </Row>
       </Card>
     </div>
