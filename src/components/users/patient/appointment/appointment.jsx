@@ -16,7 +16,7 @@ function PatientAppointment(props) {
   const [renderPostData, setPost] = useState();
 
   const renderData = () => {
-    const data = props.AppointmentPayloads.dataHistory;
+    const data = props.AppointmentPayloads.dataAppointment;
     const dataOnPage = data.slice(
       paginationConfig.offset,
       paginationConfig.offset + paginationConfig.perPage
@@ -42,14 +42,14 @@ function PatientAppointment(props) {
   });
 
   useEffect(() => {
-    props.AppointmentPayloads.dataHistory.length && renderData()
+    props.AppointmentPayloads.dataAppointment.length && renderData()
   },[paginationConfig.offset])
 
-  useEffect(() => {props.AppointmentPayloads.dataHistory.length && renderData()}, []);
+  useEffect(() => {props.AppointmentPayloads.dataAppointment.length && renderData()}, []);
 
   return (
     <Card.Body className="appointment-fix-height">
-      {props.AppointmentPayloads.dataHistory && paginationConfig.postData}
+      {props.AppointmentPayloads.dataAppointment && paginationConfig.postData}
       <div className="d-flex justify-content-center my-2 pagination-absolute">
       <ReactPaginate
         previousLabel={"prev"}

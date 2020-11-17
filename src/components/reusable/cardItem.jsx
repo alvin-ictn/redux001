@@ -1,6 +1,15 @@
 import React from "react";
-import { Badge, Card, Col, Row, Button, Image } from "react-bootstrap";
-import { VetPDog, VetPCat } from "../../assets/icons";
+import {
+  Badge,
+  Card,
+  Col,
+  Row,
+  Button,
+  Image,
+  OverlayTrigger,
+  Popover,
+} from "react-bootstrap";
+import { VetPDog, VetPCat, VetMale, VetFemale } from "../../assets/icons";
 
 const AppointmentClinic = (props) => {
   return (
@@ -208,18 +217,31 @@ const AppointmentPatient = ({ data }) => {
         className="my-2 card--group appointment-card-inner"
       >
         <Row className="align-items-center book--row m-3 appointment-card-main">
-          <Col className="book--item col-1 mr-4">
-            <Image src={data.schedule.veterinary.image} className="rounded" />
+          <Col className="d-flex" md={4}>
+            <Col className="book--item col-1 mr-4">
+              <Badge className="v-bg-donker v-text-white">
+                <p className="p-0 m-0">{datePost[2]}</p>
+                {datePost[1]}
+              </Badge>
+            </Col>
+            <Col className="book--item col-1 mr-4">
+              <Image
+                style={{ height: "48px" }}
+                src={data.schedule.clinic.image}
+                className="rounded"
+              />
+            </Col>
           </Col>
-          <Col>{data.schedule.veterinary.name}</Col>
+
+          <Col>{data.schedule.clinic.name}</Col>
 
           <Col className="d-flex">
             <Badge
               pill
               className={`px-4 py-2 w-100 ${
-                data.status == "finished"
+                data.status == "approved"
                   ? "v-badge-half-grass"
-                  : "v-badge-half-imperial"
+                  : "v-badge-half-mustard"
               }`}
             >
               {data.status[0].toUpperCase()}
@@ -228,15 +250,58 @@ const AppointmentPatient = ({ data }) => {
           </Col>
         </Row>
         <Row className="align-items-center book--row m-3 appointment-card-side">
-          <Col className="book--item col-1 mr-4">
-            <Badge className="v-bg-donker v-text-white">
-              <p className="p-0 m-0">{datePost[2]}</p>
-              {datePost[1]}
-            </Badge>
+          <Col md={2} className="book--item justify-content-center align-items-center d-flex mx-3">
+            <Image src={data.schedule.veterinary.image} className="rounded mx-4" />
           </Col>
-          <Col>{data.schedule.clinic.name}</Col>
+          <Col className="pl-5">{data.schedule.veterinary.name}</Col>
           <Col>
-            
+            {data.animals.map((item) =>
+              item.type == "Dog" ? (
+                <OverlayTrigger
+                  trigger="hover"
+                  key={item._id}
+                  placement={"top"}
+                  overlay={
+                    <Popover id={`popover-positioned-top`}>
+                      <Popover.Title as="h3">{`${item.name}'s Info`}</Popover.Title>
+                      <Popover.Content>
+                        <div>
+                          <strong>Name</strong> : {item.name}
+                        </div>
+                        <div>
+                          <strong>Gender</strong> :{" "}
+                          {item.gender ? <VetMale /> : <VetFemale />}
+                        </div>
+                      </Popover.Content>
+                    </Popover>
+                  }
+                >
+                  <VetPDog size={"40"} />
+                </OverlayTrigger>
+              ) : (
+                <OverlayTrigger
+                  trigger="hover"
+                  key={item._id}
+                  placement={"top"}
+                  overlay={
+                    <Popover id={`popover-positioned-top`}>
+                      <Popover.Title as="h3">{`${item.name}'s Info`}</Popover.Title>
+                      <Popover.Content>
+                        <div>
+                          <strong>Name</strong> : {item.name}
+                        </div>
+                        <div>
+                          <strong>Gender</strong> :{" "}
+                          {item.gender ? <VetMale /> : <VetFemale />}
+                        </div>
+                      </Popover.Content>
+                    </Popover>
+                  }
+                >
+                  <VetPCat size={"40"} />
+                </OverlayTrigger>
+              )
+            )}
           </Col>
         </Row>
       </Card>
