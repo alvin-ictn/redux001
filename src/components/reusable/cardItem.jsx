@@ -21,23 +21,15 @@ const AppointmentClinic = ({data}) => {
         className="my-2 card--group appointment-card-inner"
       >
         <Row className="align-items-center book--row m-3 appointment-card-main">
-          <Col className="d-flex" md={4}>
             <Col className="book--item col-1 mr-4">
               <Badge className="v-bg-donker v-text-white">
                 <p className="p-0 m-0">{datePost[2]}</p>
                 {datePost[1]}
               </Badge>
             </Col>
-            <Col className="book--item col-1 mr-4 px-4">
-              <Image
-                style={{ height: "48px" }}
-                src={data.schedule.clinic.image}
-                className="rounded"
-              />
-            </Col>
-          </Col>
 
-          <Col>{data.schedule.clinic.name}</Col>
+
+          <Col>{data.patient.name}</Col>
 
           <Col className="d-flex">
             <Badge
@@ -56,7 +48,7 @@ const AppointmentClinic = ({data}) => {
         <Row className="align-items-center book--row m-3 appointment-card-side">
           <Col
             md={2}
-            className="book--item justify-content-center align-items-center d-flex mx-3"
+            className="book--item justify-content-center align-items-center d-flex"
           >
             <Image
               src={data.schedule.veterinary.image}
@@ -66,7 +58,7 @@ const AppointmentClinic = ({data}) => {
           <Col className="pl-5">{data.schedule.veterinary.name}</Col>
           <Col>
             {data.animals != null ? (
-              data.animals.length ? (
+              data.animals.length > 0 ? (
                 data.animals.map((item) =>
                   item.type == "Dog" ? (
                     <OverlayTrigger
