@@ -44,6 +44,20 @@ function ProfileForm({
   const [modalShow, setModalShow] = useState(false);
   const [highlight, setHighlight] = useState(0);
   const history = useHistory()
+  
+  useEffect(() => {
+    postData = AuthPayloads?.user?.patient ? {
+      status : ""
+    } : AuthPayloads?.user?.veterinary ? {
+      status : ""
+    } : AuthPayloads?.user?.clinic ? {
+      status :  AuthPayloads?.user?.clinic?.status
+    } : {
+      
+    }
+  },[])
+
+  console.log(postData)
   const PetModal = (props) => {
     return (
       <Modal
