@@ -3,7 +3,7 @@ import { Card } from "react-bootstrap";
 
 import CardItem from "../../../reusable/cardItem";
 import {connect} from 'react-redux'
-function AppointmentApproval() {
+function ClinicAppointment() {
   return (
     <Card.Body>
       <CardItem
@@ -45,4 +45,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps,null)(AppointmentApproval)
+export default connect(mapStateToProps,null)(ClinicAppointment)

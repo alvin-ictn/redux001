@@ -66,7 +66,7 @@ $colorList:(
   .v-badge-half-#{$name}{
     color: $color;
     border-color: $color;
-    background-color: $color;
+    background-color: rgba($color,0.5);
   }
 }
 

@@ -1,7 +1,7 @@
-import ClinicApproval from './approval';
-import ClinicBook from './book'
+import ClinicAppointment from './appointment';
+import ClinicHistory from './history'
 
 export {
-  ClinicApproval,
-  ClinicBook
+  ClinicAppointment,
+  ClinicHistory
 }
