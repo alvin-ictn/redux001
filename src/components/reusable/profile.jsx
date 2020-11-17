@@ -7,7 +7,9 @@ import {
   VetPaw,
   VetSchedule,
   VetDoor,
-  VetClock
+  VetClock,
+  VetStatusOnline,
+  VetStatusOffline
 } from "../../assets/icons";
 import styles from "./profile.module.css";
 import Skeleton from "react-loading-skeleton";
@@ -52,10 +54,10 @@ function Profile(props) {
           >
             {Object.keys(props.AuthPayloads.user).length ? `${props.AuthPayloads.user.role[0].toUpperCase()}${props.AuthPayloads.user.role.slice(1)} `: <Skeleton/>}
           </Badge>
-          <Row className="pt-4">
+          <Row className="pt-4 vet-button">
             <Col
-              md={6}
-              className="d-flex align-items-center"
+              md={4}
+              className="d-flex align-items-center m-0 p-0"
               style={{ color: "green", fill: "green" }}
             >
               {Object.keys(props.AuthPayloads.user).length ? (props.AuthPayloads.user.role === "user" ? (
@@ -64,13 +66,13 @@ function Profile(props) {
                 </>
               ) : (
                 <>
-                  <VetSignal color={"green"} /> <span className="mx-2">Online</span>
+                  <VetStatusOnline/><span className="mx-2">Online</span>
                 </>
               )) : 
                 <Skeleton width={100} />
               }
             </Col>
-            <Col md={6} className="d-flex align-items-center justify-content-center">
+            <Col md={8} className="d-flex align-items-center justify-content-end m-0 p-0">
               {
                 Object.keys(props.AuthPayloads.user).length ? 
                   (props.AuthPayloads.user.role === "patient" && props.value) > 1 
@@ -102,7 +104,7 @@ function Profile(props) {
                   : props.AuthPayloads.user.role === "clinic" ? 
                   <>
                     <VetClock/>
-                    <span className="mx-2">{props.AuthPayloads.user.clinic.schedules}</span>
+                    <span className="mx-2">09.00 - 18.00</span>
                   </> :
                   ""
                 : <Skeleton width={100}/>}
@@ -111,9 +113,9 @@ function Profile(props) {
           </Row>
         </Card.Body>
         <Card.Footer className={styles["card--footer"]}>
-          <Link to={`${process.env.PUBLIC_URL}/user/${props.mode}/profile`}>
+          <Link to={`${process.env.PUBLIC_URL}/user/${props.mode}/profile`} className="text-decoration-none">
             <Button className="font-weight-bold" variant="warning" block>
-              Edit Profile
+              <span>Edit Profile</span>
             </Button>
           </Link>
         </Card.Footer>

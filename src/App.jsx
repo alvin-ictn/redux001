@@ -86,6 +86,7 @@ function App(props) {
     footer: true,
   });
   useEffect(() => {
+    console.log(token)
     token.length && props.getUserData(token)
   }, [token]);
 

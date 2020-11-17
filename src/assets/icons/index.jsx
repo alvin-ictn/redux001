@@ -633,7 +633,7 @@ export function VetAddPets(props) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
-      style={{cursor:"pointer"}}
+      style={{ cursor: "pointer" }}
     >
       <path
         d="M0.5 0.5H205.5V128.5H0.5V0.5Z"
@@ -1103,6 +1103,58 @@ export function VetArrowRightBox(props) {
         d="M16.3008 29.3567L24.0573 21.5489L16.2495 13.7924L17.7956 10.6744L28.7266 21.5335L17.8675 32.4644L16.3008 29.3567Z"
         fill={props.color || "black"}
       />
+    </svg>
+  );
+}
+
+export function VetStatusOnline(props) {
+  return (
+    <svg
+      {...props}
+      aria-hidden="true"
+      focusable="false"
+      width={props.size || "20"}
+      height={(props.size * 20) / 20 || "20"}
+      preserveAspectRatio="xMidYMid meet"
+      viewBox="0 0 20 20"
+    >
+      <g fill="none">
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M5.05 3.636a1 1 0 0 1 0 1.414a7 7 0 0 0 0 9.9a1 1 0 1 1-1.414 1.414a9 9 0 0 1 0-12.728a1 1 0 0 1 1.414 0zm9.9 0a1 1 0 0 1 1.414 0a9 9 0 0 1 0 12.728a1 1 0 1 1-1.414-1.414a7 7 0 0 0 0-9.9a1 1 0 0 1 0-1.414zM7.879 6.464a1 1 0 0 1 0 1.414a3 3 0 0 0 0 4.243a1 1 0 1 1-1.415 1.414a5 5 0 0 1 0-7.07a1 1 0 0 1 1.415 0zm4.242 0a1 1 0 0 1 1.415 0a5 5 0 0 1 0 7.072a1 1 0 0 1-1.415-1.415a3 3 0 0 0 0-4.242a1 1 0 0 1 0-1.415zM10 9a1 1 0 0 1 1 1v.01a1 1 0 1 1-2 0V10a1 1 0 0 1 1-1z"
+          fill={props.color || "#22A017"}
+        />
+      </g>
+    </svg>
+  );
+}
+
+export function VetStatusOffline(props) {
+  return (
+    <svg
+      {...props}
+      aria-hidden="true"
+      focusable="false"
+      width={props.size || "20"}
+      height={(props.size * 20) / 20 || "20"}
+      preserveAspectRatio="xMidYMid meet"
+      viewBox="0 0 20 20"
+    >
+      <g fill="none">
+        <path
+          d="M3.707 2.293a1 1 0 0 0-1.414 1.414l6.921 6.922c.05.062.105.118.168.167l6.91 6.911a1 1 0 0 0 1.415-1.414l-.675-.675a9.001 9.001 0 0 0-.668-11.982A1 1 0 1 0 14.95 5.05a7.002 7.002 0 0 1 .657 9.143l-1.435-1.435a5.002 5.002 0 0 0-.636-6.294A1 1 0 0 0 12.12 7.88c.924.923 1.12 2.3.587 3.415l-1.992-1.992a.922.922 0 0 0-.018-.018l-6.99-6.991z"
+          fill={props.color || "#ED5341"}
+        />
+        <path
+          d="M3.238 8.187a1 1 0 0 0-1.933-.516c-.8 3-.025 6.336 2.331 8.693a1 1 0 0 0 1.414-1.415a6.997 6.997 0 0 1-1.812-6.762z"
+          fill={props.color || "#ED5341"}
+        />
+        <path
+          d="M7.4 11.5a1 1 0 1 0-1.73 1c.214.371.48.72.795 1.035a1 1 0 0 0 1.414-1.414c-.191-.191-.35-.4-.478-.622z"
+          fill={props.color || "#ED5341"}
+        />
+      </g>
     </svg>
   );
 }

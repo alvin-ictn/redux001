@@ -57,7 +57,6 @@ function ProfileForm({
     }
   },[])
 
-  console.log(postData)
   const PetModal = (props) => {
     return (
       <Modal

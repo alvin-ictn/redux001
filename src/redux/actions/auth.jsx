@@ -40,7 +40,9 @@ export const setLogin = (data) => {
           method: 'self',
           access_token : res.data.access_token
         }).then(res => {
+          console.log(res)
           if (res.status === 400) {
+            
             dispatch({
               type: auth.SET_ERROR,
               errorMsg: res.data.message,
@@ -103,6 +105,7 @@ export const getUserData = (access_token) => {
       method: 'self',
       access_token
     }).then(res => {
+      console.log(res)
       if (res.status === 400) {
         dispatch({
           type: auth.SET_ERROR,
