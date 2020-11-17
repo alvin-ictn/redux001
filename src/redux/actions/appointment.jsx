@@ -43,7 +43,10 @@ export const getAppointment = (access_token,data) => {
 export const getHistory = (access_token,data) => {
   data = `history-${data}`;
   return (dispatch) => {
-
+    dispatch({
+      type: utility.SET_UTILITY_ACTION_LOAD,
+      isLoading:true,
+    })
     reservation({
       method: 'appointment',
       access_token,

@@ -23,48 +23,10 @@ import ClinicSearch from "./components/Clinic/ClinicChoose/ClinicSearch";
 
 import PageLoad from './components/reusable/utilities/pageLoad'
 import { getUserData } from "./redux/actions/auth";
+import { getAppointment, getHistory } from "./redux/actions/appointment";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-const Success = (props) => {
-  useEffect(() => {
-    props.SetBarState({
-      footer: false,
-      navbar: false,
-    });
-  }, []);
-  return (
-    <div className="vet-paws-8">
-      {["..", "G", "N", "I", "D", "A", "O", "L"].map((item, idx) =>
-        idx % 2 === 0 ? (
-          <VetPaw
-            className="vet-paw"
-            size={60}
-            style={{
-              display: "block",
-              transform: `rotateZ(${Math.floor(Math.random() * 35) + 20}deg)`,
-              position: "relative",
-              left: "60px",
-            }}
-          >
-            {item}
-          </VetPaw>
-        ) : (
-          <VetPaw
-            className="vet-paw"
-            size={60}
-            style={{
-              display: "block",
-              transform: `rotateZ(-${Math.floor(Math.random() * 35) + 20}deg)`,
-            }}
-          >
-            {item}
-          </VetPaw>
-        )
-      )}
-    </div>
-  );
-};
 
 function App(props) {
   // state declaration
@@ -88,7 +50,16 @@ function App(props) {
   useEffect(() => {
     console.log(token)
     token.length && props.getUserData(token)
+
   }, [token]);
+
+  useEffect(() => {
+    if(Object.keys(props.AuthPayloads.user).length){
+      props.getAppointment(props.AuthPayloads.access_token,props.AuthPayloads.user.role);
+      props.getHistory(props.AuthPayloads.access_token,props.AuthPayloads.user.role);
+    } 
+  },[props.AuthPayloads.access_token])
+
 
   const history = useHistory();
   useEffect(() => {
@@ -216,9 +187,6 @@ function App(props) {
             <Route path={`${process.env.PUBLIC_URL}/booking/:page`}>
               <ClinicChoose SetBarState={SetBarState} />
             </Route>
-            <Route path={`${process.env.PUBLIC_URL}/success`}>
-              <Success data={userDatas} SetBarState={SetBarState} />
-            </Route>
             <Route exact path={`${process.env.PUBLIC_URL}/`}>
               <Home SetBarState={SetBarState} />
             </Route>
@@ -233,11 +201,12 @@ function App(props) {
 const mapStateToProps = (state) => {
   return {
     AuthPayloads: state.Auth,
+    AppointmentPayloads: state.Appointment,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ getUserData }, dispatch);
+  return bindActionCreators({ getUserData, getAppointment, getHistory }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

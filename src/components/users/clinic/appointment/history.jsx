@@ -16,7 +16,6 @@ function ClinicHistory(props) {
   const [renderPostData, setPost] = useState();
 
   const renderData = () => {
-    console.log("RUN??")
     const data = props.AppointmentPayloads.dataHistory;
     const dataOnPage = data.slice(
       paginationConfig.offset,
@@ -43,15 +42,15 @@ function ClinicHistory(props) {
   });
 
   useEffect(() => {
-    renderData()
+    props.AppointmentPayloads.dataHistory.length && renderData()
   },[paginationConfig.offset])
 
-  useEffect(() => {renderData()}, []);
+  useEffect(() => {props.AppointmentPayloads.dataHistory.length && renderData()}, []);
 
   return (
-    <Card.Body>
+    <Card.Body className="appointment-fix-height">
       {props.AppointmentPayloads.dataHistory && paginationConfig.postData}
-      <div className="d-flex justify-content-center my-2">
+      <div className="d-flex justify-content-center my-2 pagination-absolute">
       <ReactPaginate
         previousLabel={"prev"}
         nextLabel={"next"}
@@ -71,7 +70,6 @@ function ClinicHistory(props) {
         activeClassName={"active"}
       />
       </div>
-      
     </Card.Body>
   );
 }

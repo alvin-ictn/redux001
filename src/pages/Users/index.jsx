@@ -7,21 +7,22 @@ import ProfileForm from "../../components/reusable/profileForm";
 import { Container, Row, Col } from "react-bootstrap";
 import { user } from "../../database";
 
-export default function Users(props) {
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+
+import { getAppointment, getHistory } from "../../redux/actions/appointment";
+
+function Users(props) {
   const { role } = useParams();
   const [passData, SetPassData] = useState(null);
 
   useEffect(() => {
-    //console.log("YUSER", props);
-    // user({
-    //   method: "self",
-    //   access_token : localStorage.getItem('VetToken')
-    // }).then(res => {
-    //   res.status === 200 && SetPassData(res.data.data.user)
-    // })
-  }, []);
-
-  useEffect(() => {}, [passData]);
+    //console.log("PROFILE{AGE",props.AuthPayloads.user.role)
+    if(Object.keys(props.AuthPayloads.user).length){
+      props.getAppointment(props.AuthPayloads.access_token,props.AuthPayloads.user.role);
+      props.getHistory(props.AuthPayloads.access_token,props.AuthPayloads.user.role);
+    } 
+  },[])
 
   return (
     <Container>
@@ -53,3 +54,16 @@ export default function Users(props) {
     </Container>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    AuthPayloads: state.Auth,
+    AppointmentPayloads: state.Appointment,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ getAppointment, getHistory }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Users)

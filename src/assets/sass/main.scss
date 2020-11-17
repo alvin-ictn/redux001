@@ -82,8 +82,16 @@ div[class*='vet-paws']  > *{
   opacity: 0;
 }
 
+.appointment-fix-height {
+  min-height: 478px;
+}
 
-
+.pagination-absolute {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  bottom:0;
+}
 $animate_time: 1.4s;
 @for $classis from 1 through 10 {
   @for $i from 1 through $classis {

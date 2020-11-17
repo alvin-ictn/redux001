@@ -172,7 +172,7 @@ const HistoryClinic = ({ data }) => {
                   : "v-badge-half-imperial"
               }`}
             >
-              {data.status}
+              {data.status[0].toUpperCase()}{data.status.slice(1)}
             </Badge>
           </Col>
         </Row>
