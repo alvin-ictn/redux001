@@ -35,7 +35,7 @@ export default function Role() {
   return (
     <div style={{ height: "85%" }} className="">
       <Row className="mx-4 justify-content-center flex-column">
-        <p className="vet-heading v-text-donker">Choice your Role</p>
+        <p className="vet-heading v-text-donker">Choose your Role</p>
         <p className="vet-body-1 v-text-donker">
           Register yourself to use our application
         </p>

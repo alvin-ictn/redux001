@@ -90,6 +90,18 @@ const reservation = ({
     ).then(res => res)
       .catch(err => err.response)
   }
+
+  if (method === "updateAppointment") {
+    return axios.get(
+      `${configuration.url}/reservation/${data}`, 
+      {
+        headers: {
+          access_token
+        }
+      }
+    ).then(res => res)
+      .catch(err => err.response)
+  }
 }
 
 const user = ({

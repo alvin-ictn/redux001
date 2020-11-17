@@ -56,8 +56,17 @@ $colorList:(
     
   }
 
-  .v-btn-#{$name}:hover {
-    
+  .v-badge-#{$name}{
+    color: invert($color: $color);
+    border-color: $color;
+    background-color: $color;
   }
 }
 
+.v-badge-mustard {
+  color: #1A3150;
+}
+
+.v-btn-outline-sp-imperial:hover {
+  color: #E0E9F5;
+}

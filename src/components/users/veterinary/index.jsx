@@ -20,7 +20,7 @@ export default function Appointment() {
         >
          <Nav.Item>
             <NavLink className="vet-title-2 v-text-donker" to={`${process.env.PUBLIC_URL}/user/veterinary/book`} onClick={(e) => console.log(e)}>
-                Book from Pasien
+              Patient Book
             </NavLink>
           </Nav.Item>
           <Nav.Item>
