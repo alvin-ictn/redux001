@@ -232,7 +232,7 @@ const AppointmentVeterinary = ({ data }) => {
           <Col>
             {data.status == "pending" && (
               <Col>
-                <Button onClick={approveAppointment} className="v-btn-grass"><span>Approve</span></Button>
+                <Button onClick={approveAppointment} className="v-btn-grass mx-2"><span>Approve</span></Button>
                 <Button onClick={rejectAppointment} className="v-btn-imperial"><span>Reject</span></Button>
               </Col>
             )}

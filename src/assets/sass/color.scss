@@ -59,6 +59,11 @@ $colorList:(
     border-color: $color;
   }
 
+  .v-btn-#{$name}:hover {
+    background-color: lighten($color, 10%);
+    border-color: lighten($color,10%);
+  }
+
   .v-badge-#{$name}{
     color: invert($color: $color);
     border-color: $color;
