@@ -1020,6 +1020,15 @@ export function VetArrowDown(props) {
     </svg>
   );
 }
+
+export function VetFlagID(props) {
+  return (
+    <svg width="30" height="20" viewBox="0 0 3 2">
+      <rect fill="#ce1126" width="3" height="2" />
+      <rect fill="#fff" y="1" width="3" height="1" />
+    </svg>
+  );
+}
 export function VetArrowLeft(props) {
   return (
     <svg

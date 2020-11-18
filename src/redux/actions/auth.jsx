@@ -40,7 +40,6 @@ export const setLogin = (data) => {
           method: 'self',
           access_token : res.data.access_token
         }).then(res => {
-          console.log(res)
           if (res.status === 400) {
             
             dispatch({
@@ -65,7 +64,6 @@ export const setLogin = (data) => {
 };
 
 export const editUser = (data, access_token) => {
-  console.log("EDITUSER",data,access_token)
   let form_data = new FormData();
   for ( let key in data ) {
     form_data.append(key, data[key]);
@@ -87,7 +85,7 @@ export const editUser = (data, access_token) => {
           errorMsg: res.data.message,
         });
       } else if(res.data.success) {
-        console.log(res)
+        
 
         
       }
@@ -105,7 +103,6 @@ export const getUserData = (access_token) => {
       method: 'self',
       access_token
     }).then(res => {
-      console.log(res)
       if (res.status === 400) {
         dispatch({
           type: auth.SET_ERROR,

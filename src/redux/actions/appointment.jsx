@@ -10,7 +10,6 @@ export const getAppointment = (access_token,data) => {
       type: utility.SET_UTILITY_ACTION_LOAD,
       isLoading:true,
     })
-    console.log(data)
     reservation({
       method: 'appointment',
       access_token,

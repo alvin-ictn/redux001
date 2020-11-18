@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Badge, Card, Image, Col, Row, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import {
-  VetSignal,
   VetBriefcase,
   VetPaw,
   VetSchedule,
@@ -16,21 +15,21 @@ import Skeleton from "react-loading-skeleton";
 
 import { connect } from "react-redux";
 
-function Profile(props) {
-  const [userBadge, setUserBadge] = useState(null);
-
-  useEffect(() => {
-    props.AuthPayloads.user.role === "patient"
-      ? setUserBadge("user")
-      : props.AuthPayloads.user.role === "veterinary"
-      ? setUserBadge("doctor")
-      : setUserBadge(props.AuthPayloads.user.role);
-  }, [props]);
-
-    useEffect(() => {
-      //console.log("TEST",props.AuthPayloads.user,Object.keys(props.AuthPayloads.user).length)
-    },[props])
-
+function Profile(props) { 
+  props.data.data.postData = props.AuthPayloads?.user?.patient
+  ? {
+      status: "",
+    }
+  : props.AuthPayloads?.user?.veterinary
+  ? {
+      status: props.AuthPayloads?.user?.veterinary?.status,
+      genderVet: props.AuthPayloads?.user?.veterinary?.genderVet.toString(),
+    }
+  : props.AuthPayloads?.user?.clinic
+  ? {
+      status: props.AuthPayloads?.user?.clinic?.status,
+    }
+  : {};
   
   return (
     <>

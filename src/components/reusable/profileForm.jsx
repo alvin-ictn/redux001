@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import React, { useState, useEffect } from "react";
 import {
   ButtonGroup,
@@ -6,7 +7,7 @@ import {
   ToggleButton,
   Button,
   Modal,
-  InputGroup
+  InputGroup,
 } from "react-bootstrap";
 
 import {
@@ -18,14 +19,15 @@ import {
   VetPDog,
   VetPCat,
   VetAddPets,
-  VetArrowLeft
+  VetArrowLeft,
+  VetFlagID,
 } from "../../assets/icons";
 
 import styles from "../../assets/sass/reusable/profileForm.module.scss";
 import "./profileForm.css";
 import Swal from "sweetalert2";
 
-import { useHistory } from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -37,26 +39,15 @@ function ProfileForm({
   data: { postData, imgPreview },
   function: { HandleInput, HandleInputFile },
   AuthPayloads,
-  editUser
+  editUser,
 }) {
   const [status, setStatus] = useState("0");
   const [gender, setGender] = useState(AuthPayloads?.user?.patient?.gender);
   const [modalShow, setModalShow] = useState(false);
   const [highlight, setHighlight] = useState(0);
-  const history = useHistory()
+  const history = useHistory();
   
-  useEffect(() => {
-    postData = AuthPayloads?.user?.patient ? {
-      status : ""
-    } : AuthPayloads?.user?.veterinary ? {
-      status : ""
-    } : AuthPayloads?.user?.clinic ? {
-      status :  AuthPayloads?.user?.clinic?.status
-    } : {
-      
-    }
-  },[])
-
+  
   const PetModal = (props) => {
     return (
       <Modal
@@ -91,7 +82,7 @@ function ProfileForm({
               <Form.Control type="text" placeholder="Enter Pet Name" />
             </Form.Group>
             <Form.Group className="mb-4" id="gender">
-              <Form.Text>Gender</Form.Text>
+              <Form.Label>Gender</Form.Label>
               <ButtonGroup toggle name="radiogroup">
                 <ToggleButton
                   key={1}
@@ -141,8 +132,12 @@ function ProfileForm({
         <Form>
           <Card.Header className={`font-weight-bold ${styles["bg-unset"]}`}>
             Upload Photo
-            <span className="float-right d-flex" style={{cursor:"pointer"}} onClick={() => history.goBack()}>
-              <VetArrowLeft/> <strong className="mx-4">Back</strong>
+            <span
+              className="float-right d-flex"
+              style={{ cursor: "pointer" }}
+              onClick={() => history.goBack()}
+            >
+              <VetArrowLeft /> <strong className="mx-4">Back</strong>
             </span>
           </Card.Header>
           <Card.Body>
@@ -181,7 +176,7 @@ function ProfileForm({
               </Card.Header>
               <Card.Body>
                 <Form.Group className="mb-4" id="status">
-                  <Form.Text>Status</Form.Text>
+                  <Form.Label>Status</Form.Label>
                   <ButtonGroup
                     toggle
                     name="radiogroup"
@@ -191,13 +186,16 @@ function ProfileForm({
                       className="d-flex justify-content-center align-items-center"
                       key={1}
                       type="radio"
-                      variant={postData.status == "true" ? "success" : ""}
+                      variant={postData.status == "active" ? "success" : ""}
                       name="status"
-                      value="true"
-                      checked={postData.status == "true"}
+                      value="active"
+                      checked={postData.status == "active"}
                       onChange={(e) => HandleInput(e)}
                     >
-                      <VetSun size={"24px"} color={postData.status == "true" && "white"} />
+                      <VetSun
+                        size={"24px"}
+                        color={postData.status == "active" && "white"}
+                      />
                       <span className="mx-3 my-0">
                         {mode == "veterinary" ? "Active" : "Buka"}
                       </span>
@@ -206,13 +204,16 @@ function ProfileForm({
                       className="d-flex justify-content-center align-items-center"
                       key={2}
                       type="radio"
-                      variant={postData.status == "false" ? "danger" : ""}
+                      variant={postData.status == "offline" ? "danger" : ""}
                       name="status"
-                      value="false"
-                      checked={postData.status == "false"}
+                      value="offline"
+                      checked={postData.status == "offline"}
                       onChange={(e) => HandleInput(e)}
                     >
-                      <VetUnavailable size={"24px"} color={postData.status == "false" && "white"}/>
+                      <VetUnavailable
+                        size={"24px"}
+                        color={postData.status == "offline" && "white"}
+                      />
                       <span className="mx-3 my-0">
                         {mode == "veterinary" ? "Offline" : "Tutup"}
                       </span>
@@ -220,9 +221,9 @@ function ProfileForm({
                   </ButtonGroup>
                 </Form.Group>
                 <Form.Group controlId="exampleForm.ControlSelect1">
-                  <Form.Text>
+                  <Form.Label>
                     Waktu {mode == "veterinary" ? "Aktif" : "Buka"}
-                  </Form.Text>
+                  </Form.Label>
                   <Form.Control as="select">
                     <option>15</option>
                     <option>16</option>
@@ -239,7 +240,7 @@ function ProfileForm({
           </Card.Header>
           <Card.Body>
             <Form.Group className="mb-4" id="status">
-              <Form.Text>Username</Form.Text>
+              <Form.Label>Username</Form.Label>
               <Form.Control
                 onChange={(e) => HandleInput(e)}
                 name="name"
@@ -249,20 +250,25 @@ function ProfileForm({
               />
             </Form.Group>
             <Form.Group className="mb-4" id="gender">
-              <Form.Text>Gender</Form.Text>
+              <Form.Label>Gender</Form.Label>
               <ButtonGroup toggle name="radiogroup">
                 <ToggleButton
                   key={1}
                   type="radio"
-                  variant={postData.gender == "true" ? "primary" : ""}
+                  variant={postData.genderVet == "true" ? "primary" : ""}
                   name="gender"
                   value={true}
-                  checked={postData.gender == "true"}
+                  checked={postData.genderVet == "true"}
                   onChange={(e) => HandleInput(e)}
                 >
-                  <VetMale size={22} color={postData.gender == "true" && "white"}/>
+                  <VetMale
+                    size={22}
+                    color={postData.genderVet == "true" && "white"}
+                  />
                   <span
-                    className={`mx-3 ${postData.gender == "false" ? "text-white" : ""}`}
+                    className={`mx-3 ${
+                      postData.genderVet == "false" ? "text-white" : ""
+                    }`}
                   >
                     Male
                   </span>
@@ -270,15 +276,20 @@ function ProfileForm({
                 <ToggleButton
                   key={2}
                   type="radio"
-                  variant={postData.gender == "false" ? "pink" : ""}
+                  variant={postData.genderVet == "false" ? "pink" : ""}
                   name="gender"
                   value={false}
-                  checked={postData.gender == "false"}
+                  checked={postData.genderVet == "false"}
                   onChange={(e) => HandleInput(e)}
                 >
-                  <VetFemale size={34} color={postData.gender == "false" && "white"} />
+                  <VetFemale
+                    size={34}
+                    color={postData.genderVet == "false" && "white"}
+                  />
                   <span
-                    className={`mx-3 ${postData.gender == "true" ? "text-white" : ""}`}
+                    className={`mx-3 ${
+                      postData.genderVet == "true" ? "text-white" : ""
+                    }`}
                   >
                     Female
                   </span>
@@ -294,14 +305,21 @@ function ProfileForm({
                     type="number"
                     placeholder="It's my name"
                     name="experience"
-                    value={postData?.experience || (AuthPayloads.user?.veterinary?.experience !== null ? AuthPayloads.user?.veterinary?.experience : 0 ) }
+                    value={
+                      postData?.experience ||
+                      (AuthPayloads.user?.veterinary?.experience !== null
+                        ? AuthPayloads.user?.veterinary?.experience
+                        : 0)
+                    }
                   />
                   <InputGroup.Prepend>
-                    <InputGroup.Text id="inputGroupPrepend">Years</InputGroup.Text>
+                    <InputGroup.Text id="inputGroupPrepend">
+                      Years
+                    </InputGroup.Text>
                   </InputGroup.Prepend>
                 </InputGroup>
 
-                <Form.Text className="text-muted">Doctor Experience.</Form.Text>
+                <Form.Label className="text-muted">Doctor Experience.</Form.Label>
               </Form.Group>
             )}
           </Card.Body>
@@ -310,15 +328,22 @@ function ProfileForm({
           </Card.Header>
           <Card.Body>
             <Form.Group controlId="formBasicEmail">
-              <Form.Text>Nomor Telefon</Form.Text>
-              <Form.Control
-                type="text"
-                placeholder="It's my name"
-                value="+628998844"
-              />
+              <Form.Label>Nomor Telefon</Form.Label>
+              <InputGroup>
+                <InputGroup.Prepend>
+                  <InputGroup.Text id="inputGroupPrepend">
+                    <VetFlagID/>
+                  </InputGroup.Text>
+                </InputGroup.Prepend>
+                <Form.Control
+                  type="text"
+                  placeholder="It's my name"
+                  value="+628998844"
+                />
+              </InputGroup>
             </Form.Group>
             <Form.Group controlId="formBasicEmail">
-              <Form.Text>Email</Form.Text>
+              <Form.Label>Email</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="phone number"

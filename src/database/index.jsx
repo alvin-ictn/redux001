@@ -109,9 +109,7 @@ const user = ({
   data = null,
   access_token = null }) => {
   // get method
-  console.log("TESTDB",method)
   if (method === "all") {
-    console.log(`${configuration.url}${configuration.endpoint.user.all}`)
     return axios.get(
       `${configuration.url}${configuration.endpoint.user.all}`
     ).then(res => res)
@@ -127,7 +125,6 @@ const user = ({
   }
 
   if (method === "login") {
-    console.log("DB",data)
     return axios.post(
       `${configuration.url}${configuration.endpoint.user.login}`,
       data

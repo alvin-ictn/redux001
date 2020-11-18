@@ -28,7 +28,7 @@ function Users(props) {
     <Container>
       <Row>
         <Col lg={4}>
-          <UserProfile src={doctorImg} mode={role} value={5} />
+          <UserProfile data={props} src={doctorImg} mode={role} value={5} />
         </Col>
         <Col lg={8} className="my-5 text-left">
           <Switch>
