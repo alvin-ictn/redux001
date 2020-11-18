@@ -4,7 +4,6 @@ import {
   Card,
   Col,
   Row,
-  Button,
   Image,
   OverlayTrigger,
   Popover,
@@ -35,7 +34,7 @@ const AppointmentClinic = ({data}) => {
             <Badge
               pill
               className={`px-4 py-2 w-100 ${
-                data.status == "approved"
+                data.status === "approved"
                   ? "v-badge-half-grass"
                   : "v-badge-half-mustard"
               }`}
@@ -60,7 +59,7 @@ const AppointmentClinic = ({data}) => {
             {data.animals != null ? (
               data.animals.length > 0 ? (
                 data.animals.map((item) =>
-                  item.type == "Dog" ? (
+                  item.type === "Dog" ? (
                     <OverlayTrigger
                       trigger={["hover", "focus"]}
                       key={item._id}
@@ -137,12 +136,12 @@ const AppointmentVeterinary = ({data}) => {
               className="rounded mx-4"
             />
           </Col>
-          <Col className="pl-5">{data.schedule.clinic.name}</Col>
+          <Col md={6} className="pl-5">{data.schedule.clinic.name}</Col>
           <Col className="d-flex">
             <Badge
               pill
               className={`px-4 py-2 w-100 ${
-                data.status == "approved"
+                data.status === "approved"
                   ? "v-badge-half-grass"
                   : "v-badge-half-mustard"
               }`}
@@ -153,18 +152,123 @@ const AppointmentVeterinary = ({data}) => {
           </Col>
         </Row>
         <Row className="align-items-center book--row m-3 appointment-card-side">
-            <Col className="book--item col-1 mr-4">
-              <Badge className="v-bg-donker v-text-white">
+            <Col md={2} className="book--item justify-content-center align-items-center d-flex p-0">
+              <Badge className="v-bg-donker v-text-white vet-title-2 line-height-24">
                 <p className="p-0 m-0">{datePost[2]}</p>
                 {datePost[1]}
               </Badge>
             </Col>
-          <Col>{data.patient.name}</Col>
+          <Col md={6} className="pl-5">{data.patient.name}</Col>
           <Col>
             {data.animals != null ? (
               data.animals.length > 0 ? (
                 data.animals.map((item) =>
-                  item.type == "Dog" ? (
+                  item.type === "Dog" ? (
+                    <OverlayTrigger
+                      trigger={["hover", "focus"]}
+                      key={item._id}
+                      placement={"top"}
+                      overlay={
+                        <Popover id={`popover-positioned-top`}>
+                          <Popover.Title as="h3">{`${item.name}'s Info`}</Popover.Title>
+                          <Popover.Content>
+                            <div>
+                              <strong>Name</strong> : {item.name}
+                            </div>
+                            <div>
+                              <strong>Gender</strong> :{" "}
+                              {item.gender ? <VetMale /> : <VetFemale />}
+                            </div>
+                          </Popover.Content>
+                        </Popover>
+                      }
+                    >
+                      <VetPDog size={"40"} />
+                    </OverlayTrigger>
+                  ) : (
+                    <OverlayTrigger
+                      trigger={["hover", "focus"]}
+                      key={item._id}
+                      placement={"top"}
+                      overlay={
+                        <Popover id={`popover-positioned-top`}>
+                          <Popover.Title as="h3">{`${item.name}'s Info`}</Popover.Title>
+                          <Popover.Content>
+                            <div>
+                              <strong>Name</strong> : {item.name}
+                            </div>
+                            <div>
+                              <strong>Gender</strong> :{" "}
+                              {item.gender ? <VetMale /> : <VetFemale />}
+                            </div>
+                          </Popover.Content>
+                        </Popover>
+                      }
+                    >
+                      <VetPCat size={"40"} />
+                    </OverlayTrigger>
+                  )
+                )
+              ) : (
+                <span className="v-title-1 v-text-donker">No Pet</span>
+              )
+            ) : (
+              <span className="v-title-1 v-text-donker">No Pet</span>
+            )}
+          </Col>
+        </Row>
+      </Card>
+    </div>
+  );
+}
+
+
+const HistoryVeterinary = ({data}) => {
+  let datePost = new Date(data.date).toDateString().split(" ");
+  return (
+    <div class="appointment-card">
+      <Card
+        style={{ boxShadow: "(0,0,0,0.3)" }}
+        className="my-2 card--group appointment-card-inner"
+      >
+        <Row className="align-items-center book--row m-3 appointment-card-main">
+          <Col
+            md={2}
+            className="book--item justify-content-center align-items-center d-flex"
+          >
+            <Image
+              src={data.schedule.clinic.image}
+              className="rounded mx-4"
+            />
+          </Col>
+          <Col md={6} className="pl-5">{data.schedule.clinic.name}</Col>
+          <Col className="d-flex">
+            <Badge
+              pill
+              className={`px-4 py-2 w-100 ${
+                data.status === "finished"
+                  ? "v-badge-half-grass"
+                  : "v-badge-half-imperial"
+              }`}
+            >
+              {data.status[0].toUpperCase()}
+              {data.status.slice(1)}
+            </Badge>
+          </Col>
+        </Row>
+        <Row className="align-items-center book--row m-3 appointment-card-side">
+            <Col md={2} className="book--item justify-content-center align-items-center d-flex p-0">
+              <Badge className="v-bg-donker v-text-white vet-title-2 line-height-24">
+                <p className="p-0 m-0">{datePost[2]}</p>
+                {datePost[1]}
+              </Badge>
+            </Col>
+          <Col md={6} className="pl-5">{data.patient.name}</Col>
+          <Col>
+            {data.animals != null ? (
+              data.animals.length > 0 ? (
+                data.animals.map((item) =>
+                  item.type === "Dog" ? (
                     <OverlayTrigger
                       trigger={["hover", "focus"]}
                       key={item._id}
@@ -271,9 +375,9 @@ const AppointmentVeterinary = ({data}) => {
 //                   className="px-4 py-2 w-100"
 //                   pill
 //                   variant={
-//                     props.buttonText === "Approve"
+//                     props.buttonText ==== "Approve"
 //                       ? "success"
-//                       : props.buttonText === "Rejected"
+//                       : props.buttonText ==== "Rejected"
 //                       ? "warning"
 //                       : "danger"
 //                   }
@@ -338,9 +442,9 @@ const AppointmentVeterinary = ({data}) => {
 //                   className="px-4 py-2 w-100"
 //                   pill
 //                   variant={
-//                     props.buttonText === "Approve"
+//                     props.buttonText ==== "Approve"
 //                       ? "success"
-//                       : props.buttonText === "Rejected"
+//                       : props.buttonText ==== "Rejected"
 //                       ? "warning"
 //                       : "danger"
 //                   }
@@ -386,7 +490,7 @@ const HistoryClinic = ({ data }) => {
             <Badge
               pill
               className={`px-4 py-2 w-100 ${
-                data.status == "finished"
+                data.status === "finished"
                   ? "v-badge-half-grass"
                   : "v-badge-half-imperial"
               }`}
@@ -408,7 +512,7 @@ const HistoryClinic = ({ data }) => {
             {data.animals != null ? (
               data.animals.length ? (
                 data.animals.map((item) =>
-                  item.type == "Dog" ? (
+                  item.type === "Dog" ? (
                     <OverlayTrigger
                       trigger={["hover", "focus"]}
                       key={item._id}
@@ -498,7 +602,7 @@ const AppointmentPatient = ({ data }) => {
             <Badge
               pill
               className={`px-4 py-2 w-100 ${
-                data.status == "approved"
+                data.status === "approved"
                   ? "v-badge-half-grass"
                   : "v-badge-half-mustard"
               }`}
@@ -510,7 +614,7 @@ const AppointmentPatient = ({ data }) => {
         </Row>
         <Row className="align-items-center book--row m-3 appointment-card-side">
           <Col
-            md={2}
+            md={4}
             className="book--item justify-content-center align-items-center d-flex mx-3"
           >
             <Image
@@ -523,7 +627,7 @@ const AppointmentPatient = ({ data }) => {
             {data.animals != null ? (
               data.animals.length ? (
                 data.animals.map((item) =>
-                  item.type == "Dog" ? (
+                  item.type === "Dog" ? (
                     <OverlayTrigger
                       trigger={["hover", "focus"]}
                       key={item._id}
@@ -613,7 +717,7 @@ const HistoryPatient = ({ data }) => {
             <Badge
               pill
               className={`px-4 py-2 w-100 ${
-                data.status == "finished"
+                data.status === "finished"
                   ? "v-badge-half-grass"
                   : "v-badge-half-imperial"
               }`}
@@ -638,7 +742,7 @@ const HistoryPatient = ({ data }) => {
             {data.animals != null ? (
               data.animals.length ? (
                 data.animals.map((item) =>
-                  item.type == "Dog" ? (
+                  item.type === "Dog" ? (
                     <OverlayTrigger
                       trigger={["hover", "focus"]}
                       key={item._id}
@@ -710,7 +814,7 @@ const renderComponent = (type, props) => {
     case "history-patient":
       return <HistoryPatient {...props} />;
     case "history-veterinary":
-      return <HistoryClinic {...props} />;
+      return <HistoryVeterinary {...props} />;
 
     default:
       return;
