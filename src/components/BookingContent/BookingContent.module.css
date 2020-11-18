@@ -65,11 +65,6 @@
     width: auto;    
 }
 
-.cardImg1 {
-    height: 10rem;
-    width: 35rem;
-}
-
 .img2 {
     width: 5rem;
     height: auto;
@@ -126,12 +121,12 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 0 1rem;
+    padding: 0;
     margin: 0;
 }
 
 .about {
-    width: 29rem;
+    width: 42.5rem;
 }
 
 .p {
@@ -139,7 +134,7 @@
 }
 
 .facility {
-    width: 38rem;
+    width: 30rem;
     margin-left: 3rem;
 }
 
@@ -149,7 +144,7 @@
 }
 
 .cardPet {
-    width: 14rem;
+    width: 10rem;
     height: auto;
     cursor: pointer;
 }

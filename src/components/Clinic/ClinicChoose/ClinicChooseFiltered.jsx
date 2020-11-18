@@ -24,7 +24,7 @@ export default function ClinicChooseFiltered() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (e.key === "Enter") {
-      history.push(`/booking/search/${inputSearch}`);
+      history.push(`${process.env.PUBLIC_URL}/booking/search/${inputSearch}`);
     }
   };
   const [linkUrl,setLinkUrl] = useState(`https://vet-booking.herokuapp.com/clinic/filter/?city=`+lokasi)
@@ -53,13 +53,13 @@ export default function ClinicChooseFiltered() {
         Lokasi
       </Dropdown.Toggle>
       <Dropdown.Menu>
-        <Dropdown.Item href="/booking/lokasi/Jakarta">Jakarta</Dropdown.Item>
-        <Dropdown.Item href="/booking/lokasi/Medan">Medan</Dropdown.Item>
-        <Dropdown.Item href="/booking/lokasi/Surabaya">Surabaya</Dropdown.Item>
-        <Dropdown.Item href="/booking/lokasi/Pekanbaru">Pekanbaru</Dropdown.Item>
-        <Dropdown.Item href="/booking/lokasi/Bandung">Bandung</Dropdown.Item>
-        <Dropdown.Item href="/booking/lokasi/Denpasar">Denpasar</Dropdown.Item>
-        <Dropdown.Item href="/booking/lokasi/Makasar">Makasar</Dropdown.Item>
+        <Dropdown.Item href="${process.env.PUBLIC_URL}/booking/lokasi/Jakarta">Jakarta</Dropdown.Item>
+        <Dropdown.Item href="${process.env.PUBLIC_URL}/booking/lokasi/Medan">Medan</Dropdown.Item>
+        <Dropdown.Item href="${process.env.PUBLIC_URL}/booking/lokasi/Surabaya">Surabaya</Dropdown.Item>
+        <Dropdown.Item href="${process.env.PUBLIC_URL}/booking/lokasi/Pekanbaru">Pekanbaru</Dropdown.Item>
+        <Dropdown.Item href="${process.env.PUBLIC_URL}/booking/lokasi/Bandung">Bandung</Dropdown.Item>
+        <Dropdown.Item href="${process.env.PUBLIC_URL}/booking/lokasi/Denpasar">Denpasar</Dropdown.Item>
+        <Dropdown.Item href="${process.env.PUBLIC_URL}/booking/lokasi/Makasar">Makasar</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>)
 
@@ -75,6 +75,20 @@ export default function ClinicChooseFiltered() {
       <Dropdown.Item href="#/action-3">Ular Kobra</Dropdown.Item>
     </Dropdown.Menu>
   </Dropdown>
+  )
+
+  const pageStatic =(
+    <div className="d-flex justify-content-center">
+    <ul className='pagination'>
+                <li className="page-item">                    
+                    <a className='page-link' 
+                    href={`${process.env.PUBLIC_URL}/booking/1`}>                        
+                    1
+                    </a>
+                </li>
+    
+    </ul>        
+    </div>
   )
 
   const buttonSearch = (    
@@ -96,7 +110,7 @@ export default function ClinicChooseFiltered() {
   console.log("ini clinic",clinicData)
   const r = clinicData && clinicData  
   const kartu = clinicData && clinicData.map((value)=>(            
-    <Card style={{ width: '16rem'}} className="mt-4 mb-4 mr-3 ml-2">
+    <Card style={{ width: '16rem',marginRight:'2rem'}} className="mt-4 mb-4">
     <Card.Img variant="top" src={value.image} style={{objectFit:"cover", width:"16rem", height:"13rem"}}/>
     <Card.Body>
       <h6><Badge variant="secondary" style={{backgroundColor:"#E0E9F5", color:'black', width:"4rem", height:"1.2rem"}}>
@@ -110,7 +124,7 @@ export default function ClinicChooseFiltered() {
       </Card.Text>
     </Card.Body>
     <Card.Footer style={{backgroundColor:"white"}}>
-      <Link to={`/booking/detail/${value._id}/`}>
+      <Link to={`${process.env.PUBLIC_URL}/booking/detail/${value._id}/`}>
         <Button style={{borderColor:"#FDCB5A",backgroundColor:"#FDCB5A", width:"14rem",borderRadius:"4px",color:"black"}}>
           Book now
         </Button>
@@ -121,7 +135,7 @@ export default function ClinicChooseFiltered() {
 
   return (
     <>    
-    <div style={{paddingLeft:'3rem', paddingRight:'3rem'}}>
+    <div style={{paddingLeft:'3rem', paddingRight:'3rem',minHeight:'100vh'}}>
     <Row className="justify-content-end" style={{marginTop:"0.5rem"}}>
       {dropDownLokasi}
       {/* {binatangPeliharaan}     */}
@@ -129,9 +143,10 @@ export default function ClinicChooseFiltered() {
       input:
       buttonSearch}   
     </Row>
-      <Row>
+      <Row className='justify-content-center'>
         {kartu}
       </Row>    
+      {clinicData && clinicData!==[]?pageStatic:""}
     </div>
     </>
   );

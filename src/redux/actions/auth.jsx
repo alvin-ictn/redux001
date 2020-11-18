@@ -129,3 +129,18 @@ export const getUserData = (access_token) => {
     })
   };
 };
+
+
+export const setLogout = () => {
+  return(dispatch) => {
+    dispatch({
+      type: auth.SET_LOGOUT,
+    })
+    localStorage.clear()
+    setTimeout(() => {
+      dispatch({
+        type: auth.DONE_LOGOUT,
+      })
+    },2000)
+  }
+}

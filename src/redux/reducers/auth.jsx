@@ -8,6 +8,7 @@ const initialState = {
   successMsg: [],
   isError: false,
   isLoading: false,
+  isLogout : false,
 };
 
 const authReducers = (state = initialState, action) => {
@@ -27,6 +28,12 @@ const authReducers = (state = initialState, action) => {
     case auth.CLEAR_ERROR:
       return { ...state, isError: false, errorMsg: "" };
 
+    case auth.SET_LOGOUT:
+      return {...state, access_token : "", user: {}, isLogout : true}
+
+    case auth.DONE_LOGOUT:
+      return {...state, isLogout: false}
+      
     case utility.SET_UTILITY_PAGE_LOAD:
     case utility.SET_UTILITY_ACTION_LOAD:
       return { ...state, isLoading: action.isLoading };

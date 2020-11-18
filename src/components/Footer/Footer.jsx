@@ -1,15 +1,15 @@
-import {AiOutlineFacebook,AiOutlineTwitter,AiOutlineInstagram} from 'react-icons/ai'
+import {VetFacebook,VetTwitter,VetInstagram} from '../../assets/icons'
 import React from "react"
 import Logo from "../../assets/Logo"
 import styles from "./Footer.module.css"
 import {Container} from 'react-bootstrap'
 
-const Footer = () =>{
+const Footer = (props) =>{
     return(
         <div 
-            className="d-flex flex-row justify-content-between align-items-center p-4" 
+            className={`d-flex flex-row justify-content-between align-items-center p-4 ${!props.barState.footer && "hidden" }`}
             style={{backgroundColor:"#1A3150",position:'relative',bottom:'0'}}
-        >        
+        >       
         <div className={styles.logoContainer}>
             <Logo height="3rem" width="5rem" className="d-flex flex-column align-items-center"/>    
             <div className={styles.vet}>V E T</div>                             
@@ -39,9 +39,9 @@ const Footer = () =>{
                     Follow Us
                 </div>
                 <div className="d-flex flex-row" style={{color:"white"}}>
-                    <AiOutlineTwitter className="mr-2" style={{height:"2.5rem",width:"2.5rem"}}/>
-                    <AiOutlineInstagram className="mr-2" style={{height:"2.5rem",width:"2.5rem"}}/>
-                    <AiOutlineFacebook className="mr-2" style={{height:"2.5rem",width:"2.5rem"}}/>
+                    <VetTwitter className="mr-2" style={{height:"2.5rem",width:"2.5rem"}}/>
+                    <VetInstagram className="mr-2" style={{height:"2.5rem",width:"2.5rem"}}/>
+                    <VetFacebook className="mr-2" style={{height:"2.5rem",width:"2.5rem"}}/>
                 </div>
             </div>
            </div>                 

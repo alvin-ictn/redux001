@@ -13,6 +13,7 @@
 .headerText{
     color: white;
     margin-top: 1rem;
+    text-align: left;
 }
 .button{
     background: #FDCB5A;

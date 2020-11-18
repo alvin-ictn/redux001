@@ -1,26 +1,33 @@
 import React, { useState, useEffect } from "react";
+import logo from "./logo.svg";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./assets/sass/main.scss";
 import Auth from "./pages/Auth";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Link, Route } from "react-router-dom";
+
+import DemoIcon from "./demo/demoIcon";
+import {} from "./assets/icons";
 import VetNavbar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
 import ClinicChoose from "./components/Clinic/ClinicChoose/ClinicChoose";
 import { user } from "./database";
 import BookingDetail from "./pages/BookingDetail";
 import BookingResume from "./pages/BookingResume";
+import { Container, Navbar } from "react-bootstrap";
 import Home from "./components/Home/Home";
 import Users from "./pages/Users/";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
+import { VetPaw } from "./assets/icons";
 import ClinicChooseFiltered from "./components/Clinic/ClinicChoose/ClinicChooseFiltered";
 import ClinicSearch from "./components/Clinic/ClinicChoose/ClinicSearch";
-import PageLoad from "./components/reusable/utilities/pageLoad";
+
+import PageLoad from './components/reusable/utilities/pageLoad'
+import Logout from './components/reusable/utilities/logout'
 import { getUserData } from "./redux/actions/auth";
 import { getAppointment, getHistory } from "./redux/actions/appointment";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import Chat from './components/Chat/Chat'
 
 function App(props) {
   // state declaration
@@ -41,20 +48,19 @@ function App(props) {
     navbar: true,
     footer: true,
   });
+  useEffect(() => {
+    console.log(token)
+    token.length && props.getUserData(token)
 
+  }, [token]);
 
   useEffect(() => {
-    if (Object.keys(props.AuthPayloads.user).length) {
-      props.getAppointment(
-        props.AuthPayloads.access_token,
-        props.AuthPayloads.user.role
-      );
-      props.getHistory(
-        props.AuthPayloads.access_token,
-        props.AuthPayloads.user.role
-      );
-    }
-  }, [props.AuthPayloads.access_token]);
+    if(Object.keys(props.AuthPayloads.user).length){
+      props.getAppointment(props.AuthPayloads.access_token,props.AuthPayloads.user.role);
+      props.getHistory(props.AuthPayloads.access_token,props.AuthPayloads.user.role);
+    } 
+  },[props.AuthPayloads.access_token])
+
 
   const history = useHistory();
   useEffect(() => {
@@ -110,15 +116,18 @@ function App(props) {
 
   useEffect(() => {
     //console.log("CHEKC ISLOAD HOEME",props.AuthPayloads.isLoading)
-  }, [props]);
+  },[props])
   const handleFooter = (option) => {
     //console.log(option);
   };
   return (
-    <>
+     <>
       <div className="App">
+        
         <Router>
-          {props.AuthPayloads.isLoading && <PageLoad data="CONNECTING" />}
+          {/* {isLogin && <Redirect to={`${process.env.PUBLIC_URL}/`} />} */}
+         {props.AuthPayloads.isLoading && <PageLoad data="CONNECTING"/>}
+         {props.AuthPayloads.isLogout && <Logout data="LOGOUT"/>}
           <VetNavbar
             barState={barState}
             data={{
@@ -128,8 +137,7 @@ function App(props) {
           />
           <Switch>
             <Route path={`${process.env.PUBLIC_URL}/user/:role`}>
-              <Users
-                function={{
+              <Users function={{
                   HandleInput: HandleInput,
                   HandleInputFile: HandleInputFile,
                   SetVisibility: SetVisibility,
@@ -138,8 +146,7 @@ function App(props) {
                 data={{
                   postData: postData,
                   imgPreview: imgPreview,
-                }}
-              />
+                }}/>
             </Route>
             <Route path={`${process.env.PUBLIC_URL}/auth`}>
               <Auth
@@ -162,8 +169,8 @@ function App(props) {
                 }}
               />
             </Route>
-            <Route path={`${process.env.PUBLIC_URL}/chat`}>
-                <Chat/>
+            <Route path={`${process.env.PUBLIC_URL}/DemoIcon`}>
+              <DemoIcon />
             </Route>
             <Route path={`${process.env.PUBLIC_URL}/booking/detail/resume`}>
               <BookingResume />
@@ -201,10 +208,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(
-    { getUserData, getAppointment, getHistory },
-    dispatch
-  );
+  return bindActionCreators({ getUserData, getAppointment, getHistory }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
