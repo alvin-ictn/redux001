@@ -54,7 +54,9 @@ $colorList:(
   }
 
   .v-btn-#{$name} {
-    
+    color: white;
+    background-color: $color;
+    border-color: $color;
   }
 
   .v-badge-#{$name}{

@@ -46,10 +46,10 @@ function ProfileForm({
   const [modalShow, setModalShow] = useState(false);
   const [highlight, setHighlight] = useState(0);
   const history = useHistory();
-  
+
   useEffect(() => {
-    console.log(postData)
-  },[postData])
+    console.log(postData);
+  }, [postData]);
   const PetModal = (props) => {
     return (
       <Modal
@@ -198,7 +198,11 @@ function ProfileForm({
                         size={"24px"}
                         color={postData.status == "active" && "white"}
                       />
-                      <span className={`mx-3 my-0 ${postData.status == "offline" ? "text-white" : ""}`}>
+                      <span
+                        className={`mx-3 my-0 ${
+                          postData.status == "offline" ? "text-white" : ""
+                        }`}
+                      >
                         {mode == "veterinary" ? "Active" : "Buka"}
                       </span>
                     </ToggleButton>
@@ -216,23 +220,15 @@ function ProfileForm({
                         size={"24px"}
                         color={postData.status == "offline" && "white"}
                       />
-                      <span className={`mx-3 my-0 ${postData.status == "active" ? "text-white" : ""}`}>
+                      <span
+                        className={`mx-3 my-0 ${
+                          postData.status == "active" ? "text-white" : ""
+                        }`}
+                      >
                         {mode == "veterinary" ? "Offline" : "Tutup"}
                       </span>
                     </ToggleButton>
                   </ButtonGroup>
-                </Form.Group>
-                <Form.Group controlId="exampleForm.ControlSelect1">
-                  <Form.Label>
-                    Waktu {mode == "veterinary" ? "Aktif" : "Buka"}
-                  </Form.Label>
-                  <Form.Control as="select">
-                    <option>15</option>
-                    <option>16</option>
-                    <option>17</option>
-                    <option>18</option>
-                    <option>19</option>
-                  </Form.Control>
                 </Form.Group>
               </Card.Body>
             </>
@@ -253,7 +249,7 @@ function ProfileForm({
             </Form.Group>
             <Form.Group className="mb-4" id="gender">
               <Form.Label>Gender</Form.Label>
-              <ButtonGroup toggle name="radiogroup">
+              {AuthPayloads?.veterinary ? <ButtonGroup toggle name="radiogroup">
                 <ToggleButton
                   key={1}
                   type="radio"
@@ -296,7 +292,50 @@ function ProfileForm({
                     Female
                   </span>
                 </ToggleButton>
-              </ButtonGroup>
+              </ButtonGroup> : <ButtonGroup toggle name="radiogroup">
+                <ToggleButton
+                  key={1}
+                  type="radio"
+                  variant={postData.gender == "true" ? "primary" : ""}
+                  name="gender"
+                  value="true"
+                  checked={postData.gender == "true"}
+                  onChange={(e) => HandleInput(e)}
+                >
+                  <VetMale
+                    size={22}
+                    color={postData.gender == "true" && "white"}
+                  />
+                  <span
+                    className={`mx-3 ${
+                      postData.gender == "false" ? "text-white" : ""
+                    }`}
+                  >
+                    Male
+                  </span>
+                </ToggleButton>
+                <ToggleButton
+                  key={2}
+                  type="radio"
+                  variant={postData.gender == "false" ? "pink" : ""}
+                  name="gender"
+                  value="false"
+                  checked={postData.gender == "false"}
+                  onChange={(e) => HandleInput(e)}
+                >
+                  <VetFemale
+                    size={34}
+                    color={postData.gender == "false" && "white"}
+                  />
+                  <span
+                    className={`mx-3 ${
+                      postData.gender == "true" ? "text-white" : ""
+                    }`}
+                  >
+                    Female
+                  </span>
+                </ToggleButton>
+              </ButtonGroup>}
             </Form.Group>
             {mode == "veterinary" && (
               <Form.Group controlId="formBasicEmail">
@@ -321,7 +360,9 @@ function ProfileForm({
                   </InputGroup.Prepend>
                 </InputGroup>
 
-                <Form.Label className="text-muted">Doctor Experience.</Form.Label>
+                <Form.Label className="text-muted">
+                  Doctor Experience.
+                </Form.Label>
               </Form.Group>
             )}
           </Card.Body>
@@ -330,17 +371,22 @@ function ProfileForm({
           </Card.Header>
           <Card.Body>
             <Form.Group controlId="formBasicEmail">
-              <Form.Label>Nomor Telefon</Form.Label>
+              <Form.Label>Phone Number</Form.Label>
               <InputGroup>
                 <InputGroup.Prepend>
                   <InputGroup.Text id="inputGroupPrepend">
-                    <VetFlagID/>
+                    <VetFlagID /> <span className="vet-title-2 v-text-donker mx-2">+62</span>
                   </InputGroup.Text>
                 </InputGroup.Prepend>
                 <Form.Control
                   type="text"
-                  placeholder="It's my name"
-                  value="+628998844"
+                  name="phone"
+                  placeholder="Enter Your Phone Number"
+                  onChange={(e) => HandleInput(e)}
+                  value={postData?.phone ||
+                    (AuthPayloads.user?.phone !== null
+                      ? AuthPayloads.user?.phone
+                      : 0)}
                 />
               </InputGroup>
             </Form.Group>
@@ -349,7 +395,12 @@ function ProfileForm({
               <Form.Control
                 type="text"
                 placeholder="phone number"
-                value="alvin@vet.com"
+                name="email"
+                onChange={(e) => HandleInput(e)}
+                  value={postData?.email ||
+                    (AuthPayloads.user?.email !== null
+                      ? AuthPayloads.user?.email
+                      : 0)}
               />
             </Form.Group>
             <Button
@@ -369,13 +420,23 @@ function ProfileForm({
             </Card.Header>
             <Card.Body className="d-flex">
               <VetAddPets className="mx-2" onClick={() => setModalShow(true)} />
-              <Card
+              {console.log("INSIDE FORM",AuthPayloads.user.patient.animals)}
+              {AuthPayloads.user.patient && AuthPayloads?.user?.patient?.animals.map(item => 
+                  item.type == "Dog" ? <Card
+                  style={{ width: "206px" }}
+                  className="d-flex align-items-center mx-2"
+                >
+                  <VetPDog size={80} />
+                  <Card.Text className="vet-title-1">{item.name}/{item.gender ? <><VetMale/><span className="mx-2">Male</span></> : <><VetFemale/><span className="mx-2">Female</span></>}</Card.Text>
+                </Card> : <Card
                 style={{ width: "206px" }}
                 className="d-flex align-items-center mx-2"
               >
-                <VetPDog size={80} />
-                <Card.Text>Ramson/Dog</Card.Text>
+                <VetPCat size={80} />
+              <Card.Text className="vet-title-1">{item.name}/{item.gender ? <><VetMale/><span className="mx-2">Male</span></> : <><VetFemale/><span className="mx-2">Female</span></>}</Card.Text>
               </Card>
+              )}
+              
             </Card.Body>
             <PetModal show={modalShow} onHide={() => setModalShow(false)} />
           </>

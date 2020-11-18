@@ -19,7 +19,7 @@ function Profile(props) {
   useEffect(() => {
     props.data.data.postData = props.AuthPayloads?.user?.patient
       ? {
-          status: "",
+          gender: props.AuthPayloads?.user?.patient?.gender.toString(),
         }
       : props.AuthPayloads?.user?.veterinary
       ? {
@@ -143,7 +143,7 @@ function Profile(props) {
             onClick={() => {
               props.data.data.postData = props.AuthPayloads?.user?.patient
                 ? {
-                    status: "",
+                    gender: props.AuthPayloads?.user?.patient?.gender.toString(),
                   }
                 : props.AuthPayloads?.user?.veterinary
                 ? {

@@ -15,7 +15,7 @@ export const getAppointment = (access_token,data) => {
       access_token,
       data
     }).then(res => {
-      if (!res.data.success) {
+      if (!res?.data?.success) {
         dispatch({
           type: utility.SET_UTILITY_ACTION_LOAD,
           isLoading:false,
@@ -115,3 +115,31 @@ export const setAppointment = (access_token,data,query) => {
     })
   };
 };
+
+export const approveAppointment = (access_token,data) => {
+  return (dispatch) => {
+
+    reservation({
+      method: 'apprroveApt',
+      access_token,
+      data
+    }).then(res => {
+      console.log(res.data)
+    })
+  };
+
+}
+
+export const rejectAppointment = (access_token,data) => {
+  return (dispatch) => {
+
+    reservation({
+      method: 'rejectApt',
+      access_token,
+      data
+    }).then(res => {
+      console.log(res.data)
+    })
+  };
+
+}

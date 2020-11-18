@@ -25,7 +25,7 @@ export default function Appointment() {
           </Nav.Item>
           <Nav.Item>
             <NavLink className="vet-title-2 v-text-donker" to={`${process.env.PUBLIC_URL}/user/veterinary/history`} >
-            Approval
+            History
             </NavLink>
           </Nav.Item>
         </Nav>

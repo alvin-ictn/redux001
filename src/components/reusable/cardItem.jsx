@@ -7,11 +7,20 @@ import {
   Image,
   OverlayTrigger,
   Popover,
+  Button,
 } from "react-bootstrap";
 import { VetPDog, VetPCat, VetMale, VetFemale } from "../../assets/icons";
 
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-const AppointmentClinic = ({data}) => {
+
+import {
+  approveAppointment,
+  rejectAppointment,
+} from "../../redux/actions/appointment";
+
+const AppointmentClinic = ({ data }) => {
   let datePost = new Date(data.date).toDateString().split(" ");
   return (
     <div class="appointment-card">
@@ -20,13 +29,12 @@ const AppointmentClinic = ({data}) => {
         className="my-2 card--group appointment-card-inner"
       >
         <Row className="align-items-center book--row m-3 appointment-card-main">
-            <Col className="book--item col-1 mr-4">
-              <Badge className="v-bg-donker v-text-white">
-                <p className="p-0 m-0">{datePost[2]}</p>
-                {datePost[1]}
-              </Badge>
-            </Col>
-
+          <Col className="book--item col-1 mr-4">
+            <Badge className="v-bg-donker v-text-white">
+              <p className="p-0 m-0">{datePost[2]}</p>
+              {datePost[1]}
+            </Badge>
+          </Col>
 
           <Col>{data.patient.name}</Col>
 
@@ -116,9 +124,9 @@ const AppointmentClinic = ({data}) => {
       </Card>
     </div>
   );
-}
+};
 
-const AppointmentVeterinary = ({data}) => {
+const AppointmentVeterinary = ({ data }) => {
   let datePost = new Date(data.date).toDateString().split(" ");
   return (
     <div class="appointment-card">
@@ -131,12 +139,11 @@ const AppointmentVeterinary = ({data}) => {
             md={2}
             className="book--item justify-content-center align-items-center d-flex"
           >
-            <Image
-              src={data.schedule.clinic.image}
-              className="rounded mx-4"
-            />
+            <Image src={data.schedule.clinic.image} className="rounded mx-4" />
           </Col>
-          <Col md={6} className="pl-5">{data.schedule.clinic.name}</Col>
+          <Col md={6} className="pl-5">
+            {data.schedule.clinic.name}
+          </Col>
           <Col className="d-flex">
             <Badge
               pill
@@ -152,14 +159,19 @@ const AppointmentVeterinary = ({data}) => {
           </Col>
         </Row>
         <Row className="align-items-center book--row m-3 appointment-card-side">
-            <Col md={2} className="book--item justify-content-center align-items-center d-flex p-0">
-              <Badge className="v-bg-donker v-text-white vet-title-2 line-height-24">
-                <p className="p-0 m-0">{datePost[2]}</p>
-                {datePost[1]}
-              </Badge>
-            </Col>
-          <Col md={6} className="pl-5">{data.patient.name}</Col>
-          <Col>
+          <Col
+            md={2}
+            className="book--item justify-content-center align-items-center d-flex p-0"
+          >
+            <Badge className="v-bg-donker v-text-white vet-title-2 line-height-24">
+              <p className="p-0 m-0">{datePost[2]}</p>
+              {datePost[1]}
+            </Badge>
+          </Col>
+          <Col md={6} className="pl-5">
+            {data.patient.name}
+          </Col>
+          {/* <Col>
             {data.animals != null ? (
               data.animals.length > 0 ? (
                 data.animals.map((item) =>
@@ -215,15 +227,23 @@ const AppointmentVeterinary = ({data}) => {
             ) : (
               <span className="v-title-1 v-text-donker">No Pet</span>
             )}
+          </Col> */}
+          {console.log()}
+          <Col>
+            {data.status == "pending" && (
+              <Col>
+                <Button onClick={approveAppointment} className="v-btn-grass"><span>Approve</span></Button>
+                <Button onClick={rejectAppointment} className="v-btn-imperial"><span>Reject</span></Button>
+              </Col>
+            )}
           </Col>
         </Row>
       </Card>
     </div>
   );
-}
+};
 
-
-const HistoryVeterinary = ({data}) => {
+const HistoryVeterinary = ({ data }) => {
   let datePost = new Date(data.date).toDateString().split(" ");
   return (
     <div class="appointment-card">
@@ -236,12 +256,11 @@ const HistoryVeterinary = ({data}) => {
             md={2}
             className="book--item justify-content-center align-items-center d-flex"
           >
-            <Image
-              src={data.schedule.clinic.image}
-              className="rounded mx-4"
-            />
+            <Image src={data.schedule.clinic.image} className="rounded mx-4" />
           </Col>
-          <Col md={6} className="pl-5">{data.schedule.clinic.name}</Col>
+          <Col md={6} className="pl-5">
+            {data.schedule.clinic.name}
+          </Col>
           <Col className="d-flex">
             <Badge
               pill
@@ -257,13 +276,18 @@ const HistoryVeterinary = ({data}) => {
           </Col>
         </Row>
         <Row className="align-items-center book--row m-3 appointment-card-side">
-            <Col md={2} className="book--item justify-content-center align-items-center d-flex p-0">
-              <Badge className="v-bg-donker v-text-white vet-title-2 line-height-24">
-                <p className="p-0 m-0">{datePost[2]}</p>
-                {datePost[1]}
-              </Badge>
-            </Col>
-          <Col md={6} className="pl-5">{data.patient.name}</Col>
+          <Col
+            md={2}
+            className="book--item justify-content-center align-items-center d-flex p-0"
+          >
+            <Badge className="v-bg-donker v-text-white vet-title-2 line-height-24">
+              <p className="p-0 m-0">{datePost[2]}</p>
+              {datePost[1]}
+            </Badge>
+          </Col>
+          <Col md={6} className="pl-5">
+            {data.patient.name}
+          </Col>
           <Col>
             {data.animals != null ? (
               data.animals.length > 0 ? (
@@ -325,7 +349,7 @@ const HistoryVeterinary = ({data}) => {
       </Card>
     </div>
   );
-}
+};
 // const AppointmentClinic = (props) => {
 //   return (
 //     <div class="appointment-card">
@@ -820,6 +844,23 @@ const renderComponent = (type, props) => {
       return;
   }
 };
-export default function CardItem(props) {
+function CardItem(props) {
+  console.log("test card item props",props)
   return <>{renderComponent(props.type, props)}</>;
 }
+
+const mapStateToProps = (state) => {
+  return {
+    AuthPayloads: state.Auth,
+    AppointmentPayloads: state.Appointment,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    { approveAppointment, rejectAppointment },
+    dispatch
+  );
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CardItem);
