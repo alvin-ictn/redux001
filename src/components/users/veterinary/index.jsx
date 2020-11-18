@@ -19,12 +19,12 @@ export default function Appointment() {
           }`}
         >
          <Nav.Item>
-            <NavLink className="vet-title-2 v-text-donker" to={`${process.env.PUBLIC_URL}/user/veterinary/appointment`} onClick={(e) => console.log(e)}>
+            <NavLink className="vet-title-2 v-text-donker" to={`${process.env.PUBLIC_URL}/user/veterinary/appointment`} >
               Patient Book
             </NavLink>
           </Nav.Item>
           <Nav.Item>
-            <NavLink className="vet-title-2 v-text-donker" to={`${process.env.PUBLIC_URL}/user/veterinary/history`} onClick={(e) => console.log(e)}>
+            <NavLink className="vet-title-2 v-text-donker" to={`${process.env.PUBLIC_URL}/user/veterinary/history`} >
             Approval
             </NavLink>
           </Nav.Item>

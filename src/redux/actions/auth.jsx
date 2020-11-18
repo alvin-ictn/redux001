@@ -85,9 +85,7 @@ export const editUser = (data, access_token) => {
           errorMsg: res.data.message,
         });
       } else if(res.data.success) {
-        
-
-        
+        console.log(res)
       }
     })
   };

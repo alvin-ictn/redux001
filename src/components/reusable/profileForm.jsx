@@ -47,7 +47,9 @@ function ProfileForm({
   const [highlight, setHighlight] = useState(0);
   const history = useHistory();
   
-  
+  useEffect(() => {
+    console.log(postData)
+  },[postData])
   const PetModal = (props) => {
     return (
       <Modal
@@ -196,7 +198,7 @@ function ProfileForm({
                         size={"24px"}
                         color={postData.status == "active" && "white"}
                       />
-                      <span className="mx-3 my-0">
+                      <span className={`mx-3 my-0 ${postData.status == "offline" ? "text-white" : ""}`}>
                         {mode == "veterinary" ? "Active" : "Buka"}
                       </span>
                     </ToggleButton>
@@ -214,7 +216,7 @@ function ProfileForm({
                         size={"24px"}
                         color={postData.status == "offline" && "white"}
                       />
-                      <span className="mx-3 my-0">
+                      <span className={`mx-3 my-0 ${postData.status == "active" ? "text-white" : ""}`}>
                         {mode == "veterinary" ? "Offline" : "Tutup"}
                       </span>
                     </ToggleButton>
@@ -256,8 +258,8 @@ function ProfileForm({
                   key={1}
                   type="radio"
                   variant={postData.genderVet == "true" ? "primary" : ""}
-                  name="gender"
-                  value={true}
+                  name="genderVet"
+                  value="true"
                   checked={postData.genderVet == "true"}
                   onChange={(e) => HandleInput(e)}
                 >
@@ -277,8 +279,8 @@ function ProfileForm({
                   key={2}
                   type="radio"
                   variant={postData.genderVet == "false" ? "pink" : ""}
-                  name="gender"
-                  value={false}
+                  name="genderVet"
+                  value="false"
                   checked={postData.genderVet == "false"}
                   onChange={(e) => HandleInput(e)}
                 >
