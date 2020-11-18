@@ -118,6 +118,110 @@ const AppointmentClinic = ({data}) => {
     </div>
   );
 }
+
+const AppointmentVeterinary = ({data}) => {
+  let datePost = new Date(data.date).toDateString().split(" ");
+  return (
+    <div class="appointment-card">
+      <Card
+        style={{ boxShadow: "(0,0,0,0.3)" }}
+        className="my-2 card--group appointment-card-inner"
+      >
+        <Row className="align-items-center book--row m-3 appointment-card-main">
+          <Col
+            md={2}
+            className="book--item justify-content-center align-items-center d-flex"
+          >
+            <Image
+              src={data.schedule.clinic.image}
+              className="rounded mx-4"
+            />
+          </Col>
+          <Col className="pl-5">{data.schedule.clinic.name}</Col>
+          <Col className="d-flex">
+            <Badge
+              pill
+              className={`px-4 py-2 w-100 ${
+                data.status == "approved"
+                  ? "v-badge-half-grass"
+                  : "v-badge-half-mustard"
+              }`}
+            >
+              {data.status[0].toUpperCase()}
+              {data.status.slice(1)}
+            </Badge>
+          </Col>
+        </Row>
+        <Row className="align-items-center book--row m-3 appointment-card-side">
+            <Col className="book--item col-1 mr-4">
+              <Badge className="v-bg-donker v-text-white">
+                <p className="p-0 m-0">{datePost[2]}</p>
+                {datePost[1]}
+              </Badge>
+            </Col>
+          <Col>{data.patient.name}</Col>
+          <Col>
+            {data.animals != null ? (
+              data.animals.length > 0 ? (
+                data.animals.map((item) =>
+                  item.type == "Dog" ? (
+                    <OverlayTrigger
+                      trigger={["hover", "focus"]}
+                      key={item._id}
+                      placement={"top"}
+                      overlay={
+                        <Popover id={`popover-positioned-top`}>
+                          <Popover.Title as="h3">{`${item.name}'s Info`}</Popover.Title>
+                          <Popover.Content>
+                            <div>
+                              <strong>Name</strong> : {item.name}
+                            </div>
+                            <div>
+                              <strong>Gender</strong> :{" "}
+                              {item.gender ? <VetMale /> : <VetFemale />}
+                            </div>
+                          </Popover.Content>
+                        </Popover>
+                      }
+                    >
+                      <VetPDog size={"40"} />
+                    </OverlayTrigger>
+                  ) : (
+                    <OverlayTrigger
+                      trigger={["hover", "focus"]}
+                      key={item._id}
+                      placement={"top"}
+                      overlay={
+                        <Popover id={`popover-positioned-top`}>
+                          <Popover.Title as="h3">{`${item.name}'s Info`}</Popover.Title>
+                          <Popover.Content>
+                            <div>
+                              <strong>Name</strong> : {item.name}
+                            </div>
+                            <div>
+                              <strong>Gender</strong> :{" "}
+                              {item.gender ? <VetMale /> : <VetFemale />}
+                            </div>
+                          </Popover.Content>
+                        </Popover>
+                      }
+                    >
+                      <VetPCat size={"40"} />
+                    </OverlayTrigger>
+                  )
+                )
+              ) : (
+                <span className="v-title-1 v-text-donker">No Pet</span>
+              )
+            ) : (
+              <span className="v-title-1 v-text-donker">No Pet</span>
+            )}
+          </Col>
+        </Row>
+      </Card>
+    </div>
+  );
+}
 // const AppointmentClinic = (props) => {
 //   return (
 //     <div class="appointment-card">
@@ -600,7 +704,7 @@ const renderComponent = (type, props) => {
     case "appointment-patient":
       return <AppointmentPatient {...props} />;
     case "appointment-veterinary":
-      return <AppointmentClinic {...props} />;
+      return <AppointmentVeterinary {...props} />;
     case "history-clinic":
       return <HistoryClinic {...props} />;
     case "history-patient":

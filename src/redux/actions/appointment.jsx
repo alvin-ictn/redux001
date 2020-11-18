@@ -2,6 +2,7 @@ import { utility, appointment } from "./types/index";
 import { reservation } from "../../database/index";
 
 export const getAppointment = (access_token,data) => {
+  if(data == "veterinary") data = "vet"
   data = `appointment-${data}`
   
   return (dispatch) => {
@@ -41,6 +42,7 @@ export const getAppointment = (access_token,data) => {
 };
 
 export const getHistory = (access_token,data) => {
+  if(data == "veterinary") data = "vet"
   data = `history-${data}`;
   return (dispatch) => {
     dispatch({

@@ -1,42 +1,75 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Card } from "react-bootstrap";
 
 import CardItem from "../../../reusable/cardItem";
-
-import doctorImg from "../../../../assets/img/doctorProfile.png";
+import ReactPaginate from "react-paginate";
 import { connect } from "react-redux";
-function VeterinaryBook() {
+
+function VeterinaryBook(props) {
+  const [paginationConfig, SetConfig] = useState({
+    offset: 0,
+    data: [],
+    perPage: 4,
+    currentPage: 0,
+  });
+
+  const [renderPostData, setPost] = useState();
+
+  const renderData = () => {
+    const data = props.AppointmentPayloads.dataHistory;
+    const dataOnPage = data.slice(
+      paginationConfig.offset,
+      paginationConfig.offset + paginationConfig.perPage
+    );
+    const postData = dataOnPage.map((item) => (
+      <CardItem type="history-veterinary" data={item} />
+    ));
+    SetConfig({
+      ...paginationConfig,
+      pageCount: Math.ceil(data.length / paginationConfig.perPage),
+      postData
+    });
+ };
+
+  const handlePageClick = useCallback((e) => {
+    const selectedPage = e.selected;
+    const offset = selectedPage * paginationConfig.perPage;
+    SetConfig({
+      ...paginationConfig,
+      currentPage: selectedPage,
+      offset: offset,
+    });
+  });
+
+  useEffect(() => {
+    props.AppointmentPayloads.dataHistory.length && renderData()
+  },[paginationConfig.offset])
+
+  useEffect(() => {props.AppointmentPayloads.dataHistory.length && renderData()}, []);
+
   return (
-    <Card.Body>
-      <CardItem
-        name="Megumin"
-        buttonMode={3}
-        day={20}
-        month={"Nov"}
-        textMode={1}
-        pets={1}
-        date={"09:00 - 12.00"}
-        buttonText={["Approve", "Disapprove"]}
+    <Card.Body className="appointment-fix-height">
+      {props.AppointmentPayloads.dataHistory && paginationConfig.postData}
+      <div className="d-flex justify-content-center my-2 pagination-absolute">
+      <ReactPaginate
+        previousLabel={"prev"}
+        nextLabel={"next"}
+        breakLabel={"..."}
+        breakClassName={"break-me"}
+        pageCount={paginationConfig.pageCount}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={5}
+        onPageChange={(e) => handlePageClick(e)}
+        previousClassName={"page-item"}
+        previousLinkClassName={"page-link"}
+        nextClassName={"page-item"}
+        nextLinkClassName={"page-link"}
+        containerClassName={"pagination"}
+        pageClassName={"page-item"}
+        pageLinkClassName={"page-link"}
+        activeClassName={"active"}
       />
-      <CardItem
-        name="Sallo"
-        buttonMode={3}
-        day={25}
-        month={"Nov"}
-        textMode={1}
-        date={"11:00 - 14.00"}
-        buttonText={["Approve", "Disapprove"]}
-      />
-      <CardItem
-        name="Jacky Sanjaya"
-        buttonMode={3}
-        day={1}
-        month={"Des"}
-        textMode={1}
-        pets={2}
-        date={"14:30 - 17.30"}
-        buttonText={["Approve", "Disapprove"]}
-      />
+      </div>
     </Card.Body>
   );
 }
@@ -46,5 +79,4 @@ const mapStateToProps = (state) => {
     AppointmentPayloads: state.Appointment,
   };
 };
-
-export default connect(mapStateToProps, null)(VeterinaryBook);
+export default connect(mapStateToProps,null)(VeterinaryBook);

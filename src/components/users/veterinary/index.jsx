@@ -19,24 +19,24 @@ export default function Appointment() {
           }`}
         >
          <Nav.Item>
-            <NavLink className="vet-title-2 v-text-donker" to={`${process.env.PUBLIC_URL}/user/veterinary/book`} onClick={(e) => console.log(e)}>
+            <NavLink className="vet-title-2 v-text-donker" to={`${process.env.PUBLIC_URL}/user/veterinary/appointment`} onClick={(e) => console.log(e)}>
               Patient Book
             </NavLink>
           </Nav.Item>
           <Nav.Item>
-            <NavLink className="vet-title-2 v-text-donker" to={`${process.env.PUBLIC_URL}/user/veterinary/approval`} onClick={(e) => console.log(e)}>
+            <NavLink className="vet-title-2 v-text-donker" to={`${process.env.PUBLIC_URL}/user/veterinary/history`} onClick={(e) => console.log(e)}>
             Approval
             </NavLink>
           </Nav.Item>
         </Nav>
       </Card.Header>
       <Switch>
-        <Route path={`${process.env.PUBLIC_URL}/user/veterinary/book`}>
-          <VeterinaryBook />
+        <Route path={`${process.env.PUBLIC_URL}/user/veterinary/appointment`}>
+          <VeterinaryApproval />
         </Route>
         <Route
-          path={`${process.env.PUBLIC_URL}/user/veterinary/approval`}
-          component={VeterinaryApproval}
+          path={`${process.env.PUBLIC_URL}/user/veterinary/history`}
+          component={VeterinaryBook}
         />
       </Switch>
     </Card>
