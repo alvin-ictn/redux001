@@ -29,7 +29,7 @@ function NavMenu(props) {
       <NavLink to={`${process.env.PUBLIC_URL}`} className={styles.link}>
         <span>Home</span>
       </NavLink>
-      <NavLink to={`${process.env.PUBLIC_URL}/clinic`} className={styles.link}>
+      <NavLink to={`${process.env.PUBLIC_URL}/chat`} className={styles.link}>
         <span>Clinic Chat</span>
       </NavLink>  
       {role && <NavLink to={`${process.env.PUBLIC_URL}/user/${role}`} className={styles.link}>

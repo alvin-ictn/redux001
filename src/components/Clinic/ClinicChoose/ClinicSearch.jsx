@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 import axios from 'axios'
 import {useParams, useHistory} from 'react-router-dom'
 import Pagination from './Pagination'
-import { VetMagnifier } from '../../../assets/icons'
+import { AiOutlineSearch } from "react-icons/ai";
 
 export default function ClinicSearch(){
   const [ clinicData, setClinicData] = useState()  
@@ -21,7 +21,7 @@ export default function ClinicSearch(){
   const handleSubmit = (e) => {
     e.preventDefault();
     if (e.key === "Enter") {
-      history.push(`/demo-Vet/booking/search/${inputSearch}`);
+      history.push(`/booking/search/${inputSearch}`);
     }
   };
     const { search } = useParams()
@@ -52,13 +52,13 @@ export default function ClinicSearch(){
             Lokasi
           </Dropdown.Toggle>
           <Dropdown.Menu className="mt-0">        
-            <Dropdown.Item href="/demo-Vet/booking/lokasi/Jakarta">Jakarta</Dropdown.Item>
-            <Dropdown.Item href="/demo-Vet/booking/lokasi/Medan">Medan</Dropdown.Item>
-            <Dropdown.Item href="/demo-Vet/booking/lokasi/Surabaya">Surabaya</Dropdown.Item>
-            <Dropdown.Item href="/demo-Vet/booking/lokasi/Pekanbaru">Pekanbaru</Dropdown.Item>
-            <Dropdown.Item href="/demo-Vet/booking/lokasi/Bandung">Bandung</Dropdown.Item>
-            <Dropdown.Item href="/demo-Vet/booking/lokasi/Denpasar">Denpasar</Dropdown.Item>
-            <Dropdown.Item href="/demo-Vet/booking/lokasi/Makasar">Makasar</Dropdown.Item>        
+            <Dropdown.Item href="/booking/lokasi/Jakarta">Jakarta</Dropdown.Item>
+            <Dropdown.Item href="/booking/lokasi/Medan">Medan</Dropdown.Item>
+            <Dropdown.Item href="/booking/lokasi/Surabaya">Surabaya</Dropdown.Item>
+            <Dropdown.Item href="/booking/lokasi/Pekanbaru">Pekanbaru</Dropdown.Item>
+            <Dropdown.Item href="/booking/lokasi/Bandung">Bandung</Dropdown.Item>
+            <Dropdown.Item href="/booking/lokasi/Denpasar">Denpasar</Dropdown.Item>
+            <Dropdown.Item href="/booking/lokasi/Makasar">Makasar</Dropdown.Item>        
           </Dropdown.Menu>
         </Dropdown>)
 
@@ -78,7 +78,7 @@ export default function ClinicSearch(){
     
       const buttonSearch = (    
           <Button variant="warning" className="mr-4" style={{backgroundColor:"#FDCB5A",fontWeight:"bold"}} onClick={()=>setIsSearch(true)}>        
-          <VetMagnifier />
+          <AiOutlineSearch />
             {"  Cari Sekarang"}
           </Button>    
       )
@@ -131,7 +131,7 @@ export default function ClinicSearch(){
           <Row >      
             {kartu}
           </Row>    
-          <Pagination />      
+          {/* <Pagination />       */}
         </div>    
       );
 }

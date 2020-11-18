@@ -6,7 +6,7 @@ import { Dropdown,Card,Badge,Button, Container,Col,Row } from "react-bootstrap";
 import { useParams } from 'react-router-dom'
 import { clinic } from '../../../database'
 import {Link} from 'react-router-dom'
-import { VetMagnifier } from '../../../assets/icons'
+import { AiOutlineSearch } from "react-icons/ai";
 import axios from 'axios'
 import { useHistory } from "react-router-dom";
 
@@ -24,7 +24,7 @@ export default function ClinicChooseFiltered() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (e.key === "Enter") {
-      history.push(`/demo-Vet/booking/search/${inputSearch}`);
+      history.push(`/booking/search/${inputSearch}`);
     }
   };
   const [linkUrl,setLinkUrl] = useState(`https://vet-booking.herokuapp.com/clinic/filter/?city=`+lokasi)
@@ -53,13 +53,13 @@ export default function ClinicChooseFiltered() {
         Lokasi
       </Dropdown.Toggle>
       <Dropdown.Menu>
-        <Dropdown.Item href="/demo-Vet/booking/lokasi/Jakarta">Jakarta</Dropdown.Item>
-        <Dropdown.Item href="/demo-Vet/booking/lokasi/Medan">Medan</Dropdown.Item>
-        <Dropdown.Item href="/demo-Vet/booking/lokasi/Surabaya">Surabaya</Dropdown.Item>
-        <Dropdown.Item href="/demo-Vet/booking/lokasi/Pekanbaru">Pekanbaru</Dropdown.Item>
-        <Dropdown.Item href="/demo-Vet/booking/lokasi/Bandung">Bandung</Dropdown.Item>
-        <Dropdown.Item href="/demo-Vet/booking/lokasi/Denpasar">Denpasar</Dropdown.Item>
-        <Dropdown.Item href="/demo-Vet/booking/lokasi/Makasar">Makasar</Dropdown.Item>
+        <Dropdown.Item href="/booking/lokasi/Jakarta">Jakarta</Dropdown.Item>
+        <Dropdown.Item href="/booking/lokasi/Medan">Medan</Dropdown.Item>
+        <Dropdown.Item href="/booking/lokasi/Surabaya">Surabaya</Dropdown.Item>
+        <Dropdown.Item href="/booking/lokasi/Pekanbaru">Pekanbaru</Dropdown.Item>
+        <Dropdown.Item href="/booking/lokasi/Bandung">Bandung</Dropdown.Item>
+        <Dropdown.Item href="/booking/lokasi/Denpasar">Denpasar</Dropdown.Item>
+        <Dropdown.Item href="/booking/lokasi/Makasar">Makasar</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>)
 
@@ -79,7 +79,7 @@ export default function ClinicChooseFiltered() {
 
   const buttonSearch = (    
     <Button variant="warning" className="mr-4" style={{backgroundColor:"#FDCB5A",fontWeight:"bold"}} onClick={()=>setIsSearch(true)}>        
-    <VetMagnifier />
+    <AiOutlineSearch />
       {"  Cari Sekarang"}
     </Button>    
 )
@@ -110,7 +110,7 @@ export default function ClinicChooseFiltered() {
       </Card.Text>
     </Card.Body>
     <Card.Footer style={{backgroundColor:"white"}}>
-      <Link to={`/demo-Vet/booking/detail/${value._id}/`}>
+      <Link to={`/booking/detail/${value._id}/`}>
         <Button style={{borderColor:"#FDCB5A",backgroundColor:"#FDCB5A", width:"14rem",borderRadius:"4px",color:"black"}}>
           Book now
         </Button>
