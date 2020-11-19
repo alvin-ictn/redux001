@@ -49,9 +49,7 @@ function App(props) {
     footer: true,
   });
   useEffect(() => {
-    console.log(token)
     token.length && props.getUserData(token)
-
   }, [token]);
 
   useEffect(() => {
@@ -62,13 +60,14 @@ function App(props) {
   },[props.AuthPayloads.access_token])
 
 
-  const history = useHistory();
+  let history = useHistory();
   useEffect(() => {
     userDatas && setLogin(true);
   }, [userDatas]);
   // function declaration
   const HandleInput = (input) => {
     input.preventDefault();
+    console.log(input)
     let data = { ...postData, [input.target.name]: input.target.value };
     setData(data);
   };
@@ -120,14 +119,16 @@ function App(props) {
   const handleFooter = (option) => {
     //console.log(option);
   };
+
+ 
   return (
      <>
       <div className="App">
-        
         <Router>
           {/* {isLogin && <Redirect to={`${process.env.PUBLIC_URL}/`} />} */}
          {props.AuthPayloads.isLoading && <PageLoad data="CONNECTING"/>}
          {props.AuthPayloads.isLogout && <Logout data="LOGOUT"/>}
+
           <VetNavbar
             barState={barState}
             data={{
@@ -142,6 +143,7 @@ function App(props) {
                   HandleInputFile: HandleInputFile,
                   SetVisibility: SetVisibility,
                   SubmitData: SubmitData,
+                  setData : setData,
                 }}
                 data={{
                   postData: postData,

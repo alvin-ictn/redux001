@@ -21,6 +21,11 @@ const authReducers = (state = initialState, action) => {
 
     case auth.SET_AUTH_USER_DATA:
       return { ...state, user: action.user,successMsg:[], isLogin: true };
+    
+    case auth.SET_AUTH_USER_ANIMAL:
+      let animal = {...state.user.patient, animals:action.animals}
+      let patient = {...state.user, patient:animal}
+      return { ...state, user: patient,successMsg:[], isLogin: true };
 
     case auth.SET_ERROR:
       return { ...state, isError: true, errorMsg: action.errorMsg };
